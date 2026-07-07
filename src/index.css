@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-navy: #0B1628;
+  --color-navy-light: #142038;
+  --color-blue: #1B4FD8;
+  --color-blue-light: #3B6FFF;
+  --color-cyan: #00C4E8;
+  --color-offwhite: #F5F7FA;
+  --color-muted: #6B7A99;
+  --color-wa: #25D366;
+  --color-ember: #FF5630;
+  --color-amber: #FFAB00;
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(135deg, #3B6FFF, #00C4E8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .ember-text {
+    background: linear-gradient(135deg, #FF5630, #FFAB00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

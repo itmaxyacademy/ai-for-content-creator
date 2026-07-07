@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Blue background block -->
+  <rect width="512" height="400" fill="#1E4BB4" />
+
+  <!-- Diagonal bands matching the original texture -->
+  <path d="M0,280 L280,0 L380,0 L0,380 Z" fill="#143DA2" opacity="0.4" />
+  <path d="M0,400 L400,0 L512,0 L112,400 Z" fill="#143DA2" opacity="0.4" />
+  <path d="M150,400 L512,40 L512,140 L250,400 Z" fill="#143DA2" opacity="0.4" />
+
+  <!-- Top text labels -->
+  <text x="256" y="98" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="40" text-anchor="middle" letter-spacing="2">SOUTHEAST ASIA</text>
+  <text x="256" y="150" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="40" text-anchor="middle" letter-spacing="4">EDTECH</text>
+
+  <!-- Trophy and 50 Outline Group -->
+  <!-- Trophy on the left -->
+  <g transform="translate(100, 190) scale(1.65)" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Cup body -->
+    <path d="M20,15 L20,38 C20,48 28,55 40,55 C52,55 60,48 60,38 L60,15 Z" />
+    <!-- Left handle -->
+    <path d="M20,20 L12,20 C8,20 8,28 12,28 L20,28" />
+    <!-- Right handle -->
+    <path d="M60,20 L68,20 C72,20 72,28 68,28 L60,28" />
+    <!-- Stem -->
+    <path d="M40,55 L40,68" />
+    <!-- Base -->
+    <path d="M28,68 L52,68" stroke-width="4" />
+    <path d="M22,73 L58,73" stroke-width="4" />
+    <!-- Solid white star in center of cup -->
+    <polygon points="40,24 42,29 48,29 43,33 45,39 40,36 35,39 37,33 32,29 38,29" fill="#FFFFFF" stroke="none" />
+  </g>
+
+  <!-- Giant Hollow 50 on the right -->
+  <text x="220" y="315" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linejoin="round" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="140" letter-spacing="-5">50</text>
+
+  <!-- Bottom brand bar -->
+  <rect y="400" width="512" height="112" fill="#1C1C1E" />
+
+  <!-- Holon IQ text -->
+  <text x="50" y="468" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="46" letter-spacing="-1.5">Holon</text>
+  <text x="188" y="468" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-weight="300" font-size="46" letter-spacing="-1.5">IQ</text>
+
+  <!-- by connector -->
+  <text x="315" y="458" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-weight="400" font-size="20">by</text>
+
+  <!-- QS logo block -->
+  <rect x="370" y="420" width="72" height="72" rx="4" fill="#FF9F0D" />
+  <text x="406" y="470" fill="#FFFFFF" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="38" text-anchor="middle">QS</text>
+</svg>
