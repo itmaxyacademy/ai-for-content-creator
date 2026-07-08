@@ -76,15 +76,6 @@ export default function App() {
           <p className="font-black text-white text-base mb-1">MAXY Academy</p>
           <p className="text-cyan text-xs font-mono mb-4">Driven by AI. Led by Humanity.</p>
           
-          {/* Subtle CRM Lead Panel Trigger */}
-          <div className="mb-6 flex justify-center">
-            <button
-              onClick={() => setIsAdminOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-slate-400 hover:text-white text-xs transition-all font-mono shadow-xs cursor-pointer"
-            >
-              <Shield className="w-3.5 h-3.5" /> Akses CRM Panel (Lihat Leads)
-            </button>
-          </div>
 
           <p className="text-slate-600 text-xs">
             © 2026 MAXY Academy. Hak Cipta Dilindungi Undang-Undang.
