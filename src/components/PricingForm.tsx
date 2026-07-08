@@ -297,7 +297,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               <div className="flex items-center justify-between mb-2">
                 <div>
                   <p className="text-[10px] font-mono tracking-widest uppercase text-muted font-bold">2 Days Onsite Regular</p>
-                  <h4 className="text-base font-black text-navy">Kelas Onsite Regular (Early Bird)</h4>
+                  <h4 className="text-base font-black text-navy">Kelas Onsite Regular</h4>
                 </div>
                 <span className="bg-cyan/15 text-cyan-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
                   Onsite Regular
