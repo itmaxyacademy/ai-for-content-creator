@@ -5,6 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    base: '/intensive-class/ia-for-content-creation/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
