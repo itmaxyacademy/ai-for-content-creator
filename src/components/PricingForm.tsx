@@ -501,12 +501,21 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-[#25D366] to-[#1aaa52] hover:scale-[1.02] active:scale-[0.98] text-white font-black py-4 rounded-xl text-sm md:text-base mt-2 shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Send className="w-4 h-4" /> Daftar &amp; Amankan Slot Early Bird
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                  <button
+                    type="submit"
+                    onClick={() => {}}
+                    className="w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-4 rounded-xl text-sm md:text-base shadow-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <HelpCircle className="w-4 h-4" /> Konsultasi
+                  </button>
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-[#25D366] to-[#1aaa52] hover:scale-[1.02] active:scale-[0.98] text-white font-black py-4 rounded-xl text-sm md:text-base shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Send className="w-4 h-4" /> Daftar Sekarang
+                  </button>
+                </div>
 
                 <p className="text-[10px] text-slate-500 text-center leading-normal">
                   Dengan mengirim data di atas, kamu menyetujui syarat layanan kami &amp; bersedia dihubungi admin terkait agenda kelas ini.
