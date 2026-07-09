@@ -1,6 +1,5 @@
 import React from "react";
 import { Star, Instagram, Play } from "lucide-react";
-import DrivePlayer from "./DrivePlayer";
 
 export default function Testimonials() {
   return (
@@ -22,12 +21,17 @@ export default function Testimonials() {
           {/* Card 1: Anisa */}
           <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/60 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
             <div>
-              {/* Google Drive Video Player */}
+              {/* YouTube Video Player */}
               <div className="mb-5">
-                <DrivePlayer
-                  src="https://drive.google.com/file/d/1Pjwd36Z-mihmRoZQw_c-FYY_TcA6Umbu/preview"
-                  title="Testimoni Anisa"
-                />
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-lg">
+                  <iframe
+                    src="https://www.youtube.com/embed/VTJR4NSjN3s"
+                    title="Testimoni Anisa"
+                    className="absolute inset-0 w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
 
               <div className="flex gap-1 mb-3 text-yellow-400">
@@ -54,12 +58,17 @@ export default function Testimonials() {
           {/* Card 3: Rhaditya */}
           <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/60 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
             <div>
-              {/* Google Drive Video Player */}
+              {/* YouTube Video Player */}
               <div className="mb-5">
-                <DrivePlayer
-                  src="https://drive.google.com/file/d/1C9hcMdDHHobS2SvzueM_jYKtAaWMuwZ1/preview"
-                  title="Testimoni Rhaditya"
-                />
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-lg">
+                  <iframe
+                    src="https://www.youtube.com/embed/zUIhNoIrFqw"
+                    title="Testimoni Rhaditya"
+                    className="absolute inset-0 w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
 
               <div className="flex gap-1 mb-3 text-yellow-400">
