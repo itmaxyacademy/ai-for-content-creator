@@ -9,11 +9,11 @@ interface TickerItem {
 }
 
 const TICKER_ITEMS: TickerItem[] = [
-  { name: "Rizky", city: "Bandung", pkg: "Hybrid Masterclass (Promo)", mins: 2 },
-  { name: "Sari", city: "Jakarta Barat", pkg: "8 Pertemuan Hybrid", mins: 7 },
-  { name: "Dewi", city: "Surabaya", pkg: "Hybrid Masterclass (Promo)", mins: 12 },
-  { name: "Andi", city: "Bekasi", pkg: "8 Pertemuan Hybrid", mins: 18 },
-  { name: "Maya", city: "Depok", pkg: "Hybrid Masterclass (Promo)", mins: 25 },
+  { name: "Rizky", city: "Bandung", pkg: "Early Bird Masterclass", mins: 2 },
+  { name: "Sari (UI)", city: "Jakarta Barat", pkg: "Mitra Universitas", mins: 7 },
+  { name: "Dewi", city: "Surabaya", pkg: "Early Bird Masterclass", mins: 12 },
+  { name: "Andi (UGM)", city: "Yogyakarta", pkg: "Mitra Universitas", mins: 18 },
+  { name: "Maya", city: "Depok", pkg: "Masterclass Regular", mins: 25 },
 ];
 
 export default function LiveTicker() {

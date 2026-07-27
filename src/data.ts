@@ -8,12 +8,19 @@ export const APP_CONFIG = {
   waAdmin: "6282144995255",
   waCS: "6282144995255",
   prices: {
+    masterclassNormal: "Rp 2.500.000",
+    masterclassCurrent: "Rp 1.800.000",
+    earlyBirdNormal: "Rp 1.800.000",
+    earlyBirdCurrent: "Rp 1.500.000",
+    mitraNormal: "Rp 2.500.000",
+    mitraCurrent: "Rp 1.500.000",
+    // Legacy mapping for compatibility
     normal: "Rp 2.500.000",
-    earlyBird: "Rp 1.800.000",
+    earlyBird: "Rp 1.500.000",
     promoFirst10: "Rp 1.500.000",
     onlineNormal: "Rp 1.800.000",
     onlineEarly: "Rp 1.500.000",
-    onsiteNormal: "Rp 1.800.000",
+    onsiteNormal: "Rp 2.500.000",
     onsiteEarly: "Rp 1.500.000",
     onsitePromoNormal: "Rp 1.800.000",
     onsitePromoEarly: "Rp 1.500.000"

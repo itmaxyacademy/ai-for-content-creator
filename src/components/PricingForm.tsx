@@ -12,7 +12,7 @@ export default function PricingForm() {
     kota: "",
     pekerjaan: "",
     namaPerusahaan: "",
-    paket: "Hybrid_Promo", // default option
+    paket: "Early_Bird", // default option
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -22,26 +22,34 @@ export default function PricingForm() {
   // Dynamic price lookup
   const getSelectedPrice = (paketCode: string) => {
     switch (paketCode) {
+      case "Early_Bird":
       case "Hybrid_Promo":
       case "Onsite_Promo":
       case "Online":
+        return {
+          name: "Harga Early Bird",
+          current: APP_CONFIG.prices.earlyBirdCurrent,
+          normal: APP_CONFIG.prices.earlyBirdNormal,
+        };
+      case "Mitra_Universitas":
+        return {
+          name: "Harga Khusus Mitra Universitas",
+          current: APP_CONFIG.prices.mitraCurrent,
+          normal: APP_CONFIG.prices.mitraNormal,
+        };
+      case "Masterclass_Regular":
+      case "Hybrid_Early":
       case "Onsite":
         return {
-          name: "8 Pertemuan Hybrid - Promo 10 Orang Pertama",
-          current: APP_CONFIG.prices.promoFirst10,
-          normal: APP_CONFIG.prices.earlyBird,
-        };
-      case "Hybrid_Early":
-        return {
-          name: "8 Pertemuan Hybrid - Early Bird Regular",
-          current: APP_CONFIG.prices.earlyBird,
-          normal: APP_CONFIG.prices.normal,
+          name: "Harga Masterclass (8 Pertemuan)",
+          current: APP_CONFIG.prices.masterclassCurrent,
+          normal: APP_CONFIG.prices.masterclassNormal,
         };
       default:
         return {
-          name: "8 Pertemuan Hybrid",
-          current: APP_CONFIG.prices.promoFirst10,
-          normal: APP_CONFIG.prices.earlyBird,
+          name: "Harga Early Bird",
+          current: APP_CONFIG.prices.earlyBirdCurrent,
+          normal: APP_CONFIG.prices.earlyBirdNormal,
         };
     }
   };
@@ -119,16 +127,16 @@ export default function PricingForm() {
 
   const getWaLink = () => {
     if (!submittedLead) return "#";
-    const rawText = `Halo Admin MAXY, saya baru mendaftar Kelas AI-Driven Content Creation (8 Pertemuan Hybrid) yang mulai 4 Agustus 2026.
+    const rawText = `Halo Admin MAXY, saya mau mendaftar Masterclass AI-Driven Content Creation (8 Pertemuan Hybrid) yang mulai 4 Agustus 2026.
 
 Nama Lengkap: ${submittedLead.nama}
 Email Aktif: ${submittedLead.email}
 No. WhatsApp: ${submittedLead.whatsapp}
 Kota Asal: ${submittedLead.kota}
 Pekerjaan: ${submittedLead.pekerjaan}
-Nama Perusahaan: ${submittedLead.namaPerusahaan}
-Opsi Paket: ${submittedLead.paket}
-Harga Promo: ${submittedLead.harga}
+Nama Perusahaan/Kampus: ${submittedLead.namaPerusahaan}
+Pilihan Opsi Paket: ${submittedLead.paket}
+Harga yang Ditagih: ${submittedLead.harga}
 
 Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
     return `https://wa.me/${APP_CONFIG.waAdmin}?text=${encodeURIComponent(rawText)}`;
@@ -142,7 +150,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
       kota: "",
       pekerjaan: "",
       namaPerusahaan: "",
-      paket: "Hybrid_Promo",
+      paket: "Early_Bird",
     });
     setIsSubmitted(false);
     setSubmittedLead(null);
@@ -200,63 +208,168 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
           {/* LEFT: Package Info Grid */}
           <div className="lg:col-span-5 space-y-5">
             <h3 className="font-black text-xl text-navy mb-1 flex items-center gap-1.5">
-              💡 Paket Kelas 8 Pertemuan Hybrid
+              💡 Opsi Paket &amp; Harga Masterclass
             </h3>
             <p className="text-muted text-xs md:text-sm leading-relaxed mb-4">
-              Kurikulum masterclass eksklusif dalam 8 pertemuan. Kamu leluasa memilih hadir langsung (offline di MAXY AI HUB Jakarta) ataupun eksekusi online live via Zoom.
+              Pilih opsi harga yang relevan dengan kualifikasi kamu. Kurikulum 8 pertemuan intensif berformat Hybrid (offline di MAXY AI HUB atau online Zoom).
             </p>
 
-            {/* Featured Hybrid Promo Package */}
-            <div className="p-6 rounded-3xl border-2 bg-gradient-to-b from-navy to-navy-light text-white border-cyan shadow-xl relative mt-4">
-              <span className="absolute -top-3 left-6 bg-gradient-to-r from-ember to-amber text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
-                🔥 PROMO 10 ORANG PERTAMA
-              </span>
+            {/* Option 1: Early Bird (Recommended / Featured) */}
+            <div
+              onClick={() => setFormData((prev) => ({ ...prev, paket: "Early_Bird" }))}
+              className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
+                formData.paket === "Early_Bird" || formData.paket === "Hybrid_Promo"
+                  ? "bg-gradient-to-b from-navy to-navy-light text-white border-cyan shadow-xl scale-[1.01] relative"
+                  : "bg-white border-slate-200 text-navy hover:border-slate-300 shadow-sm"
+              }`}
+            >
+              {(formData.paket === "Early_Bird" || formData.paket === "Hybrid_Promo") && (
+                <span className="absolute -top-3 left-6 bg-gradient-to-r from-ember to-amber text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
+                  🔥 DISKON EARLY BIRD (TERBATAS)
+                </span>
+              )}
               
-              <div className="flex items-center justify-between mb-3 mt-1">
+              <div className="flex items-center justify-between mb-2 mt-1">
                 <div>
-                  <p className="text-[10px] font-mono tracking-widest uppercase text-cyan font-bold">8 Pertemuan · Mulai 4 Agustus 2026</p>
-                  <h4 className="text-lg font-black text-white">Hybrid Masterclass</h4>
+                  <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${formData.paket === "Early_Bird" ? "text-cyan" : "text-slate-500"}`}>8 Pertemuan · Mulai 4 Agustus 2026</p>
+                  <h4 className={`text-lg font-black ${formData.paket === "Early_Bird" ? "text-white" : "text-navy"}`}>Harga Early Bird</h4>
                 </div>
-                <span className="bg-amber text-navy text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider">
-                  Selasa &amp; Kamis
+                <span className="bg-amber text-navy text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex-shrink-0">
+                  Terpopuler
                 </span>
               </div>
 
-              <div className="flex items-end gap-2.5 my-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+              <div className={`flex items-end gap-2.5 my-3 p-3.5 rounded-2xl border ${formData.paket === "Early_Bird" ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
                 <div>
-                  <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Diskon Terbatas:</p>
-                  <span className="text-2xl md:text-3xl font-black font-mono text-cyan block">
-                    {APP_CONFIG.prices.promoFirst10}
+                  <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Diskon Early Bird:</p>
+                  <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`}>
+                    {APP_CONFIG.prices.earlyBirdCurrent}
                   </span>
                 </div>
                 <div className="pb-1 text-right ml-auto">
-                  <span className="text-[10px] text-slate-400 block font-mono">Early Bird Regular:</span>
+                  <span className="text-[10px] text-slate-400 block font-mono">Normal Early Bird:</span>
                   <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
-                    {APP_CONFIG.prices.earlyBird}
+                    {APP_CONFIG.prices.earlyBirdNormal}
                   </span>
                 </div>
               </div>
 
-              <ul className="space-y-2.5 text-xs text-slate-200 border-t border-white/10 pt-4">
-                <li className="flex gap-2.5 items-start">
-                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
-                  <span><strong>8 Pertemuan Hybrid</strong> (Pilih Offline di MAXY AI HUB Jakarta atau Online via Zoom)</span>
+              <ul className={`space-y-2 text-xs border-t pt-3 ${formData.paket === "Early_Bird" ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
+                <li className="flex gap-2 items-start">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`} />
+                  <span><strong>8 Pertemuan Hybrid</strong> (Offline di MAXY AI HUB atau Online Live via Zoom)</span>
                 </li>
-                <li className="flex gap-2.5 items-start">
-                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
-                  <span>Dilangsungkan rutin setiap <strong>Selasa &amp; Kamis</strong> (Start 4 Agustus 2026)</span>
+                <li className="flex gap-2 items-start">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`} />
+                  <span>Dilangsungkan setiap Selasa &amp; Kamis (Start 4 Agustus 2026)</span>
                 </li>
-                <li className="flex gap-2.5 items-start">
-                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
-                  <span>Didampingi mentor secara langsung &amp; review konten secara mendalam</span>
-                </li>
-                <li className="flex gap-2.5 items-start">
-                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
+                <li className="flex gap-2 items-start">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`} />
                   <span>Prompt Library, JSON Template AI &amp; Akses Rekaman Kelas</span>
                 </li>
-                <li className="flex gap-2.5 items-start">
-                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
-                  <span>Makan siang, snack, &amp; sesi networking eksklusif untuk peserta Onsite</span>
+              </ul>
+            </div>
+
+            {/* Option 2: Mitra Universitas */}
+            <div
+              onClick={() => setFormData((prev) => ({ ...prev, paket: "Mitra_Universitas" }))}
+              className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
+                formData.paket === "Mitra_Universitas"
+                  ? "bg-gradient-to-b from-navy to-navy-light text-white border-emerald-400 shadow-xl scale-[1.01] relative"
+                  : "bg-white border-slate-200 text-navy hover:border-slate-300 shadow-sm"
+              }`}
+            >
+              {formData.paket === "Mitra_Universitas" && (
+                <span className="absolute -top-3 left-6 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
+                  🎓 KEMITRAAN KAMPUS
+                </span>
+              )}
+
+              <div className="flex items-center justify-between mb-2 mt-1">
+                <div>
+                  <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${formData.paket === "Mitra_Universitas" ? "text-emerald-300" : "text-slate-500"}`}>Spesial Civitas Akademika</p>
+                  <h4 className={`text-lg font-black ${formData.paket === "Mitra_Universitas" ? "text-white" : "text-navy"}`}>Harga Khusus Mitra Universitas</h4>
+                </div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex-shrink-0">
+                  Mitra Kampus
+                </span>
+              </div>
+
+              <div className={`flex items-end gap-2.5 my-3 p-3.5 rounded-2xl border ${formData.paket === "Mitra_Universitas" ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                <div>
+                  <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Khusus Mitra:</p>
+                  <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`}>
+                    {APP_CONFIG.prices.mitraCurrent}
+                  </span>
+                </div>
+                <div className="pb-1 text-right ml-auto">
+                  <span className="text-[10px] text-slate-400 block font-mono">Tarif Masterclass Regular:</span>
+                  <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
+                    {APP_CONFIG.prices.mitraNormal}
+                  </span>
+                </div>
+              </div>
+
+              <ul className={`space-y-2 text-xs border-t pt-3 ${formData.paket === "Mitra_Universitas" ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
+                <li className="flex gap-2 items-start">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`} />
+                  <span>Potongan harga spesial sebesar <strong>Rp 1.000.000</strong> khusus mitra universitas &amp; mahasiswa</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`} />
+                  <span>Akses lengkap 8 pertemuan kelas hybrid + mentoring &amp; sertifikat</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Option 3: Masterclass Regular */}
+            <div
+              onClick={() => setFormData((prev) => ({ ...prev, paket: "Masterclass_Regular" }))}
+              className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
+                formData.paket === "Masterclass_Regular"
+                  ? "bg-gradient-to-b from-navy to-navy-light text-white border-blue shadow-xl scale-[1.01] relative"
+                  : "bg-white border-slate-200 text-navy hover:border-slate-300 shadow-sm"
+              }`}
+            >
+              {formData.paket === "Masterclass_Regular" && (
+                <span className="absolute -top-3 left-6 bg-blue text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
+                  ⚡ TARIF MASTERCLASS REGULAR
+                </span>
+              )}
+
+              <div className="flex items-center justify-between mb-2 mt-1">
+                <div>
+                  <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-slate-500"}`}>8 Pertemuan Utuh</p>
+                  <h4 className={`text-lg font-black ${formData.paket === "Masterclass_Regular" ? "text-white" : "text-navy"}`}>Harga Masterclass (8 Pertemuan)</h4>
+                </div>
+                <span className="bg-slate-100 text-slate-700 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex-shrink-0">
+                  Regular
+                </span>
+              </div>
+
+              <div className={`flex items-end gap-2.5 my-3 p-3.5 rounded-2xl border ${formData.paket === "Masterclass_Regular" ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                <div>
+                  <p className="text-[10px] font-mono text-slate-400 uppercase">Tarif Diskon Saat Ini:</p>
+                  <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-blue"}`}>
+                    {APP_CONFIG.prices.masterclassCurrent}
+                  </span>
+                </div>
+                <div className="pb-1 text-right ml-auto">
+                  <span className="text-[10px] text-slate-400 block font-mono">Tarif Normal:</span>
+                  <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
+                    {APP_CONFIG.prices.masterclassNormal}
+                  </span>
+                </div>
+              </div>
+
+              <ul className={`space-y-2 text-xs border-t pt-3 ${formData.paket === "Masterclass_Regular" ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
+                <li className="flex gap-2 items-start">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-blue"}`} />
+                  <span>Akses 8 pertemuan hybrid, networking eksklusif, lunch &amp; snack onsite</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-blue"}`} />
+                  <span>Akses rekaman seumur hidup dan grup diskusi eksklusif alumni MAXY</span>
                 </li>
               </ul>
             </div>
@@ -392,7 +505,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                 {/* Paket Dropdown */}
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Pilih Opsi Harga Paket *
+                    Pilih Opsi Paket &amp; Harga *
                   </label>
                   <select
                     name="paket"
@@ -400,11 +513,14 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                     onChange={handleInputChange}
                     className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy font-bold border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all"
                   >
-                    <option value="Hybrid_Promo">
-                      8 Pertemuan Hybrid — Promo 10 Orang Pertama ({APP_CONFIG.prices.promoFirst10})
+                    <option value="Early_Bird">
+                      Harga Early Bird — {APP_CONFIG.prices.earlyBirdCurrent} (Dicoret {APP_CONFIG.prices.earlyBirdNormal})
                     </option>
-                    <option value="Hybrid_Early">
-                      8 Pertemuan Hybrid — Early Bird Regular ({APP_CONFIG.prices.earlyBird})
+                    <option value="Mitra_Universitas">
+                      Harga Khusus Mitra Universitas — {APP_CONFIG.prices.mitraCurrent} (Dicoret {APP_CONFIG.prices.mitraNormal})
+                    </option>
+                    <option value="Masterclass_Regular">
+                      Harga Masterclass (8 Pertemuan) — {APP_CONFIG.prices.masterclassCurrent} (Dicoret {APP_CONFIG.prices.masterclassNormal})
                     </option>
                   </select>
                   {errors.paket && (

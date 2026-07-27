@@ -113,18 +113,18 @@ export default function ValueStack() {
             <div className="flex justify-between items-center pt-3 border-t border-white/20">
               <div>
                 <span className="font-black text-sm md:text-base block">
-                  Promo 10 Orang Pertama (8 Pertemuan Hybrid)
+                  Harga Early Bird &amp; Khusus Mitra Universitas
                 </span>
                 <span className="text-[10px] text-amber-300 block font-mono">
-                  *Harga Early Bird Rp 1.800.000 → Khusus 10 pendaftar pertama Rp 1.500.000!
+                  *Masterclass Regular Rp 2.500.000 → Diskon spesial menjadi Rp 1.500.000!
                 </span>
               </div>
               <div className="text-right">
                 <span className="text-xs md:text-sm line-through text-white/70 font-mono block">
-                  {APP_CONFIG.prices.earlyBird}
+                  {APP_CONFIG.prices.masterclassNormal}
                 </span>
                 <span className="text-2xl md:text-4xl font-black font-mono text-cyan block">
-                  {APP_CONFIG.prices.promoFirst10}
+                  {APP_CONFIG.prices.earlyBirdCurrent}
                 </span>
               </div>
             </div>

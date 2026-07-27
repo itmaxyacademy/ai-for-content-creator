@@ -30,8 +30,8 @@ export default function App() {
       {/* 1. URGENCY TOP BAR */}
       <div className="bg-gradient-to-r from-ember to-amber py-2.5 px-4 text-white text-center text-xs md:text-sm font-bold tracking-wide flex items-center justify-center gap-x-2 flex-wrap shadow-md">
         <span className="w-2 h-2 rounded-full bg-white animate-ping inline-block"></span>
-        <span>🔥 PROMO 10 ORANG PERTAMA: Rp 1.500.000 (dari Rp 1.800.000)!</span>
-        <span className="hidden sm:inline">· Hanya tersisa <strong>3 kuota promo!</strong></span>
+        <span>🔥 HARGA EARLY BIRD &amp; MITRA UNIVERSITAS: Rp 1.500.000 (Diskon hingga Rp 1 Juta)!</span>
+        <span className="hidden sm:inline">· Kuota Promo Terbatas!</span>
       </div>
 
       {/* 2. HERO SECTION */}
