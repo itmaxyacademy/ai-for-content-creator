@@ -1,24 +1,27 @@
 import React from "react";
-import { MODULES } from "../data";
-import { BookOpen, Calendar, ArrowRight, Video, Target, Sparkles, Send } from "lucide-react";
+import { MODULES, AI_TOOLS } from "../data";
+import { BookOpen, Calendar, ArrowRight, Video, Target, Sparkles, Send, MessageSquare, Layers, UserCheck } from "lucide-react";
 import DrivePlayer from "./DrivePlayer";
 
 export default function Curriculum() {
-  const day1Modules = MODULES.slice(0, 3);
-  const day2Modules = MODULES.slice(3, 5);
-
   const getModuleIcon = (id: string) => {
     switch (id) {
-      case "M1":
+      case "Day 1":
         return <Target className="w-5 h-5 text-blue" />;
-      case "M2":
-        return <Sparkles className="w-5 h-5 text-blue" />;
-      case "M3":
-        return <BookOpen className="w-5 h-5 text-blue" />;
-      case "M4":
-        return <Video className="w-5 h-5 text-cyan" />;
-      case "M5":
-        return <Send className="w-5 h-5 text-cyan" />;
+      case "Day 2":
+        return <Sparkles className="w-5 h-5 text-indigo-600" />;
+      case "Day 3":
+        return <BookOpen className="w-5 h-5 text-purple-600" />;
+      case "Day 4":
+        return <MessageSquare className="w-5 h-5 text-emerald-600" />;
+      case "Day 5":
+        return <Layers className="w-5 h-5 text-amber-600" />;
+      case "Day 6":
+        return <UserCheck className="w-5 h-5 text-cyan-600" />;
+      case "Day 7":
+        return <Video className="w-5 h-5 text-rose-600" />;
+      case "Day 8":
+        return <Send className="w-5 h-5 text-blue" />;
       default:
         return <BookOpen className="w-5 h-5 text-blue" />;
     }
@@ -38,38 +41,38 @@ export default function Curriculum() {
           </h2>
         </div>
 
-        {/* Modules Block 1 */}
-        <div className="mb-8">
-          <div className="grid md:grid-cols-3 gap-5">
-            {day1Modules.map((mod) => (
-              <div
-                key={mod.id}
-                className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs relative overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1 group"
-              >
-                {/* Accent bar */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue to-cyan"></div>
-                
-                <div className="flex items-center gap-2 mb-3 pt-1">
-                  <span className="bg-blue/10 text-blue text-xs font-black px-2.5 py-1 rounded-lg font-mono">
+        {/* 8 Pertemuan Hybrid Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+          {MODULES.map((mod) => (
+            <div
+              key={mod.id}
+              className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs relative overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1 group flex flex-col justify-between"
+            >
+              {/* Accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue via-cyan to-indigo"></div>
+              
+              <div>
+                <div className="flex items-center gap-2 mb-3.5 pt-1">
+                  <span className="bg-blue/10 text-blue text-xs font-black px-3 py-1 rounded-lg font-mono tracking-wide">
                     {mod.id}
                   </span>
-                  <div className="p-1 rounded-lg bg-slate-50 group-hover:bg-blue/5 transition-colors">
+                  <div className="p-1.5 rounded-lg bg-slate-50 group-hover:bg-blue/5 transition-colors">
                     {getModuleIcon(mod.id)}
                   </div>
                 </div>
 
-                <h3 className="font-black text-navy text-base md:text-lg mb-2 leading-snug">
+                <h3 className="font-black text-navy text-base md:text-lg mb-2 leading-snug group-hover:text-blue transition-colors">
                   {mod.title}
                 </h3>
-                <p className="text-muted text-xs leading-relaxed mb-4">
+                <p className="text-muted text-xs leading-relaxed mb-5">
                   {mod.description}
                 </p>
 
-                <div className="pt-3 border-t border-slate-100">
+                <div className="pt-3 border-t border-slate-100 mb-5">
                   <p className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider mb-2">
                     🎯 Rincian Pembelajaran:
                   </p>
-                  <ul className="space-y-2 text-xs text-navy">
+                  <ul className="space-y-1.5 text-xs font-bold text-navy">
                     {mod.deliverables.map((del, index) => (
                       <li key={index} className="flex gap-2 items-start">
                         <span className="text-blue font-black flex-shrink-0">→</span>
@@ -79,79 +82,42 @@ export default function Curriculum() {
                   </ul>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Modules Block 2 */}
-        <div>
-          <div className="grid md:grid-cols-2 gap-5">
-            {day2Modules.map((mod) => {
-              const isDark = mod.id === "M5";
-              return (
-                <div
-                  key={mod.id}
-                  className={`p-6 md:p-8 rounded-2xl border relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group ${
-                    isDark
-                      ? "bg-navy text-white border-white/5"
-                      : "bg-white text-navy border-slate-200 shadow-xs"
-                  }`}
-                >
-                  {/* Accent bar */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan to-blue"></div>
-                  {isDark && (
-                    <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle,#00C4E8,transparent)" }}></div>
-                  )}
-
-                  <div className="flex items-center gap-2 mb-3 pt-1">
-                    <span className={`text-xs font-black px-2.5 py-1 rounded-lg font-mono ${
-                      isDark ? "bg-white/10 text-cyan" : "bg-cyan/10 text-cyan-700"
-                    }`}>
-                      {mod.id}
-                    </span>
-                    <div className={`p-1.5 rounded-lg ${isDark ? "bg-white/5" : "bg-slate-50"}`}>
-                      {getModuleIcon(mod.id)}
-                    </div>
-                  </div>
-
-                  <h3 className="font-black text-lg md:text-xl mb-2 leading-snug">
-                    {mod.title}
-                  </h3>
-                  <p className={`text-xs leading-relaxed mb-5 ${isDark ? "text-slate-300" : "text-muted"}`}>
-                    {mod.description}
+              {/* Tools used in this module with Logo */}
+              {mod.tools && (
+                <div className="pt-3 border-t border-slate-100">
+                  <p className="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider mb-2">
+                    🛠️ Alat AI &amp; Tools:
                   </p>
-
-                  <div className={`pt-4 border-t ${isDark ? "border-white/10" : "border-slate-100"}`}>
-                    <p className={`text-[10px] font-mono font-bold uppercase tracking-wider mb-2.5 ${
-                      isDark ? "text-slate-400" : "text-slate-400"
-                    }`}>
-                      🎯 Rincian Pembelajaran:
-                    </p>
-                    <ul className="space-y-2 text-xs">
-                      {mod.deliverables.map((del, index) => (
-                        <li key={index} className="flex gap-2 items-start">
-                          <span className={`font-black flex-shrink-0 ${isDark ? "text-cyan" : "text-blue"}`}>→</span>
-                          <span className={isDark ? "text-slate-200" : "text-navy"}>{del}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className={`mt-5 pt-3 border-t text-[11px] font-semibold ${
-                    isDark ? "border-white/10 text-slate-500" : "border-slate-100 text-muted"
-                  }`}>
-                    {mod.id === "M4" ? (
-                      <span>Alat Pendukung: <strong className={isDark ? "text-white" : "text-navy"}>ChatGPT · WHISK · Runway ML</strong></span>
-                    ) : (
-                      <span>Alat Pendukung: <strong className={isDark ? "text-white" : "text-navy"}>ElevenLabs · CapCut AI</strong></span>
-                    )}
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {AI_TOOLS.filter((t) =>
+                      mod.tools?.toLowerCase().includes(t.name.toLowerCase()) ||
+                      (t.name === "Answer The Public" && mod.tools?.toLowerCase().includes("answer"))
+                    ).map((t) => (
+                      <span
+                        key={t.name}
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-extrabold bg-slate-50 border border-slate-200 text-navy hover:bg-blue/5 hover:border-blue/30 transition-all shadow-xs"
+                      >
+                        <img
+                          src={`https://www.google.com/s2/favicons?domain=${t.domain}&sz=64`}
+                          alt={t.name}
+                          className="w-3.5 h-3.5 object-contain rounded-2xs"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = "none";
+                          }}
+                        />
+                        <span>{t.name}</span>
+                      </span>
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              )}
+            </div>
+          ))}
+        </div>
 
-          {/* Real-world Alumni Results (Google Drive Videos) */}
+        {/* Real-world Alumni Results (Google Drive Videos) */}
+        <div>
           <div className="mt-10 bg-gradient-to-br from-navy to-[#0F2342] rounded-3xl p-6 md:p-8 text-white border border-white/10 shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-cyan/5 rounded-full blur-3xl pointer-events-none"></div>
             

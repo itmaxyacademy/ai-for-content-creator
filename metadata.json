@@ -1,6 +1,6 @@
 {
   "name": "AICC Landing Page",
-  "description": "AI-Driven Content Creation Intensive Class by MAXY Academy",
+  "description": "AI-Driven Content Creation Masterclass by MAXY Academy",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

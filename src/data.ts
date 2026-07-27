@@ -1,4 +1,4 @@
-import { FAQItem, SpeakerItem, ModulItem, VideoItem } from "./types";
+import { FAQItem, SpeakerItem, ModulItem, VideoItem, AIToolItem } from "./types";
 
 export const APP_CONFIG = {
   earlyBirdDeadline: "2026-07-31T23:59:59", // Countdown target
@@ -29,51 +29,92 @@ export const APP_CONFIG = {
   slotTaken: 7,
 };
 
+export const AI_TOOLS: AIToolItem[] = [
+  { name: "Gemini", domain: "gemini.google.com", color: "blue" },
+  { name: "Answer The Public", domain: "answerthepublic.com", color: "amber" },
+  { name: "Claude", domain: "claude.ai", color: "orange" },
+  { name: "ChatGPT", domain: "chatgpt.com", color: "emerald" },
+  { name: "Google Flow", domain: "labs.google", color: "indigo" },
+  { name: "Capcut AI", domain: "capcut.com", color: "cyan" },
+  { name: "ElevenLabs", domain: "elevenlabs.io", color: "slate" },
+  { name: "Google Vids", domain: "workspace.google.com", color: "rose" },
+  { name: "Pomelli", domain: "pomelli.com", color: "purple" }
+];
+
 export const MODULES: ModulItem[] = [
   {
-    id: "M1",
-    title: "AI Content Ecosystem",
-    description: "Mindset shift ke AI-powered content machine. 5 komponen sistem konten end-to-end.",
+    id: "Day 1",
+    title: "Strategic Funnel Audit",
+    description: "Audit mendalam terhadap funnel dan strategi analitis performa konten bisnis berbasis kapabilitas AI.",
     deliverables: [
-      "Audit konten & funnel pakai Gemini",
-      "Studi kasus: audit akunmu sendiri secara terpadu"
-    ]
+      "Strategic Funnel Audit"
+    ],
+    tools: "Gemini"
   },
   {
-    id: "M2",
-    title: "Campaign Strategy",
-    description: "Latih AI jadi CMO virtual. Campaign Brief + funnel TOFU → MOFU → BOFU → Retention.",
+    id: "Day 2",
+    title: "Pre-Campaign Readiness & Orchestration",
+    description: "Persiapan menyeluruh sebelum kampanye dan orkestrasi taktis untuk audiens yang tepat sasaran.",
     deliverables: [
-      "Research pasar dengan AnswerThePublic",
-      "Eksperimen terarah: Campaign Brief via Claude"
-    ]
+      "Pre-Campaign Readiness",
+      "Campaign Orchestration"
+    ],
+    tools: "Answer The Public, Claude"
   },
   {
-    id: "M3",
-    title: "Content Planning",
-    description: "Template Content Plan level Senior Strategist, mencakup 9 channel.",
+    id: "Day 3",
+    title: "Strategic Content Planning & Brand DNA",
+    description: "Perancangan konten strategis tingkat senior dengan keselarasan penuh pada karakter dan DNA brand kamu.",
     deliverables: [
-      "Multi-channel plan tanpa tumpang tindih",
-      "Penerapan langsung: isi template via AI Skill"
-    ]
+      "Strategic Content Planning",
+      "Brand DNA Alignment"
+    ],
+    tools: "Claude, Pomelli"
   },
   {
-    id: "M4",
-    title: "AI Visual Storytelling",
-    description: "Video sinematik tanpa skill editing pakai storyboard AI: script → JSON prompt → generate → animasi.",
+    id: "Day 4",
+    title: "Storytelling",
+    description: "Teknik merangkai alur cerita (storytelling) bernada emosional yang persuasif dan memikat audiens dengan AI.",
     deliverables: [
-      "JSON Prompting untuk konsistensi visual",
-      "Proses mandiri: 2 format video AI dari nol"
-    ]
+      "Storytelling"
+    ],
+    tools: "ChatGPT"
   },
   {
-    id: "M5",
-    title: "Video Creation & Publish",
-    description: "Raw AI footage → konten siap viral. Alumni kelas ini sudah tembus 1,8 juta & 3 juta views.",
+    id: "Day 5",
+    title: "JSON Generator",
+    description: "Teknik pemantapan prompt JSON terstruktur untuk konsistensi keluaran visual dan narasi berskala besar.",
     deliverables: [
-      "AI voiceover + auto-caption CapCut AI",
-      "Langkah publikasi: publish hari itu juga"
-    ]
+      "JSON Generator"
+    ],
+    tools: "Gemini"
+  },
+  {
+    id: "Day 6",
+    title: "AI-Avatar",
+    description: "Produksi karakter personal dan representasi AI-Avatar profesional sebagai maskot interaktif brand.",
+    deliverables: [
+      "AI-Avatar"
+    ],
+    tools: "Gemini"
+  },
+  {
+    id: "Day 7",
+    title: "High-Impact Video Production",
+    description: "Pengembangan video berkekuatan tinggi dari rancangan alur dinamis hingga video yang siap dieksekusi.",
+    deliverables: [
+      "High-Impact Video Production"
+    ],
+    tools: "Google Vids, Google Flow"
+  },
+  {
+    id: "Day 8",
+    title: "Editing and Pitching",
+    description: "Finishing audio-visual profesional dengan suling suara AI, editing otomatis, hingga taktik commercial pitching.",
+    deliverables: [
+      "Editing and Pitching"
+    ],
+    tools: "ElevenLabs, Capcut AI"
   }
 ];
 

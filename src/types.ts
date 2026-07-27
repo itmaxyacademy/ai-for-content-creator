@@ -38,5 +38,12 @@ export interface ModulItem {
   title: string;
   description: string;
   deliverables: string[];
+  tools?: string;
+}
+
+export interface AIToolItem {
+  name: string;
+  domain: string;
+  color?: string;
 }
 

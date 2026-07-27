@@ -211,7 +211,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               💡 Opsi Paket &amp; Harga Masterclass
             </h3>
             <p className="text-muted text-xs md:text-sm leading-relaxed mb-4">
-              Pilih opsi harga yang relevan dengan kualifikasi kamu. Kurikulum 8 pertemuan intensif berformat Hybrid (offline di MAXY AI HUB atau online Zoom).
+              Pilih opsi harga yang relevan dengan kualifikasi kamu. Kurikulum 8 pertemuan Masterclass berformat Hybrid (offline di MAXY AI HUB atau online Zoom).
             </p>
 
             {/* Option 1: Early Bird (Recommended / Featured) */}

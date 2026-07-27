@@ -1,21 +1,33 @@
-import React from "react";
-import { Zap, Cpu, Clock, Check } from "lucide-react";
+import React, { useState } from "react";
+import { Zap, Cpu, Clock } from "lucide-react";
+import { AI_TOOLS } from "../data";
+import { AIToolItem } from "../types";
+
+const ToolLogoBadge: React.FC<{ tool: AIToolItem }> = ({ tool }) => {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div className="group flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 hover:border-cyan/50 transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-cyan/10">
+      <div className="w-7 h-7 rounded-xl bg-white flex items-center justify-center p-1 shadow-sm overflow-hidden group-hover:scale-110 transition-transform duration-300 shrink-0">
+        {!hasError ? (
+          <img
+            src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=128`}
+            alt={`${tool.name} logo`}
+            className="w-full h-full object-contain"
+            onError={() => setHasError(true)}
+          />
+        ) : (
+          <span className="text-navy font-black text-xs">{tool.name.charAt(0)}</span>
+        )}
+      </div>
+      <span className="text-sm font-bold text-slate-100 group-hover:text-cyan transition-colors tracking-wide">
+        {tool.name}
+      </span>
+    </div>
+  );
+}
 
 export default function Solutions() {
-  const tools = [
-    "ChatGPT",
-    "Gemini",
-    "Claude",
-    "Google Flow",
-    "Higgsfield",
-    "Runway ML",
-    "ElevenLabs",
-    "CapCut AI",
-    "AnswerThePublic",
-    "JSON Prompting",
-    "WHISK",
-  ];
-
   return (
     <section className="py-16 md:py-24 bg-offwhite border-y border-slate-200">
       <div className="max-w-5xl mx-auto px-5 lg:px-8">
@@ -73,26 +85,18 @@ export default function Solutions() {
             style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px)", backgroundSize: "60px 60px" }}
           ></div>
           
-          <p className="text-xs font-mono tracking-widest uppercase text-cyan font-bold mb-4 relative z-10">
+          <p className="text-xs font-mono tracking-widest uppercase text-cyan font-bold mb-6 relative z-10">
             Daftar Alat AI Utama Yang Bakal Kamu Kuasai
           </p>
           
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3 max-w-3xl mx-auto relative z-10">
-            {tools.map((tool) => (
-              <span
-                key={tool}
-                className="px-3.5 py-2 rounded-full text-xs font-bold bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 hover:border-white/20 transition-all duration-200"
-              >
-                {tool}
-              </span>
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 max-w-4xl mx-auto relative z-10">
+            {AI_TOOLS.map((tool) => (
+              <ToolLogoBadge key={tool.name} tool={tool} />
             ))}
-            <span className="px-3.5 py-2 rounded-full text-xs font-bold text-cyan border border-cyan/30 bg-cyan/5">
-              &amp; banyak lagi...
-            </span>
           </div>
           
-          <p className="text-[10px] text-slate-500 mt-4 font-mono">
-            *Catatan: Kurikulum terus dimutakhirkan secara berkala mengikuti standar industri AI kreatif paling baru (tidak mengajarkan tools usang seperti OpenAI Sora).
+          <p className="text-[10px] text-slate-400 mt-6 font-mono relative z-10">
+            *Catatan: Kurikulum Masterclass 8 Pertemuan terus dimutakhirkan secara berkala mengikuti standar industri AI kreatif paling baru.
           </p>
         </div>
       </div>
