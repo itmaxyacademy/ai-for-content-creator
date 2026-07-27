@@ -1,22 +1,25 @@
 import { FAQItem, SpeakerItem, ModulItem, VideoItem } from "./types";
 
 export const APP_CONFIG = {
-  earlyBirdDeadline: "2026-07-24T23:59:59", // Countdown target set strictly to 24 July 2026
-  eventDates: "12-13 Agustus 2026", // Event date set strictly to 12-13 August 2026
+  earlyBirdDeadline: "2026-07-31T23:59:59", // Countdown target
+  eventDates: "Mulai 4 Agustus 2026 (Setiap Selasa & Kamis)", // Event starts 4 August 2026, every Tuesday & Thursday
   eventTime: "08.30–17.00 WIB",
   eventLocation: "MAXY AI HUB, Grha Pengharapan 2nd Floor, Jl. Denpasar Raya No.2, Blok F3, Jakarta Selatan",
   waAdmin: "6282144995255",
   waCS: "6282144995255",
   prices: {
-    onlineNormal: "Rp 2.500.000",
-    onlineEarly: "Rp 1.800.000",
-    onsiteNormal: "Rp 3.500.000",
-    onsiteEarly: "Rp 2.500.000",
-    onsitePromoNormal: "Rp 3.500.000",
-    onsitePromoEarly: "Rp 2.000.000" // Special Onsite Early Bird Promo
+    normal: "Rp 2.500.000",
+    earlyBird: "Rp 1.800.000",
+    promoFirst10: "Rp 1.500.000",
+    onlineNormal: "Rp 1.800.000",
+    onlineEarly: "Rp 1.500.000",
+    onsiteNormal: "Rp 1.800.000",
+    onsiteEarly: "Rp 1.500.000",
+    onsitePromoNormal: "Rp 1.800.000",
+    onsitePromoEarly: "Rp 1.500.000"
   },
-  slotTotal: 30,
-  slotTaken: 23,
+  slotTotal: 10,
+  slotTaken: 7,
 };
 
 export const MODULES: ModulItem[] = [
@@ -98,8 +101,8 @@ export const FAQS: FAQItem[] = [
     answer: "Setelah mengisi formulir, kamu akan diarahkan ke tim Admin via WhatsApp untuk konfirmasi pembayaran. Setelah proses selesai, tautan kelas dan pengingat akan otomatis terkirim ke emailmu."
   },
   {
-    question: "Apa bedanya paket Online dan Onsite?",
-    answer: "Materi sama persis. Onsite: kelas interaktif didampingi mentor secara langsung, konten direview oleh pemateri, ada sesi networking eksklusif di MAXY AI HUB. Online cocok untuk peserta dari luar Jakarta yang terhalang jarak."
+    question: "Bagaimana format kelas 8 Pertemuan Hybrid berlangsung?",
+    answer: "Kelas diadakan secara Hybrid (bisa hadir offline langsung di MAXY AI HUB Jakarta atau online live eksekusi via Zoom) selama 8 pertemuan. Kelas secara rutin dilangsungkan setiap hari Selasa & Kamis mulai 4 Agustus 2026, didampingi mentor secara intensif, dengan sesi review konten dan networking eksklusif."
   }
 ];
 

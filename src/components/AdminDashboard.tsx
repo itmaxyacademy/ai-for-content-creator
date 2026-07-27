@@ -52,8 +52,8 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
 
     const matchesFilter =
       selectedFilter === "all" ||
-      (selectedFilter === "Online" && lead.paket.includes("Online")) ||
-      (selectedFilter === "Onsite" && lead.paket.includes("Onsite"));
+      (selectedFilter === "Promo" && lead.paket.includes("Promo")) ||
+      (selectedFilter === "Early" && (lead.paket.includes("Early") || lead.paket.includes("Regular")));
 
     return matchesSearch && matchesFilter;
   });
@@ -200,20 +200,20 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
               Semua Paket
             </button>
             <button
-              onClick={() => setSelectedFilter("Onsite")}
+              onClick={() => setSelectedFilter("Promo")}
               className={`px-3 py-2 rounded-xl text-xs font-bold transition-colors ${
-                selectedFilter === "Onsite" ? "bg-blue text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                selectedFilter === "Promo" ? "bg-blue text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
-              Onsite Saja
+              Promo 10 Pertama
             </button>
             <button
-              onClick={() => setSelectedFilter("Online")}
+              onClick={() => setSelectedFilter("Early")}
               className={`px-3 py-2 rounded-xl text-xs font-bold transition-colors ${
-                selectedFilter === "Online" ? "bg-blue text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                selectedFilter === "Early" ? "bg-blue text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
-              Online Saja
+              Early Bird Regular
             </button>
           </div>
         </div>
@@ -250,7 +250,7 @@ export default function AdminDashboard({ isOpen, onClose }: AdminDashboardProps)
                     </td>
                     <td className="p-4">
                       <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
-                        l.paket.includes("Onsite") 
+                        l.paket.includes("Promo") 
                           ? "bg-purple-100 text-purple-800" 
                           : "bg-blue-100 text-blue-800"
                       }`}>

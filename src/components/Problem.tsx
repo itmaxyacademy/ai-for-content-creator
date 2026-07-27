@@ -109,7 +109,7 @@ export default function Problem() {
               <span className="absolute -top-3 left-6 bg-gradient-to-r from-blue to-cyan text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider font-mono">
                 Cara MAXY ⚡
               </span>
-              <h4 className="font-black text-lg mb-4 mt-2 text-cyan">Kamu setelah 2 hari</h4>
+              <h4 className="font-black text-lg mb-4 mt-2 text-cyan">Kamu setelah 8 pertemuan</h4>
               <ul className="space-y-3.5 text-xs md:text-sm text-slate-200">
                 <li className="flex gap-2.5">
                   <span className="text-cyan font-bold flex-shrink-0">✓</span>
@@ -136,7 +136,7 @@ export default function Problem() {
           </div>
 
           <p className="text-center text-slate-400 text-xs md:text-sm mt-8 max-w-xl mx-auto leading-relaxed relative z-10">
-            Sistem yang menghasilkan konten konsisten, berkualitas, dan scalable tanpa harus burnout setiap minggu. Itulah yang akan kamu bangun di kelas ini. Jarak perubahannya cuma <strong className="text-white">2 hari</strong>. Mau mulai sekarang, atau tahun depan masih terjebak di workflow manual?
+            Sistem yang menghasilkan konten konsisten, berkualitas, dan scalable tanpa harus burnout setiap minggu. Itulah yang akan kamu bangun di kelas ini. Jarak perubahannya cuma <strong className="text-white">8 pertemuan</strong>. Mau mulai sekarang, atau tahun depan masih terjebak di workflow manual?
           </p>
         </div>
       </div>

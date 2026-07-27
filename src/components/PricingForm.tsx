@@ -12,7 +12,7 @@ export default function PricingForm() {
     kota: "",
     pekerjaan: "",
     namaPerusahaan: "",
-    paket: "Onsite_Promo", // default option
+    paket: "Hybrid_Promo", // default option
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -22,29 +22,26 @@ export default function PricingForm() {
   // Dynamic price lookup
   const getSelectedPrice = (paketCode: string) => {
     switch (paketCode) {
+      case "Hybrid_Promo":
+      case "Onsite_Promo":
       case "Online":
-        return {
-          name: "Online (Zoom) - Early Bird",
-          current: APP_CONFIG.prices.onlineEarly,
-          normal: APP_CONFIG.prices.onlineNormal,
-        };
       case "Onsite":
         return {
-          name: "Onsite (Jakarta) - Early Bird",
-          current: APP_CONFIG.prices.onsiteEarly,
-          normal: APP_CONFIG.prices.onsiteNormal,
+          name: "8 Pertemuan Hybrid - Promo 10 Orang Pertama",
+          current: APP_CONFIG.prices.promoFirst10,
+          normal: APP_CONFIG.prices.earlyBird,
         };
-      case "Onsite_Promo":
+      case "Hybrid_Early":
         return {
-          name: "Onsite (Promo Khusus) - Early Bird",
-          current: APP_CONFIG.prices.onsitePromoEarly,
-          normal: APP_CONFIG.prices.onsitePromoNormal,
+          name: "8 Pertemuan Hybrid - Early Bird Regular",
+          current: APP_CONFIG.prices.earlyBird,
+          normal: APP_CONFIG.prices.normal,
         };
       default:
         return {
-          name: "Pilih paket",
-          current: "—",
-          normal: "—",
+          name: "8 Pertemuan Hybrid",
+          current: APP_CONFIG.prices.promoFirst10,
+          normal: APP_CONFIG.prices.earlyBird,
         };
     }
   };
@@ -122,7 +119,7 @@ export default function PricingForm() {
 
   const getWaLink = () => {
     if (!submittedLead) return "#";
-    const rawText = `Halo Admin MAXY, saya baru mendaftar Mini Class AI-Driven Content Creation tanggal 12-13 Agustus 2026.
+    const rawText = `Halo Admin MAXY, saya baru mendaftar Kelas AI-Driven Content Creation (8 Pertemuan Hybrid) yang mulai 4 Agustus 2026.
 
 Nama Lengkap: ${submittedLead.nama}
 Email Aktif: ${submittedLead.email}
@@ -131,7 +128,7 @@ Kota Asal: ${submittedLead.kota}
 Pekerjaan: ${submittedLead.pekerjaan}
 Nama Perusahaan: ${submittedLead.namaPerusahaan}
 Opsi Paket: ${submittedLead.paket}
-Harga Early Bird: ${submittedLead.harga}
+Harga Promo: ${submittedLead.harga}
 
 Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
     return `https://wa.me/${APP_CONFIG.waAdmin}?text=${encodeURIComponent(rawText)}`;
@@ -145,7 +142,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
       kota: "",
       pekerjaan: "",
       namaPerusahaan: "",
-      paket: "Onsite_Promo",
+      paket: "Hybrid_Promo",
     });
     setIsSubmitted(false);
     setSubmittedLead(null);
@@ -203,126 +200,63 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
           {/* LEFT: Package Info Grid */}
           <div className="lg:col-span-5 space-y-5">
             <h3 className="font-black text-xl text-navy mb-1 flex items-center gap-1.5">
-              💡 Pilihan Paket Fleksibel
+              💡 Paket Kelas 8 Pertemuan Hybrid
             </h3>
             <p className="text-muted text-xs md:text-sm leading-relaxed mb-4">
-              Pilih paket yang paling cocok untuk kebutuhan belajar kamu. Kami menawarkan opsi kelas Onsite interaktif langsung di Jakarta maupun Online via Zoom.
+              Kurikulum eksklusif dengan 8 pertemuan intensif. Kamu leluasa memilih hadir langsung (offline di MAXY AI HUB Jakarta) ataupun eksekusi online live via Zoom.
             </p>
 
-            {/* Package 1: Online */}
-            <div className={`p-5 rounded-2xl border transition-all duration-300 ${
-              formData.paket === "Online" 
-                ? "bg-white border-blue shadow-md" 
-                : "bg-white border-slate-200 hover:border-slate-300"
-            }`}>
-              <div className="flex items-center justify-between mb-2">
+            {/* Featured Hybrid Promo Package */}
+            <div className="p-6 rounded-3xl border-2 bg-gradient-to-b from-navy to-navy-light text-white border-cyan shadow-xl relative mt-4">
+              <span className="absolute -top-3 left-6 bg-gradient-to-r from-ember to-amber text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
+                🔥 PROMO 10 ORANG PERTAMA
+              </span>
+              
+              <div className="flex items-center justify-between mb-3 mt-1">
                 <div>
-                  <p className="text-[10px] font-mono tracking-widest uppercase text-muted font-bold">2 Days Online</p>
-                  <h4 className="text-base font-black text-navy">Kelas Online (Zoom Class)</h4>
+                  <p className="text-[10px] font-mono tracking-widest uppercase text-cyan font-bold">8 Pertemuan · Mulai 4 Agustus 2026</p>
+                  <h4 className="text-lg font-black text-white">Intensive Class Hybrid</h4>
                 </div>
-                <span className="bg-blue/10 text-blue text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  Zoom Live
+                <span className="bg-amber text-navy text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider">
+                  Selasa &amp; Kamis
                 </span>
               </div>
-              <div className="flex items-end gap-2 mb-3">
-                <span className="text-xl md:text-2xl font-black text-blue font-mono">
-                  {APP_CONFIG.prices.onlineEarly}
-                </span>
-                <span className="line-through text-slate-400 text-xs md:text-sm font-semibold mb-0.5">
-                  {APP_CONFIG.prices.onlineNormal}
-                </span>
-              </div>
-              <ul className="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-2.5">
-                <li className="flex gap-2">
-                  <Check className="w-3.5 h-3.5 text-blue flex-shrink-0 mt-0.5" />
-                  <span>Kelas interaktif live 2 hari penuh</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="w-3.5 h-3.5 text-blue flex-shrink-0 mt-0.5" />
-                  <span>Prompt Library &amp; JSON Template siap pakai</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="w-3.5 h-3.5 text-blue flex-shrink-0 mt-0.5" />
-                  <span>Akses rekaman kelas &amp; grup diskusi alumni</span>
-                </li>
-              </ul>
-            </div>
 
-            {/* Package 2: Onsite Promo */}
-            <div className={`p-5 rounded-2xl border-2 transition-all duration-300 ${
-              formData.paket === "Onsite_Promo"
-                ? "bg-gradient-to-b from-navy to-navy-light text-white border-blue shadow-xl relative"
-                : "bg-white border-slate-200 hover:border-slate-300"
-            }`}>
-              {formData.paket === "Onsite_Promo" && (
-                <span className="absolute -top-3 left-4 bg-gradient-to-r from-blue to-cyan text-white text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono">
-                  PROMO SPESIAL TERBATAS
-                </span>
-              )}
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-end gap-2.5 my-4 bg-white/5 p-4 rounded-2xl border border-white/10">
                 <div>
-                  <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${formData.paket === "Onsite_Promo" ? "text-cyan" : "text-muted"}`}>2 Days Onsite Jakarta</p>
-                  <h4 className={`text-base font-black ${formData.paket === "Onsite_Promo" ? "text-white" : "text-navy"}`}>Onsite Promo (Early Bird)</h4>
+                  <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Diskon Terbatas:</p>
+                  <span className="text-2xl md:text-3xl font-black font-mono text-cyan block">
+                    {APP_CONFIG.prices.promoFirst10}
+                  </span>
                 </div>
-                <span className="bg-amber text-navy text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  Onsite Promo
-                </span>
+                <div className="pb-1 text-right ml-auto">
+                  <span className="text-[10px] text-slate-400 block font-mono">Early Bird Regular:</span>
+                  <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
+                    {APP_CONFIG.prices.earlyBird}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-end gap-2 mb-3">
-                <span className={`text-xl md:text-2xl font-black font-mono ${formData.paket === "Onsite_Promo" ? "text-cyan" : "text-blue"}`}>
-                  {APP_CONFIG.prices.onsitePromoEarly}
-                </span>
-                <span className="line-through text-slate-400 text-xs md:text-sm font-semibold mb-0.5">
-                  {APP_CONFIG.prices.onsitePromoNormal}
-                </span>
-              </div>
-              <ul className={`space-y-1.5 text-xs border-t pt-2.5 ${formData.paket === "Onsite_Promo" ? "text-slate-300 border-white/10" : "text-slate-600 border-slate-100"}`}>
-                <li className="flex gap-2">
-                  <Check className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${formData.paket === "Onsite_Promo" ? "text-cyan" : "text-blue"}`} />
-                  <span>Semua benefit Onsite reguler dengan harga diskon tambahan</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${formData.paket === "Onsite_Promo" ? "text-cyan" : "text-blue"}`} />
-                  <span>Makan siang, snack, &amp; networking eksklusif</span>
-                </li>
-              </ul>
-            </div>
 
-            {/* Package 3: Onsite Normal Early */}
-            <div className={`p-5 rounded-2xl border transition-all duration-300 ${
-              formData.paket === "Onsite" 
-                ? "bg-white border-blue shadow-md" 
-                : "bg-white border-slate-200 hover:border-slate-300"
-            }`}>
-              <div className="flex items-center justify-between mb-2">
-                <div>
-                  <p className="text-[10px] font-mono tracking-widest uppercase text-muted font-bold">2 Days Onsite Regular</p>
-                  <h4 className="text-base font-black text-navy">Kelas Onsite Regular</h4>
-                </div>
-                <span className="bg-cyan/15 text-cyan-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  Onsite Regular
-                </span>
-              </div>
-              <div className="flex items-end gap-2 mb-3">
-                <span className="text-xl md:text-2xl font-black text-blue font-mono">
-                  {APP_CONFIG.prices.onsiteEarly}
-                </span>
-                <span className="line-through text-slate-400 text-xs md:text-sm font-semibold mb-0.5">
-                  {APP_CONFIG.prices.onsiteNormal}
-                </span>
-              </div>
-              <ul className="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-2.5">
-                <li className="flex gap-2">
-                  <Check className="w-3.5 h-3.5 text-blue flex-shrink-0 mt-0.5" />
-                  <span>Didampingi mentor langsung selama pengerjaan di Jakarta</span>
+              <ul className="space-y-2.5 text-xs text-slate-200 border-t border-white/10 pt-4">
+                <li className="flex gap-2.5 items-start">
+                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
+                  <span><strong>8 Pertemuan Hybrid</strong> (Pilih Offline di MAXY AI HUB Jakarta atau Online via Zoom)</span>
                 </li>
-                <li className="flex gap-2">
-                  <Check className="w-3.5 h-3.5 text-blue flex-shrink-0 mt-0.5" />
-                  <span>Konten buatanmu langsung direview oleh pembicara</span>
+                <li className="flex gap-2.5 items-start">
+                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
+                  <span>Dilangsungkan rutin setiap <strong>Selasa &amp; Kamis</strong> (Start 4 Agustus 2026)</span>
                 </li>
-                <li className="flex gap-2">
-                  <Check className="w-3.5 h-3.5 text-blue flex-shrink-0 mt-0.5" />
-                  <span>Tempat belajar representatif di MAXY AI HUB</span>
+                <li className="flex gap-2.5 items-start">
+                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
+                  <span>Didampingi mentor secara langsung &amp; review konten secara mendalam</span>
+                </li>
+                <li className="flex gap-2.5 items-start">
+                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
+                  <span>Prompt Library, JSON Template AI &amp; Akses Rekaman Kelas</span>
+                </li>
+                <li className="flex gap-2.5 items-start">
+                  <Check className="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" />
+                  <span>Makan siang, snack, &amp; sesi networking eksklusif untuk peserta Onsite</span>
                 </li>
               </ul>
             </div>
@@ -458,22 +392,19 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                 {/* Paket Dropdown */}
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Pilih Paket Kelas Yang Diinginkan *
+                    Pilih Opsi Harga Paket *
                   </label>
                   <select
                     name="paket"
                     value={formData.paket}
                     onChange={handleInputChange}
-                    className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all"
+                    className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy font-bold border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all"
                   >
-                    <option value="Onsite_Promo">
-                      Onsite Promo (Jakarta) — {APP_CONFIG.prices.onsitePromoEarly} (Paling Hemat!)
+                    <option value="Hybrid_Promo">
+                      8 Pertemuan Hybrid — Promo 10 Orang Pertama ({APP_CONFIG.prices.promoFirst10})
                     </option>
-                    <option value="Onsite">
-                      Onsite Regular (Jakarta) — {APP_CONFIG.prices.onsiteEarly}
-                    </option>
-                    <option value="Online">
-                      Online Zoom Class — {APP_CONFIG.prices.onlineEarly}
+                    <option value="Hybrid_Early">
+                      8 Pertemuan Hybrid — Early Bird Regular ({APP_CONFIG.prices.earlyBird})
                     </option>
                   </select>
                   {errors.paket && (

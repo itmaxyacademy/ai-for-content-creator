@@ -4,7 +4,7 @@ import { APP_CONFIG } from "../data";
 
 export default function FloatingWaCs() {
   const waCSText = encodeURIComponent(
-    "Halo CS MAXY, saya mau bertanya mengenai Intensive Class AI-Driven Content Creation tanggal 12-13 Agustus 2026."
+    "Halo CS MAXY, saya mau bertanya mengenai Intensive Class AI-Driven Content Creation (8 Pertemuan Hybrid) yang mulai 4 Agustus 2026."
   );
   const waUrl = `https://wa.me/${APP_CONFIG.waCS}?text=${waCSText}`;
 

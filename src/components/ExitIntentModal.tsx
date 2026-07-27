@@ -58,18 +58,18 @@ export default function ExitIntentModal() {
           Tunggu — jangan pergi dulu! ✋
         </h3>
         <p className="text-muted text-xs md:text-sm mb-5 leading-relaxed">
-          Peluang kuasai AI dengan harga hemat masih di depan mata. Begitu batas waktu habis, harga naik <strong className="text-ember font-black">Rp 1.000.000</strong>. Yakin mau melewatkan diskon ini?
+          Peluang kuasai AI dengan harga promo <strong className="text-navy font-black">Rp 1.500.000</strong> (khusus 10 orang pertama) masih di depan mata! Setelah kuota terpenuhi, harga naik ke Early Bird <strong className="text-ember font-black">{APP_CONFIG.prices.earlyBird}</strong>. Yakin mau melewatkan kesempatan ini?
         </p>
 
         {/* Highlight Price */}
         <div className="bg-slate-50 rounded-2xl p-4 mb-5 border border-slate-100">
-          <p className="text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider">
-            Sisa Kuota Promo Hari Ini
+          <p className="text-[10px] font-mono uppercase text-ember font-bold tracking-wider">
+            🔥 Promo Khusus 10 Orang Pertama (8 Pertemuan Hybrid)
           </p>
           <p className="text-2xl font-black text-blue mt-1 font-mono">
-            {APP_CONFIG.prices.onsitePromoEarly}{" "}
+            {APP_CONFIG.prices.promoFirst10}{" "}
             <span className="text-xs md:text-sm line-through text-slate-400 font-semibold font-mono">
-              {APP_CONFIG.prices.onsiteNormal}
+              {APP_CONFIG.prices.earlyBird}
             </span>
           </p>
         </div>

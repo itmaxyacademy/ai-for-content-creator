@@ -25,11 +25,11 @@ export default function Solutions() {
             Solusi Pintar Bersama MAXY
           </p>
           <h2 className="text-3xl md:text-5xl font-black leading-tight text-navy mb-4">
-            2 Hari. Satu Mesin Konten<br />
+            8 Pertemuan Hybrid. Satu Mesin Konten<br />
             <span className="gradient-text font-black">Yang Mengubah Cara Kerja Kamu Selamanya.</span>
           </h2>
           <p className="text-muted text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            Mini Class intensif: bangun sistem produksi konten end-to-end terintegrasi AI — dari riset tren, pembuatan video, hingga distribusi terjadwal secara terarah.
+            Kelas intensif 8 pertemuan hybrid (setiap Selasa &amp; Kamis mulai 4 Agustus 2026): bangun sistem produksi konten end-to-end terintegrasi AI — dari riset tren, pembuatan video, hingga distribusi terjadwal secara terarah.
           </p>
         </div>
 

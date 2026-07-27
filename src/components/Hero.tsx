@@ -53,7 +53,7 @@ export default function Hero() {
       <div className="max-w-4xl mx-auto px-5 relative z-10 text-center pt-8 md:pt-12 pb-6 flex flex-col items-center">
         {/* Main Pill/Badge */}
         <div className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-[#1e293b] text-white font-black text-xs md:text-sm tracking-wide mb-6 shadow-sm">
-          Intensive Class · {APP_CONFIG.eventDates} · Online & Onsite
+          Intensive Class · {APP_CONFIG.eventDates} · 8 Pertemuan Hybrid
         </div>
 
         {/* Headline */}

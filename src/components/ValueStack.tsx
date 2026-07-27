@@ -113,15 +113,20 @@ export default function ValueStack() {
             <div className="flex justify-between items-center pt-3 border-t border-white/20">
               <div>
                 <span className="font-black text-sm md:text-base block">
-                  Harga Spesial Early Bird (Onsite)
+                  Promo 10 Orang Pertama (8 Pertemuan Hybrid)
                 </span>
-                <span className="text-[10px] text-white/80 block font-mono">
-                  *Diskon langsung terbatas minggu ini
+                <span className="text-[10px] text-amber-300 block font-mono">
+                  *Harga Early Bird Rp 1.800.000 → Khusus 10 pendaftar pertama Rp 1.500.000!
                 </span>
               </div>
-              <span className="text-2xl md:text-4xl font-black font-mono text-white">
-                {APP_CONFIG.prices.onsiteEarly}
-              </span>
+              <div className="text-right">
+                <span className="text-xs md:text-sm line-through text-white/70 font-mono block">
+                  {APP_CONFIG.prices.earlyBird}
+                </span>
+                <span className="text-2xl md:text-4xl font-black font-mono text-cyan block">
+                  {APP_CONFIG.prices.promoFirst10}
+                </span>
+              </div>
             </div>
           </div>
         </div>

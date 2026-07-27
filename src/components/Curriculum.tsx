@@ -30,26 +30,16 @@ export default function Curriculum() {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <p className="text-xs font-mono tracking-widest uppercase text-blue font-bold mb-3">
-            Kurikulum 5 Modul · 2 Hari
+            Kurikulum 5 Modul · 8 Pertemuan Hybrid
           </p>
           <h2 className="text-3xl md:text-5xl font-black leading-tight text-navy">
-            Hari 1: Strategi &amp; Sistem.<br />
-            <span className="gradient-text">Hari 2: Produksi &amp; Publish.</span>
+            Dari Strategi &amp; Sistem<br />
+            <span className="gradient-text">Hingga Produksi &amp; Publish.</span>
           </h2>
         </div>
 
-        {/* DAY 1 Block */}
-        <div className="mb-12">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="bg-navy text-white text-xs font-black px-4 py-2 rounded-xl tracking-wider font-mono">
-              DAY 1
-            </div>
-            <div className="flex-1 h-px bg-slate-200"></div>
-            <p className="text-muted text-[10px] md:text-xs font-semibold uppercase tracking-wider font-mono">
-              Modul 1–3 · Strategy to System
-            </p>
-          </div>
-
+        {/* Modules Block 1 */}
+        <div className="mb-8">
           <div className="grid md:grid-cols-3 gap-5">
             {day1Modules.map((mod) => (
               <div
@@ -93,18 +83,8 @@ export default function Curriculum() {
           </div>
         </div>
 
-        {/* DAY 2 Block */}
+        {/* Modules Block 2 */}
         <div>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="bg-gradient-to-r from-blue to-cyan text-white text-xs font-black px-4 py-2 rounded-xl tracking-wider font-mono">
-              DAY 2
-            </div>
-            <div className="flex-1 h-px bg-slate-200"></div>
-            <p className="text-muted text-[10px] md:text-xs font-semibold uppercase tracking-wider font-mono">
-              Modul 4–5 · Production to Publish
-            </p>
-          </div>
-
           <div className="grid md:grid-cols-2 gap-5">
             {day2Modules.map((mod) => {
               const isDark = mod.id === "M5";
@@ -171,21 +151,21 @@ export default function Curriculum() {
             })}
           </div>
 
-          {/* Day 2 Real-world Alumni Results (Google Drive Videos) */}
+          {/* Real-world Alumni Results (Google Drive Videos) */}
           <div className="mt-10 bg-gradient-to-br from-navy to-[#0F2342] rounded-3xl p-6 md:p-8 text-white border border-white/10 shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-cyan/5 rounded-full blur-3xl pointer-events-none"></div>
             
             <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
               <div>
                 <span className="text-[10px] font-mono font-black text-cyan uppercase tracking-wider bg-white/5 px-2.5 py-1 rounded-md">
-                  Hasil Nyata Alumni Hari 2
+                  Hasil Nyata Alumni
                 </span>
                 <h4 className="text-xl md:text-2xl font-black mt-2">
                   Hasil Karya Video AI yang Diproduksi di Kelas
                 </h4>
               </div>
               <p className="text-slate-300 text-xs md:max-w-md leading-relaxed">
-                Ini adalah video asli hasil kreasi mandiri para alumni yang dirancang, di-generate, dan dipublikasikan langsung selama sesi praktik Hari ke-2.
+                Ini adalah video asli hasil kreasi mandiri para alumni yang dirancang, di-generate, dan dipublikasikan langsung selama sesi praktik di kelas.
               </p>
             </div>
 
