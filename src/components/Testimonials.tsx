@@ -108,7 +108,7 @@ export default function Testimonials() {
               Tonton Kesaksian Langsung di Instagram Reels
             </h4>
             <p className="text-muted text-sm leading-relaxed max-w-xl">
-              Dapatkan cerita jujur alumni MAXY Intensive Class mengenai pengalaman belajar langsung di kelas dan bagaimana tools AI mengubah produktivitas harian mereka.
+              Dapatkan cerita jujur alumni MAXY Masterclass mengenai pengalaman belajar langsung di kelas dan bagaimana tools AI mengubah produktivitas harian mereka.
             </p>
           </div>
           

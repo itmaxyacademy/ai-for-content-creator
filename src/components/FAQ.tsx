@@ -16,7 +16,7 @@ export default function FAQ() {
             Masih Ada Pertanyaan?
           </h2>
           <p className="text-muted text-xs md:text-sm mt-3">
-            Berikut adalah jawaban dari beberapa pertanyaan yang paling sering diajukan mengenai program intensif ini.
+            Berikut adalah jawaban dari beberapa pertanyaan yang paling sering diajukan mengenai program masterclass ini.
           </p>
         </div>
 

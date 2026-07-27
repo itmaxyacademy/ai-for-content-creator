@@ -159,7 +159,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
         {/* Urgent Headers */}
         <div className="text-center mb-10 md:mb-14">
           <p className="text-xs font-mono tracking-widest uppercase text-blue font-bold mb-3">
-            Pendaftaran Kelas Intensif
+            Pendaftaran Masterclass
           </p>
           <h2 className="text-3xl md:text-5xl font-black text-navy mb-4">
             Amankan Kursi Kamu Sekarang
@@ -203,7 +203,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               💡 Paket Kelas 8 Pertemuan Hybrid
             </h3>
             <p className="text-muted text-xs md:text-sm leading-relaxed mb-4">
-              Kurikulum eksklusif dengan 8 pertemuan intensif. Kamu leluasa memilih hadir langsung (offline di MAXY AI HUB Jakarta) ataupun eksekusi online live via Zoom.
+              Kurikulum masterclass eksklusif dalam 8 pertemuan. Kamu leluasa memilih hadir langsung (offline di MAXY AI HUB Jakarta) ataupun eksekusi online live via Zoom.
             </p>
 
             {/* Featured Hybrid Promo Package */}
@@ -215,7 +215,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               <div className="flex items-center justify-between mb-3 mt-1">
                 <div>
                   <p className="text-[10px] font-mono tracking-widest uppercase text-cyan font-bold">8 Pertemuan · Mulai 4 Agustus 2026</p>
-                  <h4 className="text-lg font-black text-white">Intensive Class Hybrid</h4>
+                  <h4 className="text-lg font-black text-white">Hybrid Masterclass</h4>
                 </div>
                 <span className="bg-amber text-navy text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider">
                   Selasa &amp; Kamis

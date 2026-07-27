@@ -29,7 +29,7 @@ export default function Solutions() {
             <span className="gradient-text font-black">Yang Mengubah Cara Kerja Kamu Selamanya.</span>
           </h2>
           <p className="text-muted text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            Kelas intensif 8 pertemuan hybrid (setiap Selasa &amp; Kamis mulai 4 Agustus 2026): bangun sistem produksi konten end-to-end terintegrasi AI — dari riset tren, pembuatan video, hingga distribusi terjadwal secara terarah.
+            Masterclass 8 pertemuan hybrid (setiap Selasa &amp; Kamis mulai 4 Agustus 2026): bangun sistem produksi konten end-to-end terintegrasi AI — dari riset tren, pembuatan video, hingga distribusi terjadwal secara terarah.
           </p>
         </div>
 
