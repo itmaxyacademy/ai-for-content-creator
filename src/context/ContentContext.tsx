@@ -308,7 +308,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }
 
         // Replace any Google Drive URLs in speakers with local images
-        let loadedSpeakers = Array.isArray(parsed.speakers) && parsed.speakers.length > 0 ? parsed.speakers : SPEAKERS;
+        let loadedSpeakers = Array.isArray(parsed.speakers) ? parsed.speakers : SPEAKERS;
         loadedSpeakers = loadedSpeakers.map((sp: SpeakerItem) => {
           if (sp.imageUrl && sp.imageUrl.includes("1guqfUVCAQCRNQIfa_zVE2dayFOWwL84b")) {
             return { ...sp, imageUrl: stevenImg };
@@ -328,12 +328,12 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
               ...(storedAppConfig.prices || {}),
             },
           },
-          modules: Array.isArray(parsed.modules) && parsed.modules.length > 0 ? parsed.modules : MODULES,
+          modules: Array.isArray(parsed.modules) ? parsed.modules : MODULES,
           speakers: loadedSpeakers,
-          faqs: Array.isArray(parsed.faqs) && parsed.faqs.length > 0 ? parsed.faqs : FAQS,
-          videos: Array.isArray(parsed.videos) && parsed.videos.length > 0 ? parsed.videos : VIDEOS,
-          packages: Array.isArray(parsed.packages) && parsed.packages.length > 0 ? parsed.packages : DEFAULT_PACKAGES,
-          testimonials: Array.isArray(parsed.testimonials) && parsed.testimonials.length > 0 ? parsed.testimonials : DEFAULT_TESTIMONIALS,
+          faqs: Array.isArray(parsed.faqs) ? parsed.faqs : FAQS,
+          videos: Array.isArray(parsed.videos) ? parsed.videos : VIDEOS,
+          packages: Array.isArray(parsed.packages) ? parsed.packages : DEFAULT_PACKAGES,
+          testimonials: Array.isArray(parsed.testimonials) ? parsed.testimonials : DEFAULT_TESTIMONIALS,
           customSections: Array.isArray(parsed.customSections) ? parsed.customSections : [],
           sectionOrder: Array.isArray(parsed.sectionOrder) && parsed.sectionOrder.length > 0 ? parsed.sectionOrder : DEFAULT_SECTION_ORDER,
           popupConfig: { ...DEFAULT_POPUP_CONFIG, ...(parsed.popupConfig || {}) },
@@ -341,18 +341,18 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
           problemConfig: {
             ...DEFAULT_PROBLEM_CONFIG,
             ...(parsed.problemConfig || {}),
-            cards: Array.isArray(parsed.problemConfig?.cards) && parsed.problemConfig.cards.length > 0
+            cards: Array.isArray(parsed.problemConfig?.cards)
               ? parsed.problemConfig.cards
               : DEFAULT_PROBLEM_CONFIG.cards,
           },
           solutionConfig: {
             ...DEFAULT_SOLUTION_CONFIG,
             ...(parsed.solutionConfig || {}),
-            cards: Array.isArray(parsed.solutionConfig?.cards) && parsed.solutionConfig.cards.length > 0
+            cards: Array.isArray(parsed.solutionConfig?.cards)
               ? parsed.solutionConfig.cards
               : DEFAULT_SOLUTION_CONFIG.cards,
           },
-          valueStackItems: Array.isArray(parsed.valueStackItems) && parsed.valueStackItems.length > 0 ? parsed.valueStackItems : DEFAULT_VALUE_STACK,
+          valueStackItems: Array.isArray(parsed.valueStackItems) ? parsed.valueStackItems : DEFAULT_VALUE_STACK,
         };
       }
     } catch (e) {

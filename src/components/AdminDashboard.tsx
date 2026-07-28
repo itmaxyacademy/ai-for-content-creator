@@ -237,7 +237,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
   // Pain Card Sub-Form State
   const [editingPainCardIndex, setEditingPainCardIndex] = useState<number | null>(null);
-  const [painCardInput, setPainCardInput] = useState<PainCardItem>({ icon: "😩", title: "", desc: "" });
+  const [painCardInput, setPainCardInput] = useState<PainCardItem>({ icon: "", title: "", desc: "" });
 
   const handleSavePainCard = (e: React.FormEvent) => {
     e.preventDefault();
@@ -250,7 +250,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     }
     updateProblemConfig({ cards });
     setEditingPainCardIndex(null);
-    setPainCardInput({ icon: "😩", title: "", desc: "" });
+    setPainCardInput({ icon: "", title: "", desc: "" });
     showToast("Kartu masalah berhasil disimpan!");
   };
 

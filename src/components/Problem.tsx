@@ -31,7 +31,7 @@ export default function Problem() {
           {(problem.cards || []).map((card, idx) => (
             <div key={idx} className="p-6 md:p-8 rounded-2xl bg-red-50/40 border-l-4 border-red-500 shadow-xs">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-lg">{card.icon || "😩"}</span>
+                {card.icon ? <span className="text-lg">{card.icon}</span> : null}
                 <h4 className="font-black text-sm md:text-base text-navy">{card.title}</h4>
               </div>
               <p className="text-muted text-xs md:text-sm leading-relaxed">
