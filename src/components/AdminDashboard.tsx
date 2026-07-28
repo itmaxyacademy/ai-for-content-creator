@@ -158,6 +158,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     initials: "",
     name: "",
     role: "",
+    badgeTag: "",
     description: "",
     imageUrl: "",
   });
@@ -1655,7 +1656,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                   {editingSpeakerIndex !== null ? "Edit Data Pemateri" : "Tambah Pemateri Baru"}
                 </h3>
 
-                <div className="grid md:grid-cols-3 gap-3">
+                <div className="grid md:grid-cols-4 gap-3">
                   <div>
                     <label className="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
                     <input
@@ -1680,6 +1681,16 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                       type="text"
                       value={speakerInput.role}
                       onChange={(e) => setSpeakerInput({ ...speakerInput, role: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">🏷️ Lencana / Badge Bawah</label>
+                    <input
+                      type="text"
+                      value={speakerInput.badgeTag || ""}
+                      onChange={(e) => setSpeakerInput({ ...speakerInput, badgeTag: e.target.value })}
+                      placeholder="Konsultan Bisnis AI Terpercaya"
                       className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>

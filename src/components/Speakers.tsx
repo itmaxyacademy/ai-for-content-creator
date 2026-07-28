@@ -68,78 +68,87 @@ export default function Speakers() {
         </div>
 
         {/* Dynamic Speakers Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
-          {content.speakers.map((sp, idx) => {
-            const isDark = idx === 0;
-            return (
-              <div
-                key={sp.name}
-                className={`p-6 md:p-8 rounded-3xl border transition-all duration-300 hover:scale-[1.01] shadow-sm relative overflow-hidden flex flex-col justify-between ${
-                  isDark
-                    ? "bg-navy text-white border-blue-900/30"
-                    : "bg-offwhite text-navy border-slate-200"
-                }`}
-              >
-                {isDark && (
+        {(() => {
+          const count = content.speakers.length;
+          let gridClass = "grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20";
+          if (count === 3) {
+            gridClass = "grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-20";
+          } else if (count === 4) {
+            gridClass = "grid sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl mx-auto mb-20";
+          } else if (count > 4) {
+            gridClass = "grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-20";
+          }
+
+          return (
+            <div className={gridClass}>
+              {content.speakers.map((sp, idx) => {
+                const isDark = idx === 0;
+                return (
                   <div
-                    className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 pointer-events-none"
-                    style={{ background: "radial-gradient(circle,#00C4E8,transparent)" }}
-                  ></div>
-                )}
-                
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start text-center md:text-left">
-                  <div
-                    className={`w-32 h-32 md:w-44 md:h-44 rounded-3xl md:rounded-[2rem] flex items-center justify-center text-3xl font-black overflow-hidden border flex-shrink-0 shadow-md ${
-                      isDark 
-                        ? "bg-blue/20 text-cyan border-white/10 ring-4 ring-cyan/5" 
-                        : "bg-blue/10 text-blue border-slate-200 ring-4 ring-blue/5"
+                    key={sp.name}
+                    className={`p-6 md:p-8 rounded-3xl border transition-all duration-300 hover:scale-[1.01] shadow-sm relative overflow-hidden flex flex-col justify-between ${
+                      isDark
+                        ? "bg-navy text-white border-blue-900/30"
+                        : "bg-offwhite text-navy border-slate-200"
                     }`}
                   >
-                    {sp.imageUrl && !imgErrors[sp.name] ? (
-                      <img
-                        src={sp.imageUrl}
-                        alt={sp.name}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover object-top scale-105 transition-transform duration-500 hover:scale-110"
-                        onError={() => {
-                          setImgErrors((prev) => ({ ...prev, [sp.name]: true }));
-                        }}
-                      />
-                    ) : (
-                      <span>{sp.initials}</span>
+                    {isDark && (
+                      <div
+                        className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 pointer-events-none"
+                        style={{ background: "radial-gradient(circle,#00C4E8,transparent)" }}
+                      ></div>
                     )}
-                  </div>
-                  
-                  <div className="flex-1 mt-3 md:mt-0">
-                    <h4 className="text-xl md:text-2xl font-black mb-1 leading-snug">{sp.name}</h4>
-                    <p
-                      className={`text-xs font-bold uppercase tracking-widest mb-3 ${
-                        isDark ? "text-cyan" : "text-blue"
-                      }`}
-                    >
-                      {sp.role}
-                    </p>
-                    <p className={`text-xs md:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                      {sp.description}
-                    </p>
-                  </div>
-                </div>
+                    
+                    <div className="flex flex-col gap-5 items-center text-center">
+                      <div
+                        className={`w-32 h-32 md:w-36 md:h-36 rounded-3xl flex items-center justify-center text-3xl font-black overflow-hidden border flex-shrink-0 shadow-md ${
+                          isDark 
+                            ? "bg-blue/20 text-cyan border-white/10 ring-4 ring-cyan/5" 
+                            : "bg-blue/10 text-blue border-slate-200 ring-4 ring-blue/5"
+                        }`}
+                      >
+                        {sp.imageUrl && !imgErrors[sp.name] ? (
+                          <img
+                            src={sp.imageUrl}
+                            alt={sp.name}
+                            referrerPolicy="no-referrer"
+                            className="w-full h-full object-cover object-top scale-105 transition-transform duration-500 hover:scale-110"
+                            onError={() => {
+                              setImgErrors((prev) => ({ ...prev, [sp.name]: true }));
+                            }}
+                          />
+                        ) : (
+                          <span>{sp.initials}</span>
+                        )}
+                      </div>
+                      
+                      <div className="flex-1">
+                        <h4 className="text-xl font-black mb-1 leading-snug">{sp.name}</h4>
+                        <p
+                          className={`text-xs font-bold uppercase tracking-widest mb-3 ${
+                            isDark ? "text-cyan" : "text-blue"
+                          }`}
+                        >
+                          {sp.role}
+                        </p>
+                        <p className={`text-xs md:text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                          {sp.description}
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-200/20 flex items-center gap-1.5 text-xs font-semibold">
-                  {isDark ? (
-                    <span className="text-cyan flex items-center gap-1">
-                      <Award className="w-3.5 h-3.5" /> Konsultan Bisnis AI Terpercaya
-                    </span>
-                  ) : (
-                    <span className="text-blue flex items-center gap-1">
-                      <Briefcase className="w-3.5 h-3.5" /> Master Digital Strategist
-                    </span>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                    <div className="mt-6 pt-4 border-t border-slate-200/20 flex items-center justify-center gap-1.5 text-xs font-semibold">
+                      <span className={`${isDark ? "text-cyan" : "text-blue"} flex items-center gap-1 font-bold`}>
+                        <Award className="w-3.5 h-3.5" />
+                        {sp.badgeTag || (isDark ? "Konsultan Bisnis AI Terpercaya" : "Master Digital Strategist")}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })()}
 
         {/* Cost of Inaction Sub-section */}
         <div className="max-w-4xl mx-auto pt-16 border-t border-slate-100" ref={statsRef}>

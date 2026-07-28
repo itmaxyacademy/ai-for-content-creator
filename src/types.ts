@@ -31,6 +31,7 @@ export interface SpeakerItem {
   role: string;
   description: string;
   imageUrl?: string;
+  badgeTag?: string;
 }
 
 export interface ModulItem {
