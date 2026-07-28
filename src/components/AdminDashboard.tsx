@@ -10,7 +10,8 @@ import {
   ValueStackItem,
   PainCardItem,
   SolutionCardItem,
-  AIToolItem
+  AIToolItem,
+  FutureWorkCardItem
 } from "../types";
 import { useContent } from "../context/ContentContext";
 import {
@@ -39,7 +40,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Zap,
-  Gift
+  Gift,
+  TrendingUp
 } from "lucide-react";
 
 interface AdminDashboardProps {
@@ -65,6 +67,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     updateSolutionConfig,
     setValueStackItems,
     setAiTools,
+    updateFutureWorkConfig,
     resetToDefault,
   } = useContent();
 
@@ -328,6 +331,57 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     }
   };
 
+  // Future of Work Form State
+  const futureWorkCardFormRef = useRef<HTMLFormElement>(null);
+  const [futureWorkForm, setFutureWorkForm] = useState({
+    badgeText: content.futureWorkConfig?.badgeText || "",
+    title: content.futureWorkConfig?.title || "",
+    titleHighlight: content.futureWorkConfig?.titleHighlight || "",
+    subtitle: content.futureWorkConfig?.subtitle || "",
+  });
+
+  const [editingFutureWorkCardIndex, setEditingFutureWorkCardIndex] = useState<number | null>(null);
+  const [futureWorkCardInput, setFutureWorkCardInput] = useState<FutureWorkCardItem>({
+    icon: "",
+    stat: "",
+    title: "",
+    desc: "",
+  });
+
+  const handleSaveFutureWorkHeadings = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateFutureWorkConfig({
+      badgeText: futureWorkForm.badgeText,
+      title: futureWorkForm.title,
+      titleHighlight: futureWorkForm.titleHighlight,
+      subtitle: futureWorkForm.subtitle,
+    });
+    showToast("Teks Headings Future of Work berhasil disimpan!");
+  };
+
+  const handleSaveFutureWorkCard = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!futureWorkCardInput.title.trim()) return;
+    const cards = [...(content.futureWorkConfig?.cards || [])];
+    if (editingFutureWorkCardIndex !== null) {
+      cards[editingFutureWorkCardIndex] = futureWorkCardInput;
+    } else {
+      cards.push(futureWorkCardInput);
+    }
+    updateFutureWorkConfig({ cards });
+    setEditingFutureWorkCardIndex(null);
+    setFutureWorkCardInput({ icon: "", stat: "", title: "", desc: "" });
+    showToast("Kartu Future of Work berhasil disimpan!");
+  };
+
+  const handleDeleteFutureWorkCard = (idx: number) => {
+    if (window.confirm("Hapus kartu Future of Work ini?")) {
+      const cards = (content.futureWorkConfig?.cards || []).filter((_, i) => i !== idx);
+      updateFutureWorkConfig({ cards });
+      showToast("Kartu berhasil dihapus!");
+    }
+  };
+
   useEffect(() => {
     setHeroForm({
       topBannerText: content.appConfig.topBannerText || "",
@@ -386,6 +440,13 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
       title: content.solutionConfig?.title || "",
       titleHighlight: content.solutionConfig?.titleHighlight || "",
       subtitle: content.solutionConfig?.subtitle || "",
+    });
+
+    setFutureWorkForm({
+      badgeText: content.futureWorkConfig?.badgeText || "",
+      title: content.futureWorkConfig?.title || "",
+      titleHighlight: content.futureWorkConfig?.titleHighlight || "",
+      subtitle: content.futureWorkConfig?.subtitle || "",
     });
   }, [content]);
 
@@ -749,6 +810,17 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </button>
 
             <button
+              onClick={() => setActiveTab("future_of_work")}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                activeTab === "future_of_work"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+              }`}
+            >
+              <TrendingUp className="w-4 h-4 text-slate-300" /> Future of Work &amp; Tren
+            </button>
+
+            <button
               onClick={() => setActiveTab("solutions")}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "solutions"
@@ -907,6 +979,8 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               <h1 className="text-lg font-bold text-white uppercase tracking-wider font-sans">
                 {activeTab === "hero" && "Teks Hero &amp; Media Upload"}
                 {activeTab === "intro" && "Intro Video (YouTube &amp; Instagram)"}
+                {activeTab === "problem" && "Section Masalah &amp; Komparasi Workflow"}
+                {activeTab === "future_of_work" && "Section Future of Work &amp; Tren AI"}
                 {activeTab === "pricing" && "Datepicker &amp; Scarcity Settings"}
                 {activeTab === "packages" && "Opsi Paket Pendaftaran"}
                 {activeTab === "valuestack" && "Item 'Yang Kamu Dapatkan' (Value Stack)"}
@@ -1365,6 +1439,184 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB: FUTURE OF WORK */}
+          {activeTab === "future_of_work" && (
+            <div className="max-w-4xl space-y-6">
+              {/* Headings Form */}
+              <form onSubmit={handleSaveFutureWorkHeadings} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5">
+                <div className="border-b border-slate-800 pb-3">
+                  <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-cyan" /> Teks Headings &amp; Badge Future of Work
+                  </h3>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Sub-judul Badge Atas</label>
+                    <input
+                      type="text"
+                      value={futureWorkForm.badgeText}
+                      onChange={(e) => setFutureWorkForm({ ...futureWorkForm, badgeText: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Utama</label>
+                      <input
+                        type="text"
+                        value={futureWorkForm.title}
+                        onChange={(e) => setFutureWorkForm({ ...futureWorkForm, title: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Highlight Gradient</label>
+                      <input
+                        type="text"
+                        value={futureWorkForm.titleHighlight}
+                        onChange={(e) => setFutureWorkForm({ ...futureWorkForm, titleHighlight: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold text-cyan"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Subtitle</label>
+                    <textarea
+                      rows={3}
+                      value={futureWorkForm.subtitle}
+                      onChange={(e) => setFutureWorkForm({ ...futureWorkForm, subtitle: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs text-white leading-relaxed"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800 flex justify-end">
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <Save className="w-4 h-4" /> Simpan Headings Future of Work
+                  </button>
+                </div>
+              </form>
+
+              {/* CRUD Future of Work Cards Sub-Form */}
+              <form ref={futureWorkCardFormRef} onSubmit={handleSaveFutureWorkCard} className={`p-6 rounded-2xl border transition-all space-y-4 ${editingFutureWorkCardIndex !== null ? 'bg-cyan-950/20 border-cyan/50 shadow-lg shadow-cyan/10' : 'bg-[#111827] border-slate-800'}`}>
+                <h4 className="font-bold text-xs text-white flex items-center gap-2">
+                  <Plus className="w-4 h-4 text-cyan" />
+                  {editingFutureWorkCardIndex !== null ? `Edit Kartu Future of Work #${editingFutureWorkCardIndex + 1}` : "Tambah Kartu Future of Work Baru"}
+                </h4>
+
+                <div className="grid md:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Emoji Icon</label>
+                    <input
+                      type="text"
+                      value={futureWorkCardInput.icon || ""}
+                      onChange={(e) => setFutureWorkCardInput({ ...futureWorkCardInput, icon: e.target.value })}
+                      placeholder="misal: 🚀"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Angka Stat / Angka Kunci</label>
+                    <input
+                      type="text"
+                      value={futureWorkCardInput.stat || ""}
+                      onChange={(e) => setFutureWorkCardInput({ ...futureWorkCardInput, stat: e.target.value })}
+                      placeholder="misal: 10x / 85% / 24/7"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-cyan font-black font-mono"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Kartu</label>
+                    <input
+                      type="text"
+                      value={futureWorkCardInput.title}
+                      onChange={(e) => setFutureWorkCardInput({ ...futureWorkCardInput, title: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Penjelasan</label>
+                  <textarea
+                    rows={2}
+                    value={futureWorkCardInput.desc}
+                    onChange={(e) => setFutureWorkCardInput({ ...futureWorkCardInput, desc: e.target.value })}
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                  {editingFutureWorkCardIndex !== null && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingFutureWorkCardIndex(null);
+                        setFutureWorkCardInput({ icon: "", stat: "", title: "", desc: "" });
+                      }}
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
+                    >
+                      Batal
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Save className="w-3.5 h-3.5" /> {editingFutureWorkCardIndex !== null ? "Simpan Kartu" : "Tambah Kartu"}
+                  </button>
+                </div>
+              </form>
+
+              {/* Cards List */}
+              <div className="space-y-3">
+                <h4 className="font-bold text-xs text-slate-400 font-mono uppercase tracking-wider">
+                  Daftar Kartu Future of Work ({(content.futureWorkConfig?.cards || []).length})
+                </h4>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {(content.futureWorkConfig?.cards || []).map((card, idx) => (
+                    <div key={idx} className="bg-[#111827] p-4 rounded-xl border border-slate-800 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 min-w-0">
+                        {card.icon && <span className="text-xl shrink-0">{card.icon}</span>}
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            {card.stat && <span className="text-xs font-mono font-black text-cyan">{card.stat}</span>}
+                            <h5 className="font-bold text-xs text-white truncate">{card.title}</h5>
+                          </div>
+                          <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{card.desc}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
+                        <button
+                          onClick={() => {
+                            setEditingFutureWorkCardIndex(idx);
+                            setFutureWorkCardInput(card);
+                            setTimeout(() => futureWorkCardFormRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 50);
+                          }}
+                          className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteFutureWorkCard(idx)}
+                          className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}

@@ -106,6 +106,21 @@ export interface ValueStackItem {
   isBonus?: boolean;
 }
 
+export interface FutureWorkCardItem {
+  icon?: string;
+  stat?: string;
+  title: string;
+  desc: string;
+}
+
+export interface FutureWorkConfig {
+  badgeText: string;
+  title: string;
+  titleHighlight: string;
+  subtitle: string;
+  cards: FutureWorkCardItem[];
+}
+
 export interface CustomSection {
   id: string;
   title: string;
