@@ -102,29 +102,29 @@ export default function ValueStack() {
           </div>
 
           {/* Pricing Summary Footer inside the Card */}
-          <div className="bg-gradient-to-r from-blue to-cyan p-6 md:px-8 md:py-6 text-white">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-xs md:text-sm uppercase tracking-wider font-mono font-bold text-white/80">
+          <div className="bg-[#1B4FD8] p-6 md:px-8 md:py-6 text-white">
+            <div className="flex justify-between items-center mb-3 pb-3 border-b border-white/20">
+              <span className="text-xs md:text-sm uppercase tracking-wider font-mono font-bold text-slate-100">
                 Total Akumulasi Nilai Riil:
               </span>
               <span className="text-xl md:text-2xl font-black font-mono text-white">
                 Rp 23.000.000
               </span>
             </div>
-            <div className="flex justify-between items-center pt-3 border-t border-white/20">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pt-1">
               <div>
-                <span className="font-black text-sm md:text-base block">
+                <span className="font-extrabold text-sm md:text-base text-white block">
                   Harga Khusus Mitra Universitas &amp; Masterclass
                 </span>
-                <span className="text-[10px] text-amber-300 block font-mono">
+                <span className="text-xs text-yellow-300 block font-mono font-bold mt-1">
                   *Masterclass Regular Rp 2.500.000 → Diskon spesial menjadi Rp 1.800.000!
                 </span>
               </div>
-              <div className="text-right">
-                <span className="text-xs md:text-sm line-through text-white/70 font-mono block">
+              <div className="text-left sm:text-right">
+                <span className="text-xs md:text-sm line-through text-slate-200 font-mono font-bold block">
                   {content.appConfig.prices.masterclassNormal}
                 </span>
-                <span className="text-2xl md:text-4xl font-black font-mono text-cyan block">
+                <span className="text-2xl md:text-4xl font-black font-mono text-white block tracking-tight">
                   {content.appConfig.prices.mitraCurrent}
                 </span>
               </div>
