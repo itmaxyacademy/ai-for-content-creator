@@ -32,7 +32,9 @@ import {
   Package,
   Clock,
   Eye,
-  CheckCircle2
+  CheckCircle2,
+  AlertCircle,
+  Zap
 } from "lucide-react";
 
 interface AdminDashboardProps {
