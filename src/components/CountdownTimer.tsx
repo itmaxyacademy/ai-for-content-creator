@@ -20,19 +20,19 @@ export default function CountdownTimer({
   const [isUrgent, setIsUrgent] = useState(false);
 
   useEffect(() => {
-    // Persistent 1-hour evergreen countdown
     const getTargetTime = () => {
-      const now = Date.now();
-      const stored = localStorage.getItem("maxy_evergreen_timer_1h");
-      if (stored) {
-        const val = parseInt(stored, 10);
-        if (val > now) {
-          return val;
+      if (targetDate && targetDate.trim() !== "") {
+        // Parse date string format like "2026-07-31T23:59:59" or "2026-07-31 23:59:59"
+        const formattedDateStr = targetDate.includes("T")
+          ? targetDate
+          : targetDate.replace(" ", "T");
+        const parsed = new Date(formattedDateStr).getTime();
+        if (!isNaN(parsed)) {
+          return parsed;
         }
       }
-      const newTarget = now + 60 * 60 * 1000; // exactly 1 hour (3600000 ms)
-      localStorage.setItem("maxy_evergreen_timer_1h", String(newTarget));
-      return newTarget;
+      // Fallback: 24 hours from now
+      return Date.now() + 24 * 60 * 60 * 1000;
     };
 
     const target = getTargetTime();
@@ -42,10 +42,7 @@ export default function CountdownTimer({
       let difference = target - now;
 
       if (difference <= 0) {
-        // Auto reset to 1 hour to maintain urgency or keep at 0. Let's auto-reset to keep high conversion!
-        const newTarget = now + 60 * 60 * 1000;
-        localStorage.setItem("maxy_evergreen_timer_1h", String(newTarget));
-        difference = 60 * 60 * 1000;
+        difference = 0;
       }
 
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -56,7 +53,7 @@ export default function CountdownTimer({
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
       setTimeLeft({ days, hours, minutes, seconds });
-      setIsUrgent(true); // under 24h is always urgent
+      setIsUrgent(days === 0 && hours < 24);
     };
 
     updateTimer();
