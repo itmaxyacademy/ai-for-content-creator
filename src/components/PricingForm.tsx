@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Check, ShieldCheck, HelpCircle, Users, Sparkles, Send } from "lucide-react";
-import { APP_CONFIG } from "../data";
+import { useContent } from "../context/ContentContext";
 import { Lead } from "../types";
 import CountdownTimer from "./CountdownTimer";
 
 export default function PricingForm() {
+  const { content } = useContent();
+
   const [formData, setFormData] = useState({
     nama: "",
     email: "",
@@ -25,8 +27,8 @@ export default function PricingForm() {
       case "Mitra_Universitas":
         return {
           name: "Harga Khusus Mitra Universitas",
-          current: APP_CONFIG.prices.mitraCurrent,
-          normal: APP_CONFIG.prices.mitraNormal,
+          current: content.appConfig.prices.mitraCurrent,
+          normal: content.appConfig.prices.mitraNormal,
         };
       case "Masterclass_Regular":
       case "Hybrid_Early":
@@ -34,8 +36,8 @@ export default function PricingForm() {
       default:
         return {
           name: "Harga Masterclass (8 Pertemuan)",
-          current: APP_CONFIG.prices.masterclassCurrent,
-          normal: APP_CONFIG.prices.masterclassNormal,
+          current: content.appConfig.prices.masterclassCurrent,
+          normal: content.appConfig.prices.masterclassNormal,
         };
     }
   };
@@ -94,7 +96,6 @@ export default function PricingForm() {
       timestamp: new Date().toLocaleString("id-ID"),
     };
 
-    // Store to localStorage
     try {
       const existingLeads = localStorage.getItem("maxy_aicc_leads");
       const leadsList = existingLeads ? JSON.parse(existingLeads) : [];
@@ -106,8 +107,6 @@ export default function PricingForm() {
 
     setSubmittedLead(newLead);
     setIsSubmitted(true);
-
-    // Trigger local CustomEvent to notify AdminDashboard to reload leads
     window.dispatchEvent(new CustomEvent("leadSubmitted"));
   };
 
@@ -125,7 +124,7 @@ Pilihan Opsi Paket: ${submittedLead.paket}
 Harga yang Ditagih: ${submittedLead.harga}
 
 Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
-    return `https://wa.me/${APP_CONFIG.waAdmin}?text=${encodeURIComponent(rawText)}`;
+    return `https://wa.me/${content.appConfig.waAdmin}?text=${encodeURIComponent(rawText)}`;
   };
 
   const handleReset = () => {
@@ -143,7 +142,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
   };
 
   const scarcityPercentage = Math.round(
-    (APP_CONFIG.slotTaken / APP_CONFIG.slotTotal) * 100
+    (content.appConfig.slotTaken / content.appConfig.slotTotal) * 100
   );
 
   return (
@@ -166,7 +165,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                 🔥 Slot Diskon Terbatas!
               </span>
               <span className="text-navy">
-                {APP_CONFIG.slotTaken} / {APP_CONFIG.slotTotal} Terisi
+                {content.appConfig.slotTaken} / {content.appConfig.slotTotal} Terisi
               </span>
             </div>
             <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
@@ -176,7 +175,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               ></div>
             </div>
             <p className="text-[11px] text-slate-500 mt-2 font-medium">
-              Tersisa <strong className="text-ember font-extrabold">{APP_CONFIG.slotTotal - APP_CONFIG.slotTaken} slot</strong> untuk harga diskon khusus ini. Setelah penuh, harga otomatis kembali normal.
+              Tersisa <strong className="text-ember font-extrabold">{content.appConfig.slotTotal - content.appConfig.slotTaken} slot</strong> untuk harga diskon khusus ini. Setelah penuh, harga otomatis kembali normal.
             </p>
           </div>
 
@@ -185,7 +184,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
             <p className="text-xs text-ember font-bold mb-2.5 font-mono">
               ⏳ Promo Diskon Berakhir Dalam:
             </p>
-            <CountdownTimer targetDate={APP_CONFIG.earlyBirdDeadline} theme="light" size="sm" />
+            <CountdownTimer targetDate={content.appConfig.earlyBirdDeadline} theme="light" size="sm" />
           </div>
         </div>
 
@@ -229,13 +228,13 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                 <div>
                   <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Khusus Mitra:</p>
                   <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`}>
-                    {APP_CONFIG.prices.mitraCurrent}
+                    {content.appConfig.prices.mitraCurrent}
                   </span>
                 </div>
                 <div className="pb-1 text-right ml-auto">
                   <span className="text-[10px] text-slate-400 block font-mono">Tarif Masterclass Regular:</span>
                   <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
-                    {APP_CONFIG.prices.mitraNormal}
+                    {content.appConfig.prices.mitraNormal}
                   </span>
                 </div>
               </div>
@@ -281,13 +280,13 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                 <div>
                   <p className="text-[10px] font-mono text-slate-400 uppercase">Tarif Diskon Saat Ini:</p>
                   <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-blue"}`}>
-                    {APP_CONFIG.prices.masterclassCurrent}
+                    {content.appConfig.prices.masterclassCurrent}
                   </span>
                 </div>
                 <div className="pb-1 text-right ml-auto">
                   <span className="text-[10px] text-slate-400 block font-mono">Tarif Normal:</span>
                   <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
-                    {APP_CONFIG.prices.masterclassNormal}
+                    {content.appConfig.prices.masterclassNormal}
                   </span>
                 </div>
               </div>
@@ -444,10 +443,10 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                     className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy font-bold border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all"
                   >
                     <option value="Mitra_Universitas">
-                      Harga Khusus Mitra Universitas — {APP_CONFIG.prices.mitraCurrent} (Normal {APP_CONFIG.prices.mitraNormal})
+                      Harga Khusus Mitra Universitas — {content.appConfig.prices.mitraCurrent} (Normal {content.appConfig.prices.mitraNormal})
                     </option>
                     <option value="Masterclass_Regular">
-                      Harga Masterclass (8 Pertemuan) — {APP_CONFIG.prices.masterclassCurrent} (Normal {APP_CONFIG.prices.masterclassNormal})
+                      Harga Masterclass (8 Pertemuan) — {content.appConfig.prices.masterclassCurrent} (Normal {content.appConfig.prices.masterclassNormal})
                     </option>
                   </select>
                   {errors.paket && (

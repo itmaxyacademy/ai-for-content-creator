@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Users, Shield, ArrowUp } from "lucide-react";
+import { Users, Shield, ArrowUp, Settings } from "lucide-react";
 import Hero from "./components/Hero";
 import IntroVideo from "./components/IntroVideo";
 import TrustBanner from "./components/TrustBanner";
@@ -17,20 +17,18 @@ import StickyFooter from "./components/StickyFooter";
 import FloatingWaCs from "./components/FloatingWaCs";
 import ExitIntentModal from "./components/ExitIntentModal";
 import AdminDashboard from "./components/AdminDashboard";
+import { useContent } from "./context/ContentContext";
 
 export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
-
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const { content } = useContent();
 
   return (
-    <div className="min-h-screen bg-white text-navy font-sans antialiased selection:bg-cyan/30">
+    <div className="min-h-screen bg-white text-navy font-sans antialiased selection:bg-cyan/30 relative">
       {/* 1. URGENCY TOP BAR */}
       <div className="bg-gradient-to-r from-ember to-amber py-2.5 px-4 text-white text-center text-xs md:text-sm font-bold tracking-wide flex items-center justify-center gap-x-2 flex-wrap shadow-md">
         <span className="w-2 h-2 rounded-full bg-white animate-ping inline-block"></span>
-        <span>🔥 HARGA KHUSUS MITRA UNIVERSITAS &amp; MASTERCLASS: Rp 1.800.000 (Diskon hingga Rp 700 Ribu)!</span>
+        <span>{content.appConfig.topBannerText || "🔥 HARGA KHUSUS MITRA UNIVERSITAS & MASTERCLASS: Rp 1.800.000!"}</span>
         <span className="hidden sm:inline">· Kuota Promo Terbatas!</span>
       </div>
 
@@ -75,6 +73,13 @@ export default function App() {
         <div className="max-w-4xl mx-auto px-5 text-sm">
           <p className="font-black text-white text-base mb-1">MAXY Academy</p>
           <p className="text-cyan text-xs font-mono mb-4">Driven by AI. Led by Humanity.</p>
+
+          <button
+            onClick={() => setIsAdminOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 text-xs font-mono mb-4 transition-all"
+          >
+            <Settings className="w-3.5 h-3.5" /> Buka Admin CMS Panel
+          </button>
           
 
           <p className="text-slate-600 text-xs">
@@ -86,7 +91,14 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ====== MARKETING TRIGGERS & UTILITIES ====== */}
+      {/* Floating Admin CMS Toggle Button (Bottom-left fixed) */}
+      <button
+        onClick={() => setIsAdminOpen(true)}
+        className="fixed z-40 left-4 bottom-4 bg-navy/90 hover:bg-navy text-white text-xs font-mono font-bold px-3 py-2 rounded-xl border border-white/20 shadow-xl flex items-center gap-1.5 transition-all hover:scale-105"
+        title="Buka Admin Panel (CMS)"
+      >
+        <Settings className="w-4 h-4 text-cyan animate-spin-slow" /> CMS Admin
+      </button>
 
       {/* Floating live social proof toasts */}
       <LiveTicker />
@@ -100,7 +112,7 @@ export default function App() {
       {/* Desktop-only Mouseleave Exit-Intent popup */}
       <ExitIntentModal />
 
-      {/* Hidden Admin CRM leads panel */}
+      {/* Admin CRM & CMS panel */}
       <AdminDashboard isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
     </div>
   );

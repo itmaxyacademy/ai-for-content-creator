@@ -1,8 +1,10 @@
 import React from "react";
-import { FAQS } from "../data";
+import { useContent } from "../context/ContentContext";
 import { HelpCircle, ChevronDown } from "lucide-react";
 
 export default function FAQ() {
+  const { content } = useContent();
+
   return (
     <section className="py-16 md:py-24 bg-white" id="faq">
       <div className="max-w-3xl mx-auto px-5 lg:px-8">
@@ -22,7 +24,7 @@ export default function FAQ() {
 
         {/* FAQ Accordion List */}
         <div className="space-y-4">
-          {FAQS.map((faq, idx) => (
+          {content.faqs.map((faq, idx) => (
             <details
               key={idx}
               className="group bg-offwhite rounded-2xl border border-slate-200/50 overflow-hidden transition-all duration-300"

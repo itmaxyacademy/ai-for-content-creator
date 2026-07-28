@@ -1,9 +1,12 @@
 import React from "react";
-import { MODULES, AI_TOOLS } from "../data";
+import { AI_TOOLS } from "../data";
+import { useContent } from "../context/ContentContext";
 import { BookOpen, Calendar, ArrowRight, Video, Target, Sparkles, Send, MessageSquare, Layers, UserCheck } from "lucide-react";
 import DrivePlayer from "./DrivePlayer";
 
 export default function Curriculum() {
+  const { content } = useContent();
+
   const getModuleIcon = (id: string) => {
     switch (id) {
       case "Day 1":
@@ -33,7 +36,7 @@ export default function Curriculum() {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <p className="text-xs font-mono tracking-widest uppercase text-blue font-bold mb-3">
-            Kurikulum 5 Modul · 8 Pertemuan Hybrid
+            Kurikulum Masterclass · {content.modules.length} Pertemuan Hybrid
           </p>
           <h2 className="text-3xl md:text-5xl font-black leading-tight text-navy">
             Dari Strategi &amp; Sistem<br />
@@ -41,9 +44,9 @@ export default function Curriculum() {
           </h2>
         </div>
 
-        {/* 8 Pertemuan Hybrid Grid */}
+        {/* Dynamic Pertemuan Hybrid Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
-          {MODULES.map((mod) => (
+          {content.modules.map((mod) => (
             <div
               key={mod.id}
               className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs relative overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1 group flex flex-col justify-between"

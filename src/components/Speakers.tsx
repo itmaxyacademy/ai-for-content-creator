@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { SPEAKERS } from "../data";
+import { useContent } from "../context/ContentContext";
 import { Award, Briefcase, ChevronRight, Clock, Users } from "lucide-react";
 
 export default function Speakers() {
+  const { content } = useContent();
   const [hoursCount, setHoursCount] = useState(0);
   const [contentMult, setContentMult] = useState(0);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -16,7 +17,6 @@ export default function Speakers() {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
             
-            // Animate hours (0 to 15)
             let hoursStart = 0;
             const hoursEnd = 15;
             const hoursInterval = setInterval(() => {
@@ -29,7 +29,6 @@ export default function Speakers() {
               }
             }, 50);
 
-            // Animate multiplier (0 to 9)
             let multStart = 0;
             const multEnd = 9;
             const multInterval = setInterval(() => {
@@ -68,9 +67,9 @@ export default function Speakers() {
           </h2>
         </div>
 
-        {/* Speakers Grid */}
+        {/* Dynamic Speakers Grid */}
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
-          {SPEAKERS.map((sp, idx) => {
+          {content.speakers.map((sp, idx) => {
             const isDark = idx === 0;
             return (
               <div

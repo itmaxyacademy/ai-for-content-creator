@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { X, Gift, ArrowRight } from "lucide-react";
-import { APP_CONFIG } from "../data";
+import { useContent } from "../context/ContentContext";
 
 export default function ExitIntentModal() {
+  const { content } = useContent();
   const [isOpen, setIsOpen] = useState(false);
   const [hasTriggered, setHasTriggered] = useState(false);
 
   useEffect(() => {
-    // Only bind on desktop screens
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     if (isMobile) return;
 
     const handleMouseLeave = (e: MouseEvent) => {
-      // Trigger when mouse moves out of top viewport
       if (!hasTriggered && e.clientY <= 0 && !e.relatedTarget) {
         setIsOpen(true);
         setHasTriggered(true);
@@ -58,7 +57,7 @@ export default function ExitIntentModal() {
           Tunggu — jangan pergi dulu! ✋
         </h3>
         <p className="text-muted text-xs md:text-sm mb-5 leading-relaxed">
-          Peluang kuasai AI dengan <strong className="text-navy font-black">Harga Khusus Mitra Universitas ({APP_CONFIG.prices.mitraCurrent})</strong> masih di depan mata! Setelah kuota promo habis, harga kembali ke tarif Masterclass Normal <strong className="text-ember font-black">{APP_CONFIG.prices.masterclassNormal}</strong>. Yakin mau melewatkan diskon ini?
+          Peluang kuasai AI dengan <strong className="text-navy font-black">Harga Khusus Mitra Universitas ({content.appConfig.prices.mitraCurrent})</strong> masih di depan mata! Setelah kuota promo habis, harga kembali ke tarif Masterclass Normal <strong className="text-ember font-black">{content.appConfig.prices.masterclassNormal}</strong>. Yakin mau melewatkan diskon ini?
         </p>
 
         {/* Highlight Price */}
@@ -67,9 +66,9 @@ export default function ExitIntentModal() {
             🔥 Harga Khusus Mitra Universitas
           </p>
           <p className="text-2xl font-black text-blue mt-1 font-mono">
-            {APP_CONFIG.prices.mitraCurrent}{" "}
+            {content.appConfig.prices.mitraCurrent}{" "}
             <span className="text-xs md:text-sm line-through text-slate-400 font-semibold font-mono">
-              {APP_CONFIG.prices.masterclassNormal}
+              {content.appConfig.prices.masterclassNormal}
             </span>
           </p>
         </div>

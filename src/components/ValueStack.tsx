@@ -1,8 +1,9 @@
 import React from "react";
 import { ArrowRight, CheckCircle } from "lucide-react";
-import { APP_CONFIG } from "../data";
+import { useContent } from "../context/ContentContext";
 
 export default function ValueStack() {
+  const { content } = useContent();
   const handleScrollToDaftar = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const target = document.getElementById("daftar");
@@ -121,10 +122,10 @@ export default function ValueStack() {
               </div>
               <div className="text-right">
                 <span className="text-xs md:text-sm line-through text-white/70 font-mono block">
-                  {APP_CONFIG.prices.masterclassNormal}
+                  {content.appConfig.prices.masterclassNormal}
                 </span>
                 <span className="text-2xl md:text-4xl font-black font-mono text-cyan block">
-                  {APP_CONFIG.prices.mitraCurrent}
+                  {content.appConfig.prices.mitraCurrent}
                 </span>
               </div>
             </div>

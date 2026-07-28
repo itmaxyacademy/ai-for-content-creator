@@ -1,10 +1,12 @@
 import React from "react";
 import { Zap, Sparkles, ArrowRight } from "lucide-react";
-import { APP_CONFIG } from "../data";
+import { useContent } from "../context/ContentContext";
 import CountdownTimer from "./CountdownTimer";
 import holonIqLogo from "../assets/holonIQ.svg";
 
 export default function Hero() {
+  const { content } = useContent();
+
   const handleScrollToDaftar = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const target = document.getElementById("daftar");
@@ -13,13 +15,15 @@ export default function Hero() {
     }
   };
 
+  const bgUrl = content.appConfig.heroBgUrl || "https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2";
+
   return (
     <section className="relative pt-8 pb-16 md:pb-24 overflow-hidden bg-[#eaf4fd] min-h-[650px] flex flex-col justify-between">
-      {/* Background Image Layer (Vertical Stripes Light Blue) */}
+      {/* Background Image Layer */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none" 
         style={{ 
-          backgroundImage: "url('https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2')" 
+          backgroundImage: `url('${bgUrl}')` 
         }}
       ></div>
 
@@ -53,22 +57,17 @@ export default function Hero() {
       <div className="max-w-4xl mx-auto px-5 relative z-10 text-center pt-8 md:pt-12 pb-6 flex flex-col items-center">
         {/* Main Pill/Badge */}
         <div className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-[#1e293b] text-white font-black text-xs md:text-sm tracking-wide mb-6 shadow-sm">
-          Masterclass · {APP_CONFIG.eventDates} · 8 Pertemuan Hybrid
+          Masterclass · {content.appConfig.eventDates} · 8 Pertemuan Hybrid
         </div>
 
         {/* Headline */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-5 tracking-tight font-sans text-[#0B1628]">
-          BANGUN SISTEM <br />
-          KONTEN KAMU <br />
-          <span className="text-[#1B4FD8]">DENGAN AI SEKARANG!</span>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-5 tracking-tight font-sans text-[#0B1628] whitespace-pre-line">
+          {content.appConfig.heroHeadlineTitle || "BANGUN SISTEM KONTEN KAMU DENGAN AI SEKARANG!"}
         </h1>
 
         {/* Sub-Headline */}
-        <p className="text-xs sm:text-sm md:text-base text-slate-800 font-semibold max-w-xl mx-auto leading-relaxed mb-4">
-          <strong className="text-black font-black">Stop bikin konten manual satu per satu!</strong> Kreator yang tumbuh cepat bukan karena timnya lebih besar — tapi karena mereka punya <span className="text-[#1B4FD8] font-bold underline decoration-[#1B4FD8]/30">sistem.</span>
-        </p>
-        <p className="text-[11px] sm:text-xs md:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed mb-8">
-          Sambil kamu masih begadang edit satu video, ada kreator yang sudah tidur pulas — tapi kontennya tetap berjalan otomatis sampai pagi.
+        <p className="text-xs sm:text-sm md:text-base text-slate-800 font-semibold max-w-xl mx-auto leading-relaxed mb-8">
+          {content.appConfig.heroHeadlineSubtitle || "Stop bikin konten manual satu per satu! Kreator yang tumbuh cepat bukan karena timnya lebih besar — tapi karena mereka punya sistem."}
         </p>
 
         {/* Feature Tags */}
@@ -92,7 +91,7 @@ export default function Hero() {
           <p className="text-[11px] text-amber-300 font-extrabold mb-3 uppercase tracking-widest font-mono text-center">
             ⏳ Penawaran Special Promo Berakhir Dalam:
           </p>
-          <CountdownTimer targetDate={APP_CONFIG.earlyBirdDeadline} theme="dark" size="sm" />
+          <CountdownTimer targetDate={content.appConfig.earlyBirdDeadline} theme="dark" size="sm" />
         </div>
 
         {/* CTA Button */}

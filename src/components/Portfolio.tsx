@@ -1,10 +1,10 @@
 import React from "react";
 import { Film, Play } from "lucide-react";
-import { VIDEOS } from "../data";
+import { useContent } from "../context/ContentContext";
 
 export default function Portfolio() {
-  // Filter portfolio videos
-  const portfolioVideos = VIDEOS.filter((v) => v.category === "portfolio");
+  const { content } = useContent();
+  const portfolioVideos = content.videos.filter((v) => v.category === "portfolio");
 
   return (
     <section className="py-16 md:py-24 bg-offwhite border-t border-slate-200" id="portfolio">

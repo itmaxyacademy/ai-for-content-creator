@@ -1,7 +1,23 @@
 import React from "react";
 import { Instagram, Play } from "lucide-react";
+import { useContent } from "../context/ContentContext";
 
 export default function IntroVideo() {
+  const { content } = useContent();
+
+  const videoUrl = content.appConfig.heroVideoUrl || "https://youtu.be/Rt4q44v09qc";
+  let embedSrc = "https://www.youtube.com/embed/Rt4q44v09qc?rel=0";
+
+  if (videoUrl.includes("youtube.com/embed/")) {
+    embedSrc = videoUrl;
+  } else if (videoUrl.includes("youtu.be/")) {
+    const id = videoUrl.split("youtu.be/")[1]?.split("?")[0];
+    if (id) embedSrc = `https://www.youtube.com/embed/${id}?rel=0`;
+  } else if (videoUrl.includes("watch?v=")) {
+    const id = videoUrl.split("watch?v=")[1]?.split("&")[0];
+    if (id) embedSrc = `https://www.youtube.com/embed/${id}?rel=0`;
+  }
+
   return (
     <section className="py-14 bg-gradient-to-b from-[#eaf4fd] to-white relative z-10">
       <div className="max-w-5xl mx-auto px-5">
@@ -24,7 +40,7 @@ export default function IntroVideo() {
               <iframe
                 id="intro-video-iframe"
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/Rt4q44v09qc?rel=0"
+                src={embedSrc}
                 title="MAXY AI-Driven Content Creation Registration Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
