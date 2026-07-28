@@ -54,6 +54,8 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     setSectionOrder,
     updatePopupConfig,
     updateWaConfig,
+    updateProblemConfig,
+    updateSolutionConfig,
     resetToDefault,
   } = useContent();
 
@@ -114,6 +116,21 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     exitCtaText: content.popupConfig.exitCtaText || "",
     stickyLabel: content.popupConfig.stickyLabel || "",
     stickyCtaText: content.popupConfig.stickyCtaText || "",
+  });
+
+  const [problemForm, setProblemForm] = useState({
+    badgeText: content.problemConfig?.badgeText || "",
+    title: content.problemConfig?.title || "",
+    titleHighlight: content.problemConfig?.titleHighlight || "",
+    beforeList: (content.problemConfig?.beforeList || []).join("\n"),
+    afterList: (content.problemConfig?.afterList || []).join("\n"),
+  });
+
+  const [solutionForm, setSolutionForm] = useState({
+    badgeText: content.solutionConfig?.badgeText || "",
+    title: content.solutionConfig?.title || "",
+    titleHighlight: content.solutionConfig?.titleHighlight || "",
+    subtitle: content.solutionConfig?.subtitle || "",
   });
 
   // CRUD Package Option Form
@@ -224,6 +241,21 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
       stickyLabel: content.popupConfig.stickyLabel || "",
       stickyCtaText: content.popupConfig.stickyCtaText || "",
     });
+
+    setProblemForm({
+      badgeText: content.problemConfig?.badgeText || "",
+      title: content.problemConfig?.title || "",
+      titleHighlight: content.problemConfig?.titleHighlight || "",
+      beforeList: (content.problemConfig?.beforeList || []).join("\n"),
+      afterList: (content.problemConfig?.afterList || []).join("\n"),
+    });
+
+    setSolutionForm({
+      badgeText: content.solutionConfig?.badgeText || "",
+      title: content.solutionConfig?.title || "",
+      titleHighlight: content.solutionConfig?.titleHighlight || "",
+      subtitle: content.solutionConfig?.subtitle || "",
+    });
   }, [content]);
 
   // Handle Hero Image File Upload
@@ -292,6 +324,29 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
       introInstagramCta: introForm.introInstagramCta,
     });
     showToast("Pengaturan Intro Video berhasil disimpan!");
+  };
+
+  const handleSaveProblem = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateProblemConfig({
+      badgeText: problemForm.badgeText,
+      title: problemForm.title,
+      titleHighlight: problemForm.titleHighlight,
+      beforeList: problemForm.beforeList.split("\n").map(s => s.trim()).filter(Boolean),
+      afterList: problemForm.afterList.split("\n").map(s => s.trim()).filter(Boolean),
+    });
+    showToast("Pengaturan Section Masalah & Komparasi berhasil disimpan!");
+  };
+
+  const handleSaveSolution = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateSolutionConfig({
+      badgeText: solutionForm.badgeText,
+      title: solutionForm.title,
+      titleHighlight: solutionForm.titleHighlight,
+      subtitle: solutionForm.subtitle,
+    });
+    showToast("Pengaturan Section Solusi MAXY berhasil disimpan!");
   };
 
   const handleSavePricing = (e: React.FormEvent) => {
@@ -549,6 +604,28 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               }`}
             >
               <Video className="w-4 h-4 text-slate-300" /> Intro Video (YT &amp; IG)
+            </button>
+
+            <button
+              onClick={() => setActiveTab("problem")}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                activeTab === "problem"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+              }`}
+            >
+              <AlertCircle className="w-4 h-4 text-slate-300" /> Masalah &amp; Workflow
+            </button>
+
+            <button
+              onClick={() => setActiveTab("solutions")}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                activeTab === "solutions"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+              }`}
+            >
+              <Zap className="w-4 h-4 text-slate-300" /> Solusi MAXY
             </button>
 
             <button
@@ -967,6 +1044,152 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                   <p className="text-blue-400 font-mono truncate">{introForm.introInstagramUrl}</p>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* TAB: PROBLEM & WORKFLOW */}
+          {activeTab === "problem" && (
+            <div className="max-w-4xl space-y-6">
+              <form onSubmit={handleSaveProblem} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5">
+                <div className="border-b border-slate-800 pb-3">
+                  <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-red-400" /> Teks Headings &amp; Badge Masalah
+                  </h3>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Sub-judul Badge Atas</label>
+                    <input
+                      type="text"
+                      value={problemForm.badgeText}
+                      onChange={(e) => setProblemForm({ ...problemForm, badgeText: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Utama</label>
+                      <input
+                        type="text"
+                        value={problemForm.title}
+                        onChange={(e) => setProblemForm({ ...problemForm, title: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Highlight Merah</label>
+                      <input
+                        type="text"
+                        value={problemForm.titleHighlight}
+                        onChange={(e) => setProblemForm({ ...problemForm, titleHighlight: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold text-red-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                    <div>
+                      <label className="block text-xs font-semibold text-red-400 mb-1 font-mono uppercase">
+                        ✕ List "Cara Lama (Kamu Sekarang)" (1 per baris)
+                      </label>
+                      <textarea
+                        rows={5}
+                        value={problemForm.beforeList}
+                        onChange={(e) => setProblemForm({ ...problemForm, beforeList: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs text-white font-sans"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-cyan mb-1 font-mono uppercase">
+                        ✓ List "Cara MAXY (Setelah Masterclass)" (1 per baris)
+                      </label>
+                      <textarea
+                        rows={5}
+                        value={problemForm.afterList}
+                        onChange={(e) => setProblemForm({ ...problemForm, afterList: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs text-white font-sans"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800 flex justify-end">
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <Save className="w-4 h-4" /> Simpan Section Masalah
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* TAB: SOLUTIONS */}
+          {activeTab === "solutions" && (
+            <div className="max-w-4xl space-y-6">
+              <form onSubmit={handleSaveSolution} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5">
+                <div className="border-b border-slate-800 pb-3">
+                  <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-cyan" /> Teks Headings &amp; Deskripsi Solusi
+                  </h3>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Sub-judul Badge Atas</label>
+                    <input
+                      type="text"
+                      value={solutionForm.badgeText}
+                      onChange={(e) => setSolutionForm({ ...solutionForm, badgeText: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Utama</label>
+                      <input
+                        type="text"
+                        value={solutionForm.title}
+                        onChange={(e) => setSolutionForm({ ...solutionForm, title: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Highlight Gradient</label>
+                      <input
+                        type="text"
+                        value={solutionForm.titleHighlight}
+                        onChange={(e) => setSolutionForm({ ...solutionForm, titleHighlight: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold text-cyan"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Subtitle Solusi</label>
+                    <textarea
+                      rows={3}
+                      value={solutionForm.subtitle}
+                      onChange={(e) => setSolutionForm({ ...solutionForm, subtitle: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs text-white leading-relaxed"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800 flex justify-end">
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <Save className="w-4 h-4" /> Simpan Section Solusi
+                  </button>
+                </div>
+              </form>
             </div>
           )}
 

@@ -61,7 +61,70 @@ export interface SiteContentState {
   sectionOrder: string[];
   popupConfig: PopupConfig;
   waConfig: WaConfig;
+  problemConfig: ProblemConfig;
+  solutionConfig: SolutionConfig;
 }
+
+export const DEFAULT_PROBLEM_CONFIG: ProblemConfig = {
+  badgeText: "Mohon maaf jika sedikit menyinggung, tapi...",
+  title: "Yakin masih mau bangga jadi",
+  titleHighlight: "one-man show sampai kurang tidur?",
+  cards: [
+    {
+      icon: "😩",
+      title: "Posting kalau lagi sempat (dan ingat)",
+      desc: "Ide brilian kamu akan selalu kalah dengan ide biasa-biasa saja yang diposting konsisten. Kompetitormu tidak lebih pintar — mereka cuma punya sistem yang mempublikasikan karyanya setiap hari."
+    },
+    {
+      icon: "😤",
+      title: "Udah coba AI, tapi hasilnya \"kaku banget\"",
+      desc: "Niatnya mau cepat, malah nambah kerjaan edit caption yang terdengar seperti robot tanpa emosi. Bukan AI-nya yang salah — tapi workflow kamu yang belum tepat."
+    },
+    {
+      icon: "📉",
+      title: "Views lumayan, tapi dompet tetap aman (alias kosong)",
+      desc: "Konten viral ke mana-mana, tapi tidak ada satupun yang convert jadi pembeli. Kenapa? Karena belum ada sistem yang menyambungkan penonton ke funnel penjualanmu."
+    },
+    {
+      icon: "😰",
+      title: "Tiap buka FYP, makin insecure",
+      desc: "Melihat kreator lain terus berkembang sementara kamu stuck di tempat? Mereka tidak kenal lelah karena punya 'mesin konten' yang tidak pernah minta cuti. FYP bukan soal hoki — itu murni soal sistem."
+    }
+  ],
+  beforeList: [
+    "Seharian penuh cuma buat 1 konten tunggal",
+    "Upload bergantung sepenuhnya pada mood & energi",
+    "Mengalami burnout karena pegang akun sendirian",
+    "Melihat kompetitor terus naik, kamu jalan di tempat"
+  ],
+  afterList: [
+    "1 ide diproduksi otomatis jadi 10+ format konten",
+    "Sistem aktif 24/7 mempublikasi karya secara konsisten",
+    "Hemat 80% waktu kerja, pikiran bebas dari burnout",
+    "Menguasai pasar lebih cepat dengan akselerasi AI"
+  ]
+};
+
+export const DEFAULT_SOLUTION_CONFIG: SolutionConfig = {
+  badgeText: "Solusi Pintar Bersama MAXY",
+  title: "8 Pertemuan Hybrid. Satu Mesin Konten",
+  titleHighlight: "Yang Mengubah Cara Kerja Kamu Selamanya.",
+  subtitle: "Masterclass 8 pertemuan hybrid (setiap Selasa & Kamis mulai 4 Agustus 2026): bangun sistem produksi konten end-to-end terintegrasi AI — dari riset tren, pembuatan video, hingga distribusi terjadwal secara terarah.",
+  cards: [
+    {
+      title: "Output Berlipat Ganda",
+      desc: "Hasilkan puluhan konten berkualitas tinggi dalam waktu yang sama. Mengelola banyak klien atau brand akun sekaligus tidak akan lagi menjadi kendala fisik."
+    },
+    {
+      title: "Fokus Sistem Terpadu",
+      desc: "Kami tidak sekadar mengajarkan trik prompt biasa. Kamu akan menyusun rancangan alur produksi 1 ide dasar menjadi 10+ konten lintas platform yang scalable."
+    },
+    {
+      title: "Efisien Tanpa Buang Waktu",
+      desc: "Pangkas hingga 80% waktu kerja dari tugas edit dan caption manual yang melelahkan. Kembalikan fokus utama kamu pada aspek konseptual bisnis."
+    }
+  ]
+};
 
 export const DEFAULT_PACKAGES: PackageOptionItem[] = [
   {
@@ -184,6 +247,8 @@ interface ContentContextType {
   setSectionOrder: (order: string[]) => void;
   updatePopupConfig: (partial: Partial<PopupConfig>) => void;
   updateWaConfig: (partial: Partial<WaConfig>) => void;
+  updateProblemConfig: (partial: Partial<ProblemConfig>) => void;
+  updateSolutionConfig: (partial: Partial<SolutionConfig>) => void;
   resetToDefault: () => void;
 }
 
@@ -237,6 +302,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
           sectionOrder: Array.isArray(parsed.sectionOrder) && parsed.sectionOrder.length > 0 ? parsed.sectionOrder : DEFAULT_SECTION_ORDER,
           popupConfig: { ...DEFAULT_POPUP_CONFIG, ...(parsed.popupConfig || {}) },
           waConfig: { ...DEFAULT_WA_CONFIG, ...(parsed.waConfig || {}) },
+          problemConfig: { ...DEFAULT_PROBLEM_CONFIG, ...(parsed.problemConfig || {}) },
+          solutionConfig: { ...DEFAULT_SOLUTION_CONFIG, ...(parsed.solutionConfig || {}) },
         };
       }
     } catch (e) {
@@ -254,6 +321,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       sectionOrder: DEFAULT_SECTION_ORDER,
       popupConfig: DEFAULT_POPUP_CONFIG,
       waConfig: DEFAULT_WA_CONFIG,
+      problemConfig: DEFAULT_PROBLEM_CONFIG,
+      solutionConfig: DEFAULT_SOLUTION_CONFIG,
     };
   });
 
@@ -325,6 +394,20 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
 
+  const updateProblemConfig = (partial: Partial<ProblemConfig>) => {
+    setContent((prev) => ({
+      ...prev,
+      problemConfig: { ...prev.problemConfig, ...partial },
+    }));
+  };
+
+  const updateSolutionConfig = (partial: Partial<SolutionConfig>) => {
+    setContent((prev) => ({
+      ...prev,
+      solutionConfig: { ...prev.solutionConfig, ...partial },
+    }));
+  };
+
   const resetToDefault = () => {
     const defaultState: SiteContentState = {
       appConfig: DEFAULT_CONFIG,
@@ -358,6 +441,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setSectionOrder,
         updatePopupConfig,
         updateWaConfig,
+        updateProblemConfig,
+        updateSolutionConfig,
         resetToDefault,
       }}
     >

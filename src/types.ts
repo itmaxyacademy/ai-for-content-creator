@@ -70,6 +70,34 @@ export interface PackageOptionItem {
   isPopular?: boolean;
 }
 
+export interface PainCardItem {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+export interface ProblemConfig {
+  badgeText: string;
+  title: string;
+  titleHighlight: string;
+  cards: PainCardItem[];
+  beforeList: string[];
+  afterList: string[];
+}
+
+export interface SolutionCardItem {
+  title: string;
+  desc: string;
+}
+
+export interface SolutionConfig {
+  badgeText: string;
+  title: string;
+  titleHighlight: string;
+  subtitle: string;
+  cards: SolutionCardItem[];
+}
+
 export interface CustomSection {
   id: string;
   title: string;
