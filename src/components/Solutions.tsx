@@ -84,8 +84,8 @@ export default function Solutions() {
           </p>
           
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 max-w-4xl mx-auto relative z-10">
-            {AI_TOOLS.map((tool) => (
-              <ToolLogoBadge key={tool.name} tool={tool} />
+            {(content.aiTools || []).map((tool, idx) => (
+              <ToolLogoBadge key={`${tool.name}-${idx}`} tool={tool} />
             ))}
           </div>
           

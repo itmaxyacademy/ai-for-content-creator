@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { APP_CONFIG, MODULES, SPEAKERS, FAQS, VIDEOS } from "../data";
+import { APP_CONFIG, MODULES, SPEAKERS, FAQS, VIDEOS, AI_TOOLS } from "../data";
 import {
   ModulItem,
   SpeakerItem,
@@ -9,7 +9,11 @@ import {
   PackageOptionItem,
   CustomSection,
   PopupConfig,
-  WaConfig
+  WaConfig,
+  AIToolItem,
+  ProblemConfig,
+  SolutionConfig,
+  ValueStackItem
 } from "../types";
 
 export interface AppConfigType {
@@ -98,6 +102,7 @@ export interface SiteContentState {
   problemConfig: ProblemConfig;
   solutionConfig: SolutionConfig;
   valueStackItems: ValueStackItem[];
+  aiTools: AIToolItem[];
 }
 
 export const DEFAULT_PROBLEM_CONFIG: ProblemConfig = {
@@ -285,6 +290,7 @@ interface ContentContextType {
   updateProblemConfig: (partial: Partial<ProblemConfig>) => void;
   updateSolutionConfig: (partial: Partial<SolutionConfig>) => void;
   setValueStackItems: (items: ValueStackItem[]) => void;
+  setAiTools: (aiTools: AIToolItem[]) => void;
   resetToDefault: () => void;
 }
 
@@ -353,6 +359,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
               : DEFAULT_SOLUTION_CONFIG.cards,
           },
           valueStackItems: Array.isArray(parsed.valueStackItems) ? parsed.valueStackItems : DEFAULT_VALUE_STACK,
+          aiTools: Array.isArray(parsed.aiTools) ? parsed.aiTools : AI_TOOLS,
         };
       }
     } catch (e) {
@@ -373,6 +380,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       problemConfig: DEFAULT_PROBLEM_CONFIG,
       solutionConfig: DEFAULT_SOLUTION_CONFIG,
       valueStackItems: DEFAULT_VALUE_STACK,
+      aiTools: AI_TOOLS,
     };
   });
 
@@ -462,6 +470,10 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setContent((prev) => ({ ...prev, valueStackItems }));
   };
 
+  const setAiTools = (aiTools: AIToolItem[]) => {
+    setContent((prev) => ({ ...prev, aiTools }));
+  };
+
   const resetToDefault = () => {
     const defaultState: SiteContentState = {
       appConfig: DEFAULT_CONFIG,
@@ -475,6 +487,10 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       sectionOrder: DEFAULT_SECTION_ORDER,
       popupConfig: DEFAULT_POPUP_CONFIG,
       waConfig: DEFAULT_WA_CONFIG,
+      problemConfig: DEFAULT_PROBLEM_CONFIG,
+      solutionConfig: DEFAULT_SOLUTION_CONFIG,
+      valueStackItems: DEFAULT_VALUE_STACK,
+      aiTools: AI_TOOLS,
     };
     setContent(defaultState);
     localStorage.removeItem(STORAGE_KEY);
@@ -498,6 +514,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         updateProblemConfig,
         updateSolutionConfig,
         setValueStackItems,
+        setAiTools,
         resetToDefault,
       }}
     >

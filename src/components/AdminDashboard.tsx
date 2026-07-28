@@ -9,7 +9,8 @@ import {
   CustomSection,
   ValueStackItem,
   PainCardItem,
-  SolutionCardItem
+  SolutionCardItem,
+  AIToolItem
 } from "../types";
 import { useContent } from "../context/ContentContext";
 import {
@@ -63,6 +64,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     updateProblemConfig,
     updateSolutionConfig,
     setValueStackItems,
+    setAiTools,
     resetToDefault,
   } = useContent();
 
@@ -286,6 +288,33 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
       const cards = (content.solutionConfig?.cards || []).filter((_, i) => i !== idx);
       updateSolutionConfig({ cards });
       showToast("Kartu solusi berhasil dihapus!");
+    }
+  };
+
+  // AI Tool Sub-Form State
+  const aiToolFormRef = useRef<HTMLFormElement>(null);
+  const [editingAiToolIndex, setEditingAiToolIndex] = useState<number | null>(null);
+  const [aiToolInput, setAiToolInput] = useState<AIToolItem>({ name: "", domain: "" });
+
+  const handleSaveAiTool = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!aiToolInput.name.trim()) return;
+    const tools = [...(content.aiTools || [])];
+    if (editingAiToolIndex !== null) {
+      tools[editingAiToolIndex] = aiToolInput;
+    } else {
+      tools.push(aiToolInput);
+    }
+    setAiTools(tools);
+    setEditingAiToolIndex(null);
+    setAiToolInput({ name: "", domain: "" });
+    showToast("Alat AI berhasil disimpan!");
+  };
+
+  const handleDeleteAiTool = (idx: number) => {
+    if (window.confirm("Hapus alat AI ini dari daftar?")) {
+      setAiTools((content.aiTools || []).filter((_, i) => i !== idx));
+      showToast("Alat AI berhasil dihapus!");
     }
   };
 
@@ -1469,6 +1498,102 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* CRUD AI Tools Sub-Form */}
+              <form ref={aiToolFormRef} onSubmit={handleSaveAiTool} className={`p-6 rounded-2xl border transition-all space-y-4 ${editingAiToolIndex !== null ? 'bg-cyan-950/20 border-cyan/50 shadow-lg shadow-cyan/10' : 'bg-[#111827] border-slate-800'}`}>
+                <h4 className="font-bold text-xs text-white flex items-center gap-2">
+                  <Plus className="w-4 h-4 text-cyan" />
+                  {editingAiToolIndex !== null ? `Edit Alat AI #${editingAiToolIndex + 1}` : "Tambah Alat AI Baru"}
+                </h4>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Nama Alat AI</label>
+                    <input
+                      type="text"
+                      value={aiToolInput.name}
+                      onChange={(e) => setAiToolInput({ ...aiToolInput, name: e.target.value })}
+                      placeholder="misal: Midjourney"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Domain Website (Favicon Icon)</label>
+                    <input
+                      type="text"
+                      value={aiToolInput.domain}
+                      onChange={(e) => setAiToolInput({ ...aiToolInput, domain: e.target.value })}
+                      placeholder="misal: midjourney.com"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                  {editingAiToolIndex !== null && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingAiToolIndex(null);
+                        setAiToolInput({ name: "", domain: "" });
+                      }}
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
+                    >
+                      Batal
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Save className="w-3.5 h-3.5" /> {editingAiToolIndex !== null ? "Simpan Alat AI" : "Tambah Alat AI"}
+                  </button>
+                </div>
+              </form>
+
+              {/* AI Tools List */}
+              <div className="space-y-3">
+                <h4 className="font-bold text-xs text-slate-400 font-mono uppercase tracking-wider">
+                  Daftar Alat AI Utama Yang Bakal Dikuasai ({(content.aiTools || []).length})
+                </h4>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  {(content.aiTools || []).map((tool, idx) => (
+                    <div key={idx} className="bg-[#111827] p-3 rounded-xl border border-slate-800 flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="w-6 h-6 rounded-lg bg-white flex items-center justify-center p-0.5 shrink-0 overflow-hidden">
+                          <img
+                            src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=64`}
+                            alt={tool.name}
+                            className="w-full h-full object-contain"
+                            onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <h5 className="font-bold text-xs text-white truncate">{tool.name}</h5>
+                          <p className="text-[10px] text-slate-400 font-mono truncate">{tool.domain}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
+                        <button
+                          onClick={() => {
+                            setEditingAiToolIndex(idx);
+                            setAiToolInput(tool);
+                            setTimeout(() => aiToolFormRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 50);
+                          }}
+                          className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
+                        >
+                          <Edit2 className="w-3 h-3" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteAiTool(idx)}
+                          className="p-1.5 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
