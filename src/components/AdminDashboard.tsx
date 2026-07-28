@@ -446,15 +446,21 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
   const handleSaveSpeaker = (e: React.FormEvent) => {
     e.preventDefault();
     if (!speakerInput.name.trim()) return;
+
+    const itemToSave: SpeakerItem = {
+      ...speakerInput,
+      initials: speakerInput.initials.trim() || speakerInput.name.trim().slice(0, 2).toUpperCase(),
+    };
+
     const list = [...content.speakers];
     if (editingSpeakerIndex !== null) {
-      list[editingSpeakerIndex] = speakerInput;
+      list[editingSpeakerIndex] = itemToSave;
     } else {
-      list.push(speakerInput);
+      list.push(itemToSave);
     }
     setSpeakers(list);
     setEditingSpeakerIndex(null);
-    setSpeakerInput({ initials: "", name: "", role: "", description: "", imageUrl: "" });
+    setSpeakerInput({ initials: "", name: "", role: "", badgeTag: "", description: "", imageUrl: "" });
     showToast("Data pemateri berhasil disimpan!");
   };
 
