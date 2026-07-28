@@ -3,7 +3,6 @@ import Hero from "./components/Hero";
 import IntroVideo from "./components/IntroVideo";
 import TrustBanner from "./components/TrustBanner";
 import Problem from "./components/Problem";
-import FutureOfWork from "./components/FutureOfWork";
 import Curriculum from "./components/Curriculum";
 import Speakers from "./components/Speakers";
 import Solutions from "./components/Solutions";
@@ -80,8 +79,6 @@ export default function App() {
         return <TrustBanner key="trustBanner" />;
       case "problem":
         return <Problem key="problem" />;
-      case "future_of_work":
-        return <FutureOfWork key="future_of_work" />;
       case "solutions":
         return <Solutions key="solutions" />;
       case "curriculum":

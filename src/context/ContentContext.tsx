@@ -13,9 +13,7 @@ import {
   AIToolItem,
   ProblemConfig,
   SolutionConfig,
-  ValueStackItem,
-  FutureWorkCardItem,
-  FutureWorkConfig
+  ValueStackItem
 } from "../types";
 
 export interface AppConfigType {
@@ -89,39 +87,6 @@ export const DEFAULT_VALUE_STACK: ValueStackItem[] = [
   },
 ];
 
-export const DEFAULT_FUTURE_WORK_CONFIG: FutureWorkConfig = {
-  badgeText: "TRENS & DISRUPSI INDUSTRI KREATIF",
-  title: "Future of Work: AI Bukan Menggantikan Manusia,",
-  titleHighlight: "Tapi Manusia Yang Menggunakan AI Menggantikan Yang Manual.",
-  subtitle: "Perubahan lanskap industri digital bergerak 10x lebih cepat. Pahami mengapa penguasaan AI content ecosystem menjadi skill paling krusial di era baru.",
-  cards: [
-    {
-      icon: "🚀",
-      stat: "10x",
-      title: "Akselerasi Output Konten",
-      desc: "Menghasilkan puluhan ide dan aset media terstruktur dalam hitungan menit tanpa mengorbankan kualitas."
-    },
-    {
-      icon: "💼",
-      stat: "85%",
-      title: "Adopsi AI di Industri",
-      desc: "Perusahaan dan brand papan atas memprioritaskan tim kreatif yang menguasai AI toolchain terintegrasi."
-    },
-    {
-      icon: "💰",
-      stat: "80%",
-      title: "Efisiensi Biaya Operasional",
-      desc: "Menghemat anggaran riset, eksekusi visual, dan caption builder hingga ratusan juta rupiah per tahun."
-    },
-    {
-      icon: "🌐",
-      stat: "24/7",
-      title: "Distribusi Skala Otomatis",
-      desc: "Sistem kampanye berjalan terus-menerus menjangkau audiens di seluruh platform sosial media tanpa henti."
-    }
-  ]
-};
-
 export interface SiteContentState {
   appConfig: AppConfigType;
   modules: ModulItem[];
@@ -138,7 +103,6 @@ export interface SiteContentState {
   solutionConfig: SolutionConfig;
   valueStackItems: ValueStackItem[];
   aiTools: AIToolItem[];
-  futureWorkConfig: FutureWorkConfig;
 }
 
 export const DEFAULT_PROBLEM_CONFIG: ProblemConfig = {
@@ -327,7 +291,6 @@ interface ContentContextType {
   updateSolutionConfig: (partial: Partial<SolutionConfig>) => void;
   setValueStackItems: (items: ValueStackItem[]) => void;
   setAiTools: (aiTools: AIToolItem[]) => void;
-  updateFutureWorkConfig: (partial: Partial<FutureWorkConfig>) => void;
   resetToDefault: () => void;
 }
 
@@ -397,13 +360,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
           },
           valueStackItems: Array.isArray(parsed.valueStackItems) ? parsed.valueStackItems : DEFAULT_VALUE_STACK,
           aiTools: Array.isArray(parsed.aiTools) ? parsed.aiTools : AI_TOOLS,
-          futureWorkConfig: {
-            ...DEFAULT_FUTURE_WORK_CONFIG,
-            ...(parsed.futureWorkConfig || {}),
-            cards: Array.isArray(parsed.futureWorkConfig?.cards)
-              ? parsed.futureWorkConfig.cards
-              : DEFAULT_FUTURE_WORK_CONFIG.cards,
-          },
         };
       }
     } catch (e) {
@@ -425,7 +381,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       solutionConfig: DEFAULT_SOLUTION_CONFIG,
       valueStackItems: DEFAULT_VALUE_STACK,
       aiTools: AI_TOOLS,
-      futureWorkConfig: DEFAULT_FUTURE_WORK_CONFIG,
     };
   });
 
@@ -519,13 +474,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setContent((prev) => ({ ...prev, aiTools }));
   };
 
-  const updateFutureWorkConfig = (partial: Partial<FutureWorkConfig>) => {
-    setContent((prev) => ({
-      ...prev,
-      futureWorkConfig: { ...prev.futureWorkConfig, ...partial },
-    }));
-  };
-
   const resetToDefault = () => {
     const defaultState: SiteContentState = {
       appConfig: DEFAULT_CONFIG,
@@ -543,7 +491,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       solutionConfig: DEFAULT_SOLUTION_CONFIG,
       valueStackItems: DEFAULT_VALUE_STACK,
       aiTools: AI_TOOLS,
-      futureWorkConfig: DEFAULT_FUTURE_WORK_CONFIG,
     };
     setContent(defaultState);
     localStorage.removeItem(STORAGE_KEY);
@@ -568,7 +515,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         updateSolutionConfig,
         setValueStackItems,
         setAiTools,
-        updateFutureWorkConfig,
         resetToDefault,
       }}
     >
