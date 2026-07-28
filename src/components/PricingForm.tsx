@@ -17,6 +17,10 @@ export default function PricingForm() {
     paket: "Mitra_Universitas", // default option
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedLead, setSubmittedLead] = useState<Lead | null>(null);
+
   useEffect(() => {
     const pkgs = content.packages || [];
     if (pkgs.length > 0) {

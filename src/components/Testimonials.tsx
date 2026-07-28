@@ -35,7 +35,7 @@ export default function Testimonials() {
                         src={testi.videoEmbedUrl}
                         title={`Testimoni ${testi.name}`}
                         className="absolute inset-0 w-full h-full border-0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                       ></iframe>
                     </div>
@@ -82,7 +82,7 @@ export default function Testimonials() {
               Tonton Kesaksian Langsung di Instagram Reels
             </h4>
             <p className="text-muted text-sm leading-relaxed max-w-xl">
-              Dapatkan cerita jujur alumni MAXY Masterclass mengenai pengalaman belajar langsung di kelas dan bagaimana tools AI mengubah produktivitas harian mereka.
+              Dapatkan cerita jujur alumni MAXY Masterclass mengenai pengalaman belajar langsung di kelas dan bagaimana tools AI mengubah produktivitas harian meereka.
             </p>
           </div>
 
@@ -94,7 +94,6 @@ export default function Testimonials() {
                   className="absolute inset-0 w-full h-full"
                   frameBorder="0"
                   scrolling="no"
-                  allowTransparency={true}
                   allowFullScreen={true}
                   title="Testimoni Alumni MAXY di Instagram"
                 ></iframe>
