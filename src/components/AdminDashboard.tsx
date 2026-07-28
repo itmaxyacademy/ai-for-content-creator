@@ -244,6 +244,25 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     reader.readAsDataURL(file);
   };
 
+  // Handle Speaker Photo File Upload
+  const handleSpeakerFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Ukuran file terlalu besar (Maksimal 5MB)");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      setSpeakerInput((prev) => ({ ...prev, imageUrl: base64 }));
+      showToast("Foto pemateri berhasil di-upload!");
+    };
+    reader.readAsDataURL(file);
+  };
+
   // Save Handlers
   const handleSaveHero = (e: React.FormEvent) => {
     e.preventDefault();
@@ -1685,14 +1704,32 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Foto Profile Image URL</label>
-                  <input
-                    type="text"
-                    value={speakerInput.imageUrl || ""}
-                    onChange={(e) => setSpeakerInput({ ...speakerInput, imageUrl: e.target.value })}
-                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
-                  />
+                {/* Speaker Photo Upload & URL */}
+                <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-2.5">
+                  <label className="block text-xs font-semibold text-slate-300 uppercase font-mono tracking-wider">
+                    🖼️ Foto Profile Pemateri (Upload File atau URL)
+                  </label>
+                  <div className="flex flex-col sm:flex-row gap-3 items-center">
+                    <label className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-semibold text-xs rounded-lg cursor-pointer flex items-center gap-2 transition-colors flex-shrink-0">
+                      <Upload className="w-3.5 h-3.5" /> Pilih File Foto Komputer
+                      <input type="file" accept="image/*" onChange={handleSpeakerFileUpload} className="hidden" />
+                    </label>
+                    <span className="text-xs text-slate-500 font-mono">atau URL:</span>
+                    <input
+                      type="text"
+                      value={speakerInput.imageUrl || ""}
+                      onChange={(e) => setSpeakerInput({ ...speakerInput, imageUrl: e.target.value })}
+                      placeholder="https://..."
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
+                    />
+                  </div>
+
+                  {speakerInput.imageUrl && (
+                    <div className="mt-2 flex items-center gap-3 bg-slate-900 p-2 rounded-lg border border-slate-800">
+                      <img src={speakerInput.imageUrl} alt="Preview" className="w-10 h-10 rounded-lg object-cover" />
+                      <span className="text-[10px] text-emerald-400 font-mono font-bold">✓ Pratinjau Foto Pemateri Loaded</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex gap-2 justify-end pt-1">
