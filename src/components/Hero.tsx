@@ -15,17 +15,22 @@ export default function Hero() {
     }
   };
 
-  const bgUrl = content.appConfig.heroBgUrl || "https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2";
+  const bgUrl =
+    content.appConfig.heroBgUrl && content.appConfig.heroBgUrl.trim() !== ""
+      ? content.appConfig.heroBgUrl
+      : "https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2";
 
   return (
     <section className="relative pt-8 pb-16 md:pb-24 overflow-hidden bg-[#eaf4fd] min-h-[650px] flex flex-col justify-between">
-      {/* Background Image Layer */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none" 
-        style={{ 
-          backgroundImage: `url('${bgUrl}')` 
-        }}
-      ></div>
+      {/* Background Image Layer (Light Blue Pattern) */}
+      {bgUrl && (
+        <img
+          src={bgUrl}
+          alt="Hero background pattern"
+          referrerPolicy="no-referrer"
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0"
+        />
+      )}
 
       {/* Decorative Credibility Badge on Top Right */}
       <div className="hidden md:block absolute top-12 right-12 z-20 w-32 md:w-40 lg:w-44 select-none hover:scale-105 transition-all duration-300">
