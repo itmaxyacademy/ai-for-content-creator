@@ -23,23 +23,19 @@ export default function PricingForm() {
 
   // Dynamic price lookup
   const getSelectedPrice = (paketCode: string) => {
-    switch (paketCode) {
-      case "Mitra_Universitas":
-        return {
-          name: "Harga Khusus Mitra Universitas",
-          current: content.appConfig.prices.mitraCurrent,
-          normal: content.appConfig.prices.mitraNormal,
-        };
-      case "Masterclass_Regular":
-      case "Hybrid_Early":
-      case "Onsite":
-      default:
-        return {
-          name: "Harga Masterclass (8 Pertemuan)",
-          current: content.appConfig.prices.masterclassCurrent,
-          normal: content.appConfig.prices.masterclassNormal,
-        };
+    const pkg = content.packages.find((p) => p.code === paketCode);
+    if (pkg) {
+      return {
+        name: pkg.name,
+        current: pkg.currentPrice,
+        normal: pkg.normalPrice,
+      };
     }
+    return {
+      name: "Harga Masterclass (8 Pertemuan)",
+      current: content.appConfig.prices.masterclassCurrent || "Rp 1.800.000",
+      normal: content.appConfig.prices.masterclassNormal || "Rp 2.500.000",
+    };
   };
 
   const currentPriceInfo = getSelectedPrice(formData.paket);
@@ -199,109 +195,61 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               Pilih opsi harga yang relevan dengan kualifikasi kamu. Kurikulum 8 pertemuan Masterclass berformat Hybrid (offline di MAXY AI HUB atau online Zoom).
             </p>
 
-            {/* Option 1: Mitra Universitas */}
-            <div
-              onClick={() => setFormData((prev) => ({ ...prev, paket: "Mitra_Universitas" }))}
-              className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
-                formData.paket === "Mitra_Universitas"
-                  ? "bg-gradient-to-b from-navy to-navy-light text-white border-emerald-400 shadow-xl scale-[1.01] relative"
-                  : "bg-white border-slate-200 text-navy hover:border-slate-300 shadow-sm"
-              }`}
-            >
-              {formData.paket === "Mitra_Universitas" && (
-                <span className="absolute -top-3 left-6 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
-                  🎓 KEMITRAAN KAMPUS
-                </span>
-              )}
+            {content.packages.map((pkg) => {
+              const isSelected = formData.paket === pkg.code;
+              return (
+                <div
+                  key={pkg.code}
+                  onClick={() => setFormData((prev) => ({ ...prev, paket: pkg.code }))}
+                  className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
+                    isSelected
+                      ? "bg-gradient-to-b from-navy to-navy-light text-white border-emerald-400 shadow-xl scale-[1.01] relative"
+                      : "bg-white border-slate-200 text-navy hover:border-slate-300 shadow-sm"
+                  }`}
+                >
+                  {isSelected && (
+                    <span className="absolute -top-3 left-6 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
+                      {pkg.badgeTag || "🎓 PROMO"}
+                    </span>
+                  )}
 
-              <div className="flex items-center justify-between mb-2 mt-1">
-                <div>
-                  <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${formData.paket === "Mitra_Universitas" ? "text-emerald-300" : "text-slate-500"}`}>Spesial Civitas Akademika</p>
-                  <h4 className={`text-lg font-black ${formData.paket === "Mitra_Universitas" ? "text-white" : "text-navy"}`}>Harga Khusus Mitra Universitas</h4>
+                  <div className="flex items-center justify-between mb-2 mt-1">
+                    <div>
+                      <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${isSelected ? "text-emerald-300" : "text-slate-500"}`}>
+                        {pkg.subtitle || "Opsi Pendaftaran"}
+                      </p>
+                      <h4 className={`text-lg font-black ${isSelected ? "text-white" : "text-navy"}`}>
+                        {pkg.name}
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div className={`flex items-end gap-2.5 my-3 p-3.5 rounded-2xl border ${isSelected ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
+                    <div>
+                      <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Diskon Saat Ini:</p>
+                      <span className={`text-2xl md:text-3xl font-black font-mono block ${isSelected ? "text-emerald-400" : "text-emerald-600"}`}>
+                        {pkg.currentPrice}
+                      </span>
+                    </div>
+                    <div className="pb-1 text-right ml-auto">
+                      <span className="text-[10px] text-slate-400 block font-mono">Harga Normal:</span>
+                      <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
+                        {pkg.normalPrice}
+                      </span>
+                    </div>
+                  </div>
+
+                  <ul className={`space-y-2 text-xs border-t pt-3 ${isSelected ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
+                    {pkg.features.map((feat, fidx) => (
+                      <li key={fidx} className="flex gap-2 items-start">
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${isSelected ? "text-emerald-400" : "text-emerald-600"}`} />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex-shrink-0">
-                  Mitra Kampus
-                </span>
-              </div>
-
-              <div className={`flex items-end gap-2.5 my-3 p-3.5 rounded-2xl border ${formData.paket === "Mitra_Universitas" ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                <div>
-                  <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Khusus Mitra:</p>
-                  <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`}>
-                    {content.appConfig.prices.mitraCurrent}
-                  </span>
-                </div>
-                <div className="pb-1 text-right ml-auto">
-                  <span className="text-[10px] text-slate-400 block font-mono">Tarif Masterclass Regular:</span>
-                  <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
-                    {content.appConfig.prices.mitraNormal}
-                  </span>
-                </div>
-              </div>
-
-              <ul className={`space-y-2 text-xs border-t pt-3 ${formData.paket === "Mitra_Universitas" ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
-                <li className="flex gap-2 items-start">
-                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`} />
-                  <span>Potongan harga spesial sebesar <strong>Rp 700.000</strong> khusus mitra universitas &amp; mahasiswa</span>
-                </li>
-                <li className="flex gap-2 items-start">
-                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`} />
-                  <span>Akses lengkap 8 pertemuan kelas hybrid + mentoring &amp; sertifikat</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Option 3: Masterclass Regular */}
-            <div
-              onClick={() => setFormData((prev) => ({ ...prev, paket: "Masterclass_Regular" }))}
-              className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
-                formData.paket === "Masterclass_Regular"
-                  ? "bg-gradient-to-b from-navy to-navy-light text-white border-blue shadow-xl scale-[1.01] relative"
-                  : "bg-white border-slate-200 text-navy hover:border-slate-300 shadow-sm"
-              }`}
-            >
-              {formData.paket === "Masterclass_Regular" && (
-                <span className="absolute -top-3 left-6 bg-blue text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
-                  ⚡ TARIF MASTERCLASS REGULAR
-                </span>
-              )}
-
-              <div className="flex items-center justify-between mb-2 mt-1">
-                <div>
-                  <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-slate-500"}`}>8 Pertemuan Utuh</p>
-                  <h4 className={`text-lg font-black ${formData.paket === "Masterclass_Regular" ? "text-white" : "text-navy"}`}>Harga Masterclass (8 Pertemuan)</h4>
-                </div>
-                <span className="bg-slate-100 text-slate-700 text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex-shrink-0">
-                  Regular
-                </span>
-              </div>
-
-              <div className={`flex items-end gap-2.5 my-3 p-3.5 rounded-2xl border ${formData.paket === "Masterclass_Regular" ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                <div>
-                  <p className="text-[10px] font-mono text-slate-400 uppercase">Tarif Diskon Saat Ini:</p>
-                  <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-blue"}`}>
-                    {content.appConfig.prices.masterclassCurrent}
-                  </span>
-                </div>
-                <div className="pb-1 text-right ml-auto">
-                  <span className="text-[10px] text-slate-400 block font-mono">Tarif Normal:</span>
-                  <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
-                    {content.appConfig.prices.masterclassNormal}
-                  </span>
-                </div>
-              </div>
-
-              <ul className={`space-y-2 text-xs border-t pt-3 ${formData.paket === "Masterclass_Regular" ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
-                <li className="flex gap-2 items-start">
-                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-blue"}`} />
-                  <span>Akses 8 pertemuan hybrid, networking eksklusif, lunch &amp; snack onsite</span>
-                </li>
-                <li className="flex gap-2 items-start">
-                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Masterclass_Regular" ? "text-cyan" : "text-blue"}`} />
-                  <span>Akses rekaman seumur hidup dan grup diskusi eksklusif alumni MAXY</span>
-                </li>
-              </ul>
-            </div>
+              );
+            })}
           </div>
 
           {/* RIGHT: Registration Interactive Form */}

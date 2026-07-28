@@ -44,7 +44,7 @@ export default function ExitIntentModal() {
       >
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-navy text-2xl leading-none transition-colors"
+          className="absolute top-4 right-4 text-slate-400 hover:text-navy text-2xl leading-none transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -54,35 +54,35 @@ export default function ExitIntentModal() {
         </div>
 
         <h3 className="text-2xl font-black mb-2 text-navy leading-snug">
-          Tunggu — jangan pergi dulu! ✋
+          {content.popupConfig.exitTitle || "Tunggu — jangan pergi dulu! ✋"}
         </h3>
         <p className="text-muted text-xs md:text-sm mb-5 leading-relaxed">
-          Peluang kuasai AI dengan <strong className="text-navy font-black">Harga Khusus Mitra Universitas ({content.appConfig.prices.mitraCurrent})</strong> masih di depan mata! Setelah kuota promo habis, harga kembali ke tarif Masterclass Normal <strong className="text-ember font-black">{content.appConfig.prices.masterclassNormal}</strong>. Yakin mau melewatkan diskon ini?
+          {content.popupConfig.exitDesc || `Peluang kuasai AI dengan Harga Khusus Mitra Universitas (${content.appConfig.prices.mitraCurrent}) masih di depan mata!`}
         </p>
 
         {/* Highlight Price */}
         <div className="bg-slate-50 rounded-2xl p-4 mb-5 border border-slate-100">
           <p className="text-[10px] font-mono uppercase text-ember font-bold tracking-wider">
-            🔥 Harga Khusus Mitra Universitas
+            {content.popupConfig.exitPriceTag || "🔥 Harga Khusus Mitra Universitas"}
           </p>
           <p className="text-2xl font-black text-blue mt-1 font-mono">
-            {content.appConfig.prices.mitraCurrent}{" "}
+            {content.appConfig.prices.mitraCurrent || "Rp 1.800.000"}{" "}
             <span className="text-xs md:text-sm line-through text-slate-400 font-semibold font-mono">
-              {content.appConfig.prices.masterclassNormal}
+              {content.appConfig.prices.mitraNormal || "Rp 2.500.000"}
             </span>
           </p>
         </div>
 
         <button
           onClick={handleClaim}
-          className="w-full bg-gradient-to-r from-wa to-[#1aaa52] text-white font-black py-4 rounded-xl text-xs md:text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5"
+          className="w-full bg-gradient-to-r from-wa to-[#1aaa52] text-white font-black py-4 rounded-xl text-xs md:text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
         >
-          Oke, Amankan Harga Diskon <ArrowRight className="w-4 h-4" />
+          {content.popupConfig.exitCtaText || "Oke, Amankan Harga Diskon"} <ArrowRight className="w-4 h-4" />
         </button>
 
         <button
           onClick={handleClose}
-          className="text-slate-400 hover:text-navy text-[11px] underline mt-3.5 block mx-auto"
+          className="text-slate-400 hover:text-navy text-[11px] underline mt-3.5 block mx-auto cursor-pointer"
         >
           Nggak, saya ingin bayar harga normal nanti
         </button>

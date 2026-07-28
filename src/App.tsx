@@ -68,6 +68,38 @@ export default function App() {
     setIsAdminRoute(false);
   };
 
+  // Helper map for reorderable standard sections
+  const renderSection = (secId: string) => {
+    switch (secId) {
+      case "hero":
+        return <Hero key="hero" />;
+      case "introVideo":
+        return <IntroVideo key="introVideo" />;
+      case "trustBanner":
+        return <TrustBanner key="trustBanner" />;
+      case "problem":
+        return <Problem key="problem" />;
+      case "solutions":
+        return <Solutions key="solutions" />;
+      case "curriculum":
+        return <Curriculum key="curriculum" />;
+      case "speakers":
+        return <Speakers key="speakers" />;
+      case "testimonials":
+        return <Testimonials key="testimonials" />;
+      case "pricing":
+        return <PricingForm key="pricing" />;
+      case "valueStack":
+        return <ValueStack key="valueStack" />;
+      case "faq":
+        return <FAQ key="faq" />;
+      case "portfolio":
+        return <Portfolio key="portfolio" />;
+      default:
+        return null;
+    }
+  };
+
   // If on /admin route: render Admin Page or Login Screen
   if (isAdminRoute) {
     if (!isAuthenticated) {
@@ -100,43 +132,26 @@ export default function App() {
         <span className="hidden sm:inline">· Kuota Promo Terbatas!</span>
       </div>
 
-      {/* 2. HERO SECTION */}
-      <Hero />
+      {/* RENDER DYNAMICALLY ORDERED SECTIONS */}
+      {content.sectionOrder.map((secId) => renderSection(secId))}
 
-      {/* 2b. INTRODUCTORY VIDEO SECTION */}
-      <IntroVideo />
+      {/* RENDER CUSTOM SECTIONS CREATED BY ADMIN */}
+      {content.customSections.map((sec) => (
+        <section key={sec.id} className="py-16 bg-slate-50 border-t border-slate-200">
+          <div className="max-w-4xl mx-auto px-5 text-center">
+            <h2 className="text-3xl font-black text-navy mb-2">{sec.title}</h2>
+            {sec.subtitle && (
+              <p className="text-slate-500 text-sm mb-6">{sec.subtitle}</p>
+            )}
+            <div
+              className="text-slate-700 text-sm leading-relaxed text-left bg-white p-6 rounded-2xl border border-slate-200 shadow-sm"
+              dangerouslySetInnerHTML={{ __html: sec.content }}
+            />
+          </div>
+        </section>
+      ))}
 
-      {/* 3. TRUST BANNER */}
-      <TrustBanner />
-
-      {/* 4. PROBLEM SECTION & BEFORE/AFTER */}
-      <Problem />
-
-      {/* 5. SOLUTIONS & HIGHLIGHTS */}
-      <Solutions />
-
-      {/* 6. CURRICULUM SECTION */}
-      <Curriculum />
-
-      {/* 7. SPEAKERS & COST OF INACTION */}
-      <Speakers />
-
-      {/* 8. TESTIMONIALS SECTION */}
-      <Testimonials />
-
-      {/* 9. PRICING & REGISTRATION FORM */}
-      <PricingForm />
-
-      {/* 10. VALUE STACK ACCUMULATOR */}
-      <ValueStack />
-
-      {/* 11. FAQ SECTION */}
-      <FAQ />
-
-      {/* 12. PORTFOLIO VIDEOS GRID */}
-      <Portfolio />
-
-      {/* 13. FOOTER (CLEAN PUBLIC FOOTER - NO ADMIN BUTTON) */}
+      {/* FOOTER */}
       <footer className="py-12 bg-[#0B1628] text-center text-slate-500 border-t border-white/5 pb-24 md:pb-12 relative">
         <div className="max-w-4xl mx-auto px-5 text-sm">
           <p className="font-black text-white text-base mb-1">MAXY Academy</p>

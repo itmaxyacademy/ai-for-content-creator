@@ -5,18 +5,22 @@ import { useContent } from "../context/ContentContext";
 export default function IntroVideo() {
   const { content } = useContent();
 
-  const videoUrl = content.appConfig.heroVideoUrl || "https://youtu.be/Rt4q44v09qc";
+  const youtubeUrl = content.appConfig.introYoutubeUrl || content.appConfig.heroVideoUrl || "https://www.youtube.com/embed/Rt4q44v09qc";
   let embedSrc = "https://www.youtube.com/embed/Rt4q44v09qc?rel=0";
 
-  if (videoUrl.includes("youtube.com/embed/")) {
-    embedSrc = videoUrl;
-  } else if (videoUrl.includes("youtu.be/")) {
-    const id = videoUrl.split("youtu.be/")[1]?.split("?")[0];
+  if (youtubeUrl.includes("youtube.com/embed/")) {
+    embedSrc = youtubeUrl;
+  } else if (youtubeUrl.includes("youtu.be/")) {
+    const id = youtubeUrl.split("youtu.be/")[1]?.split("?")[0];
     if (id) embedSrc = `https://www.youtube.com/embed/${id}?rel=0`;
-  } else if (videoUrl.includes("watch?v=")) {
-    const id = videoUrl.split("watch?v=")[1]?.split("&")[0];
+  } else if (youtubeUrl.includes("watch?v=")) {
+    const id = youtubeUrl.split("watch?v=")[1]?.split("&")[0];
     if (id) embedSrc = `https://www.youtube.com/embed/${id}?rel=0`;
   }
+
+  const instagramUrl = content.appConfig.introInstagramUrl || "https://www.instagram.com/reel/DZ4bquZzePJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==";
+  const instagramTitle = content.appConfig.introInstagramTitle || "Lihat di Instagram Reels";
+  const instagramCta = content.appConfig.introInstagramCta || "Buka Instagram Reels";
 
   return (
     <section className="py-14 bg-gradient-to-b from-[#eaf4fd] to-white relative z-10">
@@ -54,19 +58,19 @@ export default function IntroVideo() {
                 <div className="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-600 mb-4">
                   <Instagram className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-sm text-[#0B1628] mb-2">Lihat di Instagram Reels</h4>
+                <h4 className="font-bold text-sm text-[#0B1628] mb-2">{instagramTitle}</h4>
                 <p className="text-slate-600 text-xs leading-relaxed mb-5">
                   Video Reels pendaftaran interaktif dari MAXY mengenai pentingnya beradaptasi dengan AI content creation secara menyeluruh.
                 </p>
               </div>
               <a
                 id="reels-cta-btn"
-                href="https://www.instagram.com/reel/DZ4bquZzePJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xs font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
               >
-                <Play className="w-3.5 h-3.5 fill-current" /> Buka Instagram Reels
+                <Play className="w-3.5 h-3.5 fill-current" /> {instagramCta}
               </a>
             </div>
           </div>

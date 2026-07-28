@@ -47,3 +47,48 @@ export interface AIToolItem {
   color?: string;
 }
 
+export interface TestimonialItem {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+  avatarUrl?: string;
+  videoEmbedUrl?: string;
+  rating?: number;
+}
+
+export interface PackageOptionItem {
+  code: string;
+  name: string;
+  currentPrice: string;
+  normalPrice: string;
+  badgeTag: string;
+  subtitle: string;
+  features: string[];
+  isPopular?: boolean;
+}
+
+export interface CustomSection {
+  id: string;
+  title: string;
+  subtitle: string;
+  content: string;
+  bgStyle: "white" | "offwhite" | "dark";
+}
+
+export interface PopupConfig {
+  exitTitle: string;
+  exitDesc: string;
+  exitPriceTag: string;
+  exitCtaText: string;
+  stickyLabel: string;
+  stickyCtaText: string;
+}
+
+export interface WaConfig {
+  adminWa: string;
+  csWa: string;
+  waMessageTemplate: string;
+  customWaLink?: string;
+}

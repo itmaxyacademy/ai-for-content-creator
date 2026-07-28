@@ -20,6 +20,10 @@ export default function Hero() {
       ? content.appConfig.heroBgUrl
       : "https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2";
 
+  const featureTags = content.appConfig.heroFeatureTags && content.appConfig.heroFeatureTags.length > 0
+    ? content.appConfig.heroFeatureTags
+    : ["⚡ 1 ide → 10 konten / jam", "🤖 Sistem Aktif 24/7", "📈 80% Lebih Efisien"];
+
   return (
     <section className="relative pt-8 pb-16 md:pb-24 overflow-hidden bg-[#eaf4fd] min-h-[650px] flex flex-col justify-between">
       {/* Background Image Layer (Light Blue Pattern) */}
@@ -62,7 +66,7 @@ export default function Hero() {
       <div className="max-w-4xl mx-auto px-5 relative z-10 text-center pt-8 md:pt-12 pb-6 flex flex-col items-center">
         {/* Main Pill/Badge */}
         <div className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-[#1e293b] text-white font-black text-xs md:text-sm tracking-wide mb-6 shadow-sm">
-          Masterclass · {content.appConfig.eventDates} · 8 Pertemuan Hybrid
+          {content.appConfig.heroEventBadge || `Masterclass · ${content.appConfig.eventDates} · 8 Pertemuan Hybrid`}
         </div>
 
         {/* Headline */}
@@ -71,21 +75,23 @@ export default function Hero() {
         </h1>
 
         {/* Sub-Headline */}
-        <p className="text-xs sm:text-sm md:text-base text-slate-800 font-semibold max-w-xl mx-auto leading-relaxed mb-8">
+        <p className="text-xs sm:text-sm md:text-base text-slate-800 font-semibold max-w-xl mx-auto leading-relaxed mb-3">
           {content.appConfig.heroHeadlineSubtitle || "Stop bikin konten manual satu per satu! Kreator yang tumbuh cepat bukan karena timnya lebih besar — tapi karena mereka punya sistem."}
         </p>
 
+        {content.appConfig.heroHeadlineSubtitle2 && (
+          <p className="text-[11px] sm:text-xs md:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed mb-8">
+            {content.appConfig.heroHeadlineSubtitle2}
+          </p>
+        )}
+
         {/* Feature Tags */}
         <div className="flex flex-wrap justify-center gap-2 mb-8 text-xs font-black">
-          <span className="px-4 py-2 bg-[#1e293b] text-white rounded-xl flex items-center gap-1.5 shadow-sm">
-            ⚡ 1 ide → 10 konten / jam
-          </span>
-          <span className="px-4 py-2 bg-[#1e293b] text-white rounded-xl flex items-center gap-1.5 shadow-sm">
-            🤖 Sistem Aktif 24/7
-          </span>
-          <span className="px-4 py-2 bg-[#1e293b] text-white rounded-xl flex items-center gap-1.5 shadow-sm">
-            📈 80% Lebih Efisien
-          </span>
+          {featureTags.map((tag, idx) => (
+            <span key={idx} className="px-4 py-2 bg-[#1e293b] text-white rounded-xl flex items-center gap-1.5 shadow-sm">
+              {tag}
+            </span>
+          ))}
         </div>
 
         {/* Countdown Box */}
@@ -94,7 +100,7 @@ export default function Hero() {
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/15 rounded-full blur-xl pointer-events-none"></div>
 
           <p className="text-[11px] text-amber-300 font-extrabold mb-3 uppercase tracking-widest font-mono text-center">
-            ⏳ Penawaran Special Promo Berakhir Dalam:
+            {content.appConfig.heroCountdownTitle || "⏳ Penawaran Special Promo Berakhir Dalam:"}
           </p>
           <CountdownTimer targetDate={content.appConfig.earlyBirdDeadline} theme="dark" size="sm" />
         </div>
@@ -106,10 +112,10 @@ export default function Hero() {
             onClick={handleScrollToDaftar}
             className="inline-flex items-center justify-center gap-2 text-white font-black text-sm md:text-base px-8 py-4.5 rounded-full w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-[#25D366] to-[#1aaa52] shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)] cursor-pointer"
           >
-            Amankan Kursi Kamu Sekarang <ArrowRight className="w-5 h-5" />
+            {content.appConfig.heroCtaText || "Amankan Kursi Kamu Sekarang"} <ArrowRight className="w-5 h-5" />
           </a>
           <p className="mt-3 text-[10px] text-slate-500 font-mono">
-            Tinggalkan cara manual. Mulai adu sistem bersama MAXY.
+            {content.appConfig.heroCtaSubtext || "Tinggalkan cara manual. Mulai adu sistem bersama MAXY."}
           </p>
         </div>
       </div>
