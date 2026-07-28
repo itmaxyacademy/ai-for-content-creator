@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Lead,
   ModulItem,
   SpeakerItem,
   FAQItem,
@@ -11,14 +10,7 @@ import {
 } from "../types";
 import { useContent } from "../context/ContentContext";
 import {
-  Download,
   Trash2,
-  Users,
-  ShieldAlert,
-  X,
-  DollarSign,
-  Search,
-  Calendar,
   Settings,
   BookOpen,
   UserCheck,
@@ -39,14 +31,8 @@ import {
   Star,
   Package,
   Clock,
-  Sparkles,
   Eye,
-  Gift,
-  Zap,
-  Tag,
-  Sliders,
-  CheckCircle2,
-  AlertCircle
+  CheckCircle2
 } from "lucide-react";
 
 interface AdminDashboardProps {
@@ -72,60 +58,14 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
   } = useContent();
 
   const [activeTab, setActiveTab] = useState<
-    "leads" | "hero" | "intro" | "pricing" | "packages" | "modules" | "speakers" | "testimonials" | "faqs" | "wa_popup" | "sections"
-  >("leads");
+    "hero" | "intro" | "pricing" | "packages" | "modules" | "speakers" | "testimonials" | "faqs" | "wa_popup" | "sections"
+  >("hero");
 
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
-  };
-
-  // Leads logic
-  const [leads, setLeads] = useState<Lead[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("all");
-
-  const loadLeads = () => {
-    try {
-      const stored = localStorage.getItem("maxy_aicc_leads");
-      if (stored) {
-        setLeads(JSON.parse(stored));
-      } else {
-        setLeads([]);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    loadLeads();
-    const handleRefresh = () => loadLeads();
-    window.addEventListener("leadSubmitted", handleRefresh);
-    return () => window.removeEventListener("leadSubmitted", handleRefresh);
-  }, []);
-
-  const handleDeleteSingleLead = (id: string) => {
-    if (window.confirm("Apakah Anda yakin ingin menghapus data pendaftar ini?")) {
-      const updated = leads.filter((l) => l.id !== id);
-      setLeads(updated);
-      localStorage.setItem("maxy_aicc_leads", JSON.stringify(updated));
-      showToast("Data pendaftar berhasil dihapus!");
-    }
-  };
-
-  const handleClearAllLeads = () => {
-    if (
-      window.confirm(
-        "Apakah Anda yakin ingin menghapus SELURUH data leads pendaftaran? Tindakan ini tidak dapat dibatalkan."
-      )
-    ) {
-      localStorage.removeItem("maxy_aicc_leads");
-      setLeads([]);
-      showToast("Seluruh data leads berhasil dihapus!");
-    }
   };
 
   // Form states for CMS Hero
@@ -521,79 +461,6 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     }
   };
 
-  // Filtered Leads
-  const filteredLeads = leads.filter((lead) => {
-    const matchesSearch =
-      lead.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.whatsapp.includes(searchTerm) ||
-      lead.kota.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.pekerjaan.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.namaPerusahaan.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesFilter =
-      selectedFilter === "all" ||
-      (selectedFilter === "Mitra" && lead.paket.includes("Mitra")) ||
-      (selectedFilter === "Regular" && (lead.paket.includes("Regular") || lead.paket.includes("Masterclass")));
-
-    return matchesSearch && matchesFilter;
-  });
-
-  const totalProjectedValue = filteredLeads.reduce((acc, lead) => {
-    const numericStr = lead.harga.replace(/[^0-9]/g, "");
-    const value = parseInt(numericStr, 10) || 0;
-    return acc + value;
-  }, 0);
-
-  const formatPrice = (val: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      maximumFractionDigits: 0,
-    }).format(val);
-  };
-
-  const handleExportCSV = () => {
-    if (!filteredLeads.length) return;
-    const headers = [
-      "ID",
-      "Nama Lengkap",
-      "Email Aktif",
-      "No. WhatsApp",
-      "Kota",
-      "Pekerjaan",
-      "Perusahaan/Instansi",
-      "Paket Kelas",
-      "Harga",
-      "Waktu Daftar",
-    ];
-    const csvRows = [
-      headers.join(","),
-      ...filteredLeads.map((l) =>
-        [
-          `"${l.id}"`,
-          `"${l.nama.replace(/"/g, '""')}"`,
-          `"${l.email.replace(/"/g, '""')}"`,
-          `"${l.whatsapp}"`,
-          `"${l.kota.replace(/"/g, '""')}"`,
-          `"${l.pekerjaan.replace(/"/g, '""')}"`,
-          `"${l.namaPerusahaan.replace(/"/g, '""')}"`,
-          `"${l.paket}"`,
-          `"${l.harga}"`,
-          `"${l.timestamp}"`,
-        ].join(",")
-      ),
-    ];
-    const blob = new Blob([csvRows.join("\n")], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `MAXY_AICC_Leads_${new Date().toISOString().slice(0, 10)}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   const handleResetSiteContent = () => {
     if (
       window.confirm(
@@ -630,22 +497,6 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
           {/* Navigation Links */}
           <nav className="space-y-1.5 overflow-y-auto max-h-[calc(100vh-250px)] pr-1">
-            <button
-              onClick={() => setActiveTab("leads")}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
-                activeTab === "leads"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <Users className="w-4 h-4 text-cyan" /> Data Leads
-              </div>
-              <span className="text-[10px] bg-white/15 px-2 py-0.5 rounded-full font-mono font-black">
-                {leads.length}
-              </span>
-            </button>
-
             <button
               onClick={() => setActiveTab("hero")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
@@ -798,7 +649,6 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
               <h1 className="text-xl font-black text-white uppercase tracking-tight font-sans">
-                {activeTab === "leads" && "📊 Data Leads Pendaftaran &amp; CRM"}
                 {activeTab === "hero" && "⚙️ Teks Hero &amp; Media Upload"}
                 {activeTab === "intro" && "🎥 Intro Video (YouTube &amp; Instagram)"}
                 {activeTab === "pricing" && "⏰ Datepicker &amp; Scarcity Settings"}
@@ -829,172 +679,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
         {/* Content Body Container */}
         <div className="flex-1 overflow-auto p-6 md:p-8 space-y-6">
 
-          {/* TAB 1: DATA LEADS CRM */}
-          {activeTab === "leads" && (
-            <div className="space-y-6">
-              {/* Analytics Summary Cards */}
-              <div className="grid sm:grid-cols-3 gap-5">
-                <div className="bg-[#111C30] p-6 rounded-3xl border border-white/10 flex items-center gap-5 shadow-xl">
-                  <div className="w-14 h-14 rounded-2xl bg-blue/20 border border-blue/30 flex items-center justify-center text-cyan">
-                    <Users className="w-7 h-7" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">
-                      Total Leads Terdaftar
-                    </p>
-                    <h3 className="text-3xl font-black font-mono text-white mt-0.5">
-                      {filteredLeads.length} <span className="text-xs font-normal text-slate-400">Pendaftar</span>
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="bg-[#111C30] p-6 rounded-3xl border border-white/10 flex items-center gap-5 shadow-xl">
-                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                    <DollarSign className="w-7 h-7" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">
-                      Proyeksi Omzet Total
-                    </p>
-                    <h3 className="text-2xl font-black font-mono text-emerald-400 mt-0.5">
-                      {formatPrice(totalProjectedValue)}
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="bg-[#111C30] p-6 rounded-3xl border border-white/10 flex items-center justify-end gap-3 shadow-xl">
-                  <button
-                    onClick={handleExportCSV}
-                    disabled={!filteredLeads.length}
-                    className="px-5 py-3.5 bg-gradient-to-r from-blue to-cyan hover:opacity-90 text-white rounded-2xl text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-cyan/20 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                  >
-                    <Download className="w-4 h-4" /> Ekspor CSV
-                  </button>
-                  <button
-                    onClick={handleClearAllLeads}
-                    disabled={!leads.length}
-                    className="px-5 py-3.5 bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/30 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                  >
-                    <Trash2 className="w-4 h-4" /> Hapus Data Leads
-                  </button>
-                </div>
-              </div>
-
-              {/* Filter / Search Card */}
-              <div className="p-4 bg-[#111C30] rounded-3xl border border-white/10 flex flex-col sm:flex-row gap-3 shadow-lg">
-                <div className="relative flex-1">
-                  <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    placeholder="Cari nama, email, whatsapp, pekerjaan, kota..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-white/5 rounded-2xl text-xs md:text-sm text-white placeholder-slate-400 border border-white/10 focus:outline-none focus:border-cyan"
-                  />
-                </div>
-                <div className="flex gap-2 flex-wrap">
-                  <button
-                    onClick={() => setSelectedFilter("all")}
-                    className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-colors cursor-pointer ${
-                      selectedFilter === "all"
-                        ? "bg-cyan text-navy shadow-md font-black"
-                        : "bg-white/5 text-slate-300 hover:bg-white/10"
-                    }`}
-                  >
-                    Semua Paket
-                  </button>
-                  <button
-                    onClick={() => setSelectedFilter("Mitra")}
-                    className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-colors cursor-pointer ${
-                      selectedFilter === "Mitra"
-                        ? "bg-emerald-500 text-white shadow-md font-black"
-                        : "bg-white/5 text-slate-300 hover:bg-white/10"
-                    }`}
-                  >
-                    Mitra Universitas
-                  </button>
-                  <button
-                    onClick={() => setSelectedFilter("Regular")}
-                    className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-colors cursor-pointer ${
-                      selectedFilter === "Regular"
-                        ? "bg-blue text-white shadow-md font-black"
-                        : "bg-white/5 text-slate-300 hover:bg-white/10"
-                    }`}
-                  >
-                    Masterclass Regular
-                  </button>
-                </div>
-              </div>
-
-              {/* Leads Table Card */}
-              <div className="bg-[#111C30] rounded-3xl border border-white/10 overflow-hidden shadow-xl">
-                {filteredLeads.length > 0 ? (
-                  <table className="w-full text-left border-collapse min-w-[800px]">
-                    <thead>
-                      <tr className="bg-white/5 border-b border-white/10 text-slate-400 font-mono font-bold text-[10px] uppercase tracking-wider">
-                        <th className="p-4 pl-6">ID</th>
-                        <th className="p-4">Identitas Pendaftar</th>
-                        <th className="p-4">WhatsApp / Kota</th>
-                        <th className="p-4">Pekerjaan &amp; Instansi</th>
-                        <th className="p-4">Pilihan Opsi Paket</th>
-                        <th className="p-4">Harga / Waktu</th>
-                        <th className="p-4 text-center pr-6">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5 text-xs text-white">
-                      {filteredLeads.map((l) => (
-                        <tr key={l.id} className="hover:bg-white/5 transition-colors">
-                          <td className="p-4 pl-6 font-mono text-slate-400">#{l.id}</td>
-                          <td className="p-4">
-                            <div className="font-bold text-sm text-white">{l.nama}</div>
-                            <div className="text-slate-400 text-[11px] mt-0.5 font-mono">{l.email}</div>
-                          </td>
-                          <td className="p-4">
-                            <div className="font-bold text-cyan font-mono">{l.whatsapp}</div>
-                            <div className="text-slate-400 text-[11px] mt-0.5">{l.kota}</div>
-                          </td>
-                          <td className="p-4">
-                            <div className="font-semibold text-slate-200">{l.pekerjaan}</div>
-                            <div className="text-slate-400 text-[11px] mt-0.5">
-                              {l.namaPerusahaan}
-                            </div>
-                          </td>
-                          <td className="p-4">
-                            <span className="px-3 py-1.5 rounded-xl text-[10px] font-bold bg-blue/20 text-cyan border border-blue/30">
-                              {l.paket}
-                            </span>
-                          </td>
-                          <td className="p-4">
-                            <div className="font-black text-emerald-400 font-mono">{l.harga}</div>
-                            <div className="text-[10px] text-slate-400 mt-0.5 flex items-center gap-1 font-mono">
-                              <Calendar className="w-3 h-3 text-slate-500" /> {l.timestamp}
-                            </div>
-                          </td>
-                          <td className="p-4 text-center pr-6">
-                            <button
-                              onClick={() => handleDeleteSingleLead(l.id)}
-                              className="p-2 bg-red-500/15 hover:bg-red-500/25 text-red-300 rounded-xl transition-colors cursor-pointer border border-red-500/20"
-                              title="Hapus baris lead ini"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className="p-16 text-center">
-                    <ShieldAlert className="w-12 h-12 text-slate-500 mx-auto mb-3" />
-                    <h4 className="font-bold text-white text-sm">Belum ada data leads</h4>
-                    <p className="text-slate-400 text-xs mt-1">Data pendaftar baru akan otomatis tersimpan di sini.</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* TAB 2: HERO SETTINGS */}
+          {/* TAB 1: HERO SETTINGS */}
           {activeTab === "hero" && (
             <div className="grid lg:grid-cols-12 gap-8 items-start">
               {/* Form Input Card */}
@@ -1178,7 +863,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </div>
           )}
 
-          {/* TAB 3: INTRO VIDEO SETTINGS */}
+          {/* TAB 2: INTRO VIDEO SETTINGS */}
           {activeTab === "intro" && (
             <div className="grid lg:grid-cols-12 gap-8 items-start">
               <form onSubmit={handleSaveIntro} className="lg:col-span-7 bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
@@ -1264,7 +949,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </div>
           )}
 
-          {/* TAB 4: PRICING & DATEPICKER */}
+          {/* TAB 3: PRICING & DATEPICKER */}
           {activeTab === "pricing" && (
             <div className="max-w-4xl space-y-6">
               <form onSubmit={handleSavePricing} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
@@ -1325,7 +1010,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </div>
           )}
 
-          {/* TAB 5: CRUD PACKAGE OPTIONS */}
+          {/* TAB 4: CRUD PACKAGE OPTIONS */}
           {activeTab === "packages" && (
             <div className="space-y-6 max-w-5xl">
               <form onSubmit={handleSavePackage} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
@@ -1497,7 +1182,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </div>
           )}
 
-          {/* TAB 6: CRUD TESTIMONIALS */}
+          {/* TAB 5: CRUD TESTIMONIALS */}
           {activeTab === "testimonials" && (
             <div className="space-y-6 max-w-5xl">
               <form onSubmit={handleSaveTesti} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
@@ -1636,7 +1321,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </div>
           )}
 
-          {/* TAB 7: WA LINKS & POPUPS */}
+          {/* TAB 6: WA LINKS & POPUPS */}
           {activeTab === "wa_popup" && (
             <form onSubmit={handleSaveWaPopup} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-6 max-w-4xl shadow-xl">
               <div className="border-b border-white/10 pb-4">
@@ -1728,7 +1413,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </form>
           )}
 
-          {/* TAB 8: SECTION ORDER & CUSTOM SECTIONS */}
+          {/* TAB 7: SECTION ORDER & CUSTOM SECTIONS */}
           {activeTab === "sections" && (
             <div className="space-y-8 max-w-5xl">
               <div className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
