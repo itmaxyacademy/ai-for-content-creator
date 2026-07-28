@@ -118,13 +118,16 @@ export const MODULES: ModulItem[] = [
   }
 ];
 
+import stevenImg from "./assets/steven-laksana.jpg";
+import gamaImg from "./assets/gama-anom.jpg";
+
 export const SPEAKERS: SpeakerItem[] = [
   {
     initials: "SL",
     name: "Steven Laksana",
     role: "Applied AI Expert & Product Manager",
     description: "50+ perusahaan sebagai AI Marketing Consultant. Ahli implementasi AI untuk workflow produksi & campaign kreatif.",
-    imageUrl: "https://lh3.googleusercontent.com/d/1guqfUVCAQCRNQIfa_zVE2dayFOWwL84b",
+    imageUrl: stevenImg,
     badgeTag: "Konsultan Bisnis AI Terpercaya"
   },
   {
@@ -132,7 +135,7 @@ export const SPEAKERS: SpeakerItem[] = [
     name: "Gama Anom",
     role: "Ads Expertise & Digital Marketing Trainer",
     description: "Mencetak 1 Miliar Omzet dalam 6 bulan. Pelatih berpengalaman di digital marketing & kreasi konten taktis.",
-    imageUrl: "https://lh3.googleusercontent.com/d/1YuoJWgsL5mB5YFu9PB4gOtiXmzAXwWLX",
+    imageUrl: gamaImg,
     badgeTag: "Master Digital Strategist"
   }
 ];

@@ -143,11 +143,15 @@ export const DEFAULT_WA_CONFIG: WaConfig = {
   customWaLink: ""
 };
 
+import heroBgImg from "../assets/hero-bg.png";
+import stevenImg from "../assets/steven-laksana.jpg";
+import gamaImg from "../assets/gama-anom.jpg";
+
 const DEFAULT_CONFIG: AppConfigType = {
   ...APP_CONFIG,
   countdownMode: "real",
   evergreenMinutes: 45,
-  heroBgUrl: "https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2",
+  heroBgUrl: heroBgImg,
   heroEventBadge: "Masterclass · Mulai 4 Agustus 2026 · 8 Pertemuan Hybrid",
   heroHeadlineTitle: "BANGUN SISTEM\nKONTEN KAMU\nDENGAN AI SEKARANG!",
   heroHeadlineSubtitle: "Stop bikin konten manual satu per satu! Kreator yang tumbuh cepat bukan karena timnya lebih besar — tapi karena mereka punya sistem.",
@@ -183,7 +187,7 @@ interface ContentContextType {
   resetToDefault: () => void;
 }
 
-const STORAGE_KEY = "maxy_aicc_site_content_v2";
+const STORAGE_KEY = "maxy_aicc_site_content_v3";
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
@@ -194,6 +198,24 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (stored) {
         const parsed = JSON.parse(stored);
         const storedAppConfig = parsed.appConfig || {};
+
+        // Replace any Google Drive URL in heroBgUrl with local heroBgImg
+        if (storedAppConfig.heroBgUrl && storedAppConfig.heroBgUrl.includes("lh3.googleusercontent.com")) {
+          storedAppConfig.heroBgUrl = heroBgImg;
+        }
+
+        // Replace any Google Drive URLs in speakers with local images
+        let loadedSpeakers = Array.isArray(parsed.speakers) && parsed.speakers.length > 0 ? parsed.speakers : SPEAKERS;
+        loadedSpeakers = loadedSpeakers.map((sp: SpeakerItem) => {
+          if (sp.imageUrl && sp.imageUrl.includes("1guqfUVCAQCRNQIfa_zVE2dayFOWwL84b")) {
+            return { ...sp, imageUrl: stevenImg };
+          }
+          if (sp.imageUrl && sp.imageUrl.includes("1YuoJWgsL5mB5YFu9PB4gOtiXmzAXwWLX")) {
+            return { ...sp, imageUrl: gamaImg };
+          }
+          return sp;
+        });
+
         return {
           appConfig: {
             ...DEFAULT_CONFIG,
@@ -204,7 +226,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
             },
           },
           modules: Array.isArray(parsed.modules) && parsed.modules.length > 0 ? parsed.modules : MODULES,
-          speakers: Array.isArray(parsed.speakers) && parsed.speakers.length > 0 ? parsed.speakers : SPEAKERS,
+          speakers: loadedSpeakers,
           faqs: Array.isArray(parsed.faqs) && parsed.faqs.length > 0 ? parsed.faqs : FAQS,
           videos: Array.isArray(parsed.videos) && parsed.videos.length > 0 ? parsed.videos : VIDEOS,
           packages: Array.isArray(parsed.packages) && parsed.packages.length > 0 ? parsed.packages : DEFAULT_PACKAGES,

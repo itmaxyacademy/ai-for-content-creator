@@ -4,6 +4,10 @@ import { useContent } from "../context/ContentContext";
 import CountdownTimer from "./CountdownTimer";
 import holonIqLogo from "../assets/holonIQ.svg";
 
+import heroBgImg from "../assets/hero-bg.png";
+import boyLaptopImg from "../assets/boy-laptop.png";
+import girlCameraImg from "../assets/girl-camera.png";
+
 export default function Hero() {
   const { content } = useContent();
 
@@ -18,7 +22,7 @@ export default function Hero() {
   const bgUrl =
     content.appConfig.heroBgUrl && content.appConfig.heroBgUrl.trim() !== ""
       ? content.appConfig.heroBgUrl
-      : "https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2";
+      : heroBgImg;
 
   const featureTags = content.appConfig.heroFeatureTags && content.appConfig.heroFeatureTags.length > 0
     ? content.appConfig.heroFeatureTags
@@ -48,7 +52,7 @@ export default function Hero() {
 
       {/* Left Avatar: Boy with Laptop */}
       <img
-        src="https://lh3.googleusercontent.com/d/15IP7HQj2-t7YIdtmiMKxqzX-ht8CLV3a"
+        src={boyLaptopImg}
         alt="Boy with laptop"
         referrerPolicy="no-referrer"
         className="hidden lg:block absolute bottom-0 left-[1%] xl:left-[3%] h-[420px] xl:h-[480px] 2xl:h-[530px] w-auto object-contain z-10 pointer-events-none"
@@ -56,7 +60,7 @@ export default function Hero() {
 
       {/* Right Avatar: Girl with Camera */}
       <img
-        src="https://lh3.googleusercontent.com/d/1BMD7TNuXaBITZQ50DB1fyBl5aA5CYaG8"
+        src={girlCameraImg}
         alt="Girl with camera"
         referrerPolicy="no-referrer"
         className="hidden lg:block absolute bottom-0 right-[1%] xl:right-[3%] h-[420px] xl:h-[480px] 2xl:h-[530px] w-auto object-contain z-10 pointer-events-none"
