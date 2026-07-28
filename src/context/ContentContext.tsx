@@ -338,8 +338,20 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
           sectionOrder: Array.isArray(parsed.sectionOrder) && parsed.sectionOrder.length > 0 ? parsed.sectionOrder : DEFAULT_SECTION_ORDER,
           popupConfig: { ...DEFAULT_POPUP_CONFIG, ...(parsed.popupConfig || {}) },
           waConfig: { ...DEFAULT_WA_CONFIG, ...(parsed.waConfig || {}) },
-          problemConfig: { ...DEFAULT_PROBLEM_CONFIG, ...(parsed.problemConfig || {}) },
-          solutionConfig: { ...DEFAULT_SOLUTION_CONFIG, ...(parsed.solutionConfig || {}) },
+          problemConfig: {
+            ...DEFAULT_PROBLEM_CONFIG,
+            ...(parsed.problemConfig || {}),
+            cards: Array.isArray(parsed.problemConfig?.cards) && parsed.problemConfig.cards.length > 0
+              ? parsed.problemConfig.cards
+              : DEFAULT_PROBLEM_CONFIG.cards,
+          },
+          solutionConfig: {
+            ...DEFAULT_SOLUTION_CONFIG,
+            ...(parsed.solutionConfig || {}),
+            cards: Array.isArray(parsed.solutionConfig?.cards) && parsed.solutionConfig.cards.length > 0
+              ? parsed.solutionConfig.cards
+              : DEFAULT_SOLUTION_CONFIG.cards,
+          },
           valueStackItems: Array.isArray(parsed.valueStackItems) && parsed.valueStackItems.length > 0 ? parsed.valueStackItems : DEFAULT_VALUE_STACK,
         };
       }
