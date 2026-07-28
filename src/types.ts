@@ -45,6 +45,7 @@ export interface ModulItem {
 export interface AIToolItem {
   name: string;
   domain: string;
+  logoUrl?: string;
   color?: string;
 }
 

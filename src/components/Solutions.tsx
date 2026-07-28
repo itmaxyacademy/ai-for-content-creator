@@ -6,13 +6,14 @@ import { AIToolItem } from "../types";
 
 const ToolLogoBadge: React.FC<{ tool: AIToolItem }> = ({ tool }) => {
   const [hasError, setHasError] = useState(false);
+  const logoSrc = tool.logoUrl || (tool.domain ? `https://www.google.com/s2/favicons?domain=${tool.domain}&sz=128` : "");
 
   return (
     <div className="group flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 hover:border-cyan/50 transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-cyan/10">
       <div className="w-7 h-7 rounded-xl bg-white flex items-center justify-center p-1 shadow-sm overflow-hidden group-hover:scale-110 transition-transform duration-300 shrink-0">
-        {!hasError ? (
+        {!hasError && logoSrc ? (
           <img
-            src={`https://www.google.com/s2/favicons?domain=${tool.domain}&sz=128`}
+            src={logoSrc}
             alt={`${tool.name} logo`}
             className="w-full h-full object-contain"
             onError={() => setHasError(true)}
