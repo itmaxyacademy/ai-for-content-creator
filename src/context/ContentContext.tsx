@@ -189,16 +189,24 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
+        const storedAppConfig = parsed.appConfig || {};
         return {
-          appConfig: { ...DEFAULT_CONFIG, ...parsed.appConfig },
-          modules: parsed.modules || MODULES,
-          speakers: parsed.speakers || SPEAKERS,
-          faqs: parsed.faqs || FAQS,
-          videos: parsed.videos || VIDEOS,
-          packages: parsed.packages || DEFAULT_PACKAGES,
-          testimonials: parsed.testimonials || DEFAULT_TESTIMONIALS,
-          customSections: parsed.customSections || [],
-          sectionOrder: parsed.sectionOrder || DEFAULT_SECTION_ORDER,
+          appConfig: {
+            ...DEFAULT_CONFIG,
+            ...storedAppConfig,
+            prices: {
+              ...DEFAULT_CONFIG.prices,
+              ...(storedAppConfig.prices || {}),
+            },
+          },
+          modules: Array.isArray(parsed.modules) && parsed.modules.length > 0 ? parsed.modules : MODULES,
+          speakers: Array.isArray(parsed.speakers) && parsed.speakers.length > 0 ? parsed.speakers : SPEAKERS,
+          faqs: Array.isArray(parsed.faqs) && parsed.faqs.length > 0 ? parsed.faqs : FAQS,
+          videos: Array.isArray(parsed.videos) && parsed.videos.length > 0 ? parsed.videos : VIDEOS,
+          packages: Array.isArray(parsed.packages) && parsed.packages.length > 0 ? parsed.packages : DEFAULT_PACKAGES,
+          testimonials: Array.isArray(parsed.testimonials) && parsed.testimonials.length > 0 ? parsed.testimonials : DEFAULT_TESTIMONIALS,
+          customSections: Array.isArray(parsed.customSections) ? parsed.customSections : [],
+          sectionOrder: Array.isArray(parsed.sectionOrder) && parsed.sectionOrder.length > 0 ? parsed.sectionOrder : DEFAULT_SECTION_ORDER,
           popupConfig: { ...DEFAULT_POPUP_CONFIG, ...(parsed.popupConfig || {}) },
           waConfig: { ...DEFAULT_WA_CONFIG, ...(parsed.waConfig || {}) },
         };

@@ -18,17 +18,19 @@ export default function PricingForm() {
   });
 
   useEffect(() => {
-    if (content.packages.length > 0) {
-      const exists = content.packages.some((p) => p.code === formData.paket);
+    const pkgs = content.packages || [];
+    if (pkgs.length > 0) {
+      const exists = pkgs.some((p) => p.code === formData.paket);
       if (!exists) {
-        setFormData((prev) => ({ ...prev, paket: content.packages[0].code }));
+        setFormData((prev) => ({ ...prev, paket: pkgs[0].code }));
       }
     }
   }, [content.packages]);
 
   // Dynamic price lookup
   const getSelectedPrice = (paketCode: string) => {
-    const pkg = content.packages.find((p) => p.code === paketCode);
+    const pkgs = content.packages || [];
+    const pkg = pkgs.find((p) => p.code === paketCode);
     if (pkg) {
       return {
         name: pkg.name,
@@ -36,7 +38,7 @@ export default function PricingForm() {
         normal: pkg.normalPrice,
       };
     }
-    const firstPkg = content.packages[0];
+    const firstPkg = pkgs[0];
     if (firstPkg) {
       return {
         name: firstPkg.name,
@@ -46,8 +48,8 @@ export default function PricingForm() {
     }
     return {
       name: "Harga Masterclass (8 Pertemuan)",
-      current: content.appConfig.prices.masterclassCurrent || "Rp 1.800.000",
-      normal: content.appConfig.prices.masterclassNormal || "Rp 2.500.000",
+      current: content.appConfig?.prices?.masterclassCurrent || "Rp 1.800.000",
+      normal: content.appConfig?.prices?.masterclassNormal || "Rp 2.500.000",
     };
   };
 
@@ -208,7 +210,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               Pilih opsi harga yang relevan dengan kualifikasi kamu. Kurikulum 8 pertemuan Masterclass berformat Hybrid (offline di MAXY AI HUB atau online Zoom).
             </p>
 
-            {content.packages.map((pkg) => {
+            {(content.packages || []).map((pkg) => {
               const isSelected = formData.paket === pkg.code;
               return (
                 <div
@@ -403,7 +405,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                     onChange={handleInputChange}
                     className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy font-bold border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all cursor-pointer"
                   >
-                    {content.packages.map((pkg) => (
+                    {(content.packages || []).map((pkg) => (
                       <option key={pkg.code} value={pkg.code}>
                         {pkg.name} — {pkg.currentPrice} (Normal {pkg.normalPrice})
                       </option>

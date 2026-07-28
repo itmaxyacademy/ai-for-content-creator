@@ -122,10 +122,10 @@ export default function ValueStack() {
               </div>
               <div className="text-left sm:text-right">
                 <span className="text-xs md:text-sm line-through text-slate-200 font-mono font-bold block">
-                  {content.appConfig.prices.masterclassNormal}
+                  {content.appConfig?.prices?.masterclassNormal || "Rp 2.500.000"}
                 </span>
                 <span className="text-2xl md:text-4xl font-black font-mono text-white block tracking-tight">
-                  {content.appConfig.prices.mitraCurrent}
+                  {content.appConfig?.prices?.mitraCurrent || "Rp 1.800.000"}
                 </span>
               </div>
             </div>
