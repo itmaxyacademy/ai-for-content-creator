@@ -90,7 +90,7 @@ export default function Hero() {
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/15 rounded-full blur-xl pointer-events-none"></div>
 
           <p className="text-[11px] text-amber-300 font-extrabold mb-3 uppercase tracking-widest font-mono text-center">
-            ⏳ Penawaran Early Bird Berakhir Dalam:
+            ⏳ Penawaran Special Promo Berakhir Dalam:
           </p>
           <CountdownTimer targetDate={APP_CONFIG.earlyBirdDeadline} theme="dark" size="sm" />
         </div>
@@ -102,7 +102,7 @@ export default function Hero() {
             onClick={handleScrollToDaftar}
             className="inline-flex items-center justify-center gap-2 text-white font-black text-sm md:text-base px-8 py-4.5 rounded-full w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-[#25D366] to-[#1aaa52] shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)] cursor-pointer"
           >
-            Amankan Harga Early Bird Sekarang <ArrowRight className="w-5 h-5" />
+            Amankan Kursi Kamu Sekarang <ArrowRight className="w-5 h-5" />
           </a>
           <p className="mt-3 text-[10px] text-slate-500 font-mono">
             Tinggalkan cara manual. Mulai adu sistem bersama MAXY.

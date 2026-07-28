@@ -58,16 +58,16 @@ export default function ExitIntentModal() {
           Tunggu — jangan pergi dulu! ✋
         </h3>
         <p className="text-muted text-xs md:text-sm mb-5 leading-relaxed">
-          Peluang kuasai AI dengan <strong className="text-navy font-black">Harga Early Bird &amp; Mitra Universitas ({APP_CONFIG.prices.earlyBirdCurrent})</strong> masih di depan mata! Setelah kuota promo habis, harga kembali ke tarif Masterclass Normal <strong className="text-ember font-black">{APP_CONFIG.prices.masterclassNormal}</strong>. Yakin mau melewatkan diskon ini?
+          Peluang kuasai AI dengan <strong className="text-navy font-black">Harga Khusus Mitra Universitas ({APP_CONFIG.prices.mitraCurrent})</strong> masih di depan mata! Setelah kuota promo habis, harga kembali ke tarif Masterclass Normal <strong className="text-ember font-black">{APP_CONFIG.prices.masterclassNormal}</strong>. Yakin mau melewatkan diskon ini?
         </p>
 
         {/* Highlight Price */}
         <div className="bg-slate-50 rounded-2xl p-4 mb-5 border border-slate-100">
           <p className="text-[10px] font-mono uppercase text-ember font-bold tracking-wider">
-            🔥 Harga Early Bird &amp; Mitra Universitas
+            🔥 Harga Khusus Mitra Universitas
           </p>
           <p className="text-2xl font-black text-blue mt-1 font-mono">
-            {APP_CONFIG.prices.earlyBirdCurrent}{" "}
+            {APP_CONFIG.prices.mitraCurrent}{" "}
             <span className="text-xs md:text-sm line-through text-slate-400 font-semibold font-mono">
               {APP_CONFIG.prices.masterclassNormal}
             </span>
@@ -78,7 +78,7 @@ export default function ExitIntentModal() {
           onClick={handleClaim}
           className="w-full bg-gradient-to-r from-wa to-[#1aaa52] text-white font-black py-4 rounded-xl text-xs md:text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5"
         >
-          Oke, Amankan Harga Early Bird <ArrowRight className="w-4 h-4" />
+          Oke, Amankan Harga Diskon <ArrowRight className="w-4 h-4" />
         </button>
 
         <button

@@ -54,7 +54,7 @@ export default function StickyFooter() {
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0B1628]/95 backdrop-blur-md border-t border-white/10 p-3 flex gap-2 items-center justify-between shadow-[0_-8px_30px_rgba(0,0,0,0.3)]">
       <div className="flex-1 leading-tight text-left">
         <span className="text-[10px] font-mono uppercase text-cyan font-bold tracking-wider">
-          Early Bird Diskon
+          Diskon Spesial
         </span>
         <div className="text-xs text-white mt-0.5">
           Sisa Waktu: <strong className="text-amber font-mono font-black">{timeLeftStr}</strong>

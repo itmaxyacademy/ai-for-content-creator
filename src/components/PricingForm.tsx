@@ -12,7 +12,7 @@ export default function PricingForm() {
     kota: "",
     pekerjaan: "",
     namaPerusahaan: "",
-    paket: "Early_Bird", // default option
+    paket: "Mitra_Universitas", // default option
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -22,15 +22,6 @@ export default function PricingForm() {
   // Dynamic price lookup
   const getSelectedPrice = (paketCode: string) => {
     switch (paketCode) {
-      case "Early_Bird":
-      case "Hybrid_Promo":
-      case "Onsite_Promo":
-      case "Online":
-        return {
-          name: "Harga Early Bird",
-          current: APP_CONFIG.prices.earlyBirdCurrent,
-          normal: APP_CONFIG.prices.earlyBirdNormal,
-        };
       case "Mitra_Universitas":
         return {
           name: "Harga Khusus Mitra Universitas",
@@ -40,16 +31,11 @@ export default function PricingForm() {
       case "Masterclass_Regular":
       case "Hybrid_Early":
       case "Onsite":
+      default:
         return {
           name: "Harga Masterclass (8 Pertemuan)",
           current: APP_CONFIG.prices.masterclassCurrent,
           normal: APP_CONFIG.prices.masterclassNormal,
-        };
-      default:
-        return {
-          name: "Harga Early Bird",
-          current: APP_CONFIG.prices.earlyBirdCurrent,
-          normal: APP_CONFIG.prices.earlyBirdNormal,
         };
     }
   };
@@ -150,7 +136,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
       kota: "",
       pekerjaan: "",
       namaPerusahaan: "",
-      paket: "Early_Bird",
+      paket: "Mitra_Universitas",
     });
     setIsSubmitted(false);
     setSubmittedLead(null);
@@ -177,7 +163,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
           <div className="max-w-md mx-auto bg-white rounded-2xl p-5 border border-slate-200 shadow-sm mb-6">
             <div className="flex justify-between text-xs font-bold mb-2">
               <span className="text-ember flex items-center gap-1">
-                🔥 Slot Early Bird Terbatas!
+                🔥 Slot Diskon Terbatas!
               </span>
               <span className="text-navy">
                 {APP_CONFIG.slotTaken} / {APP_CONFIG.slotTotal} Terisi
@@ -197,7 +183,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
           {/* Countdown timer under scarcity */}
           <div className="max-w-md mx-auto">
             <p className="text-xs text-ember font-bold mb-2.5 font-mono">
-              ⏳ Harga Early Bird Khusus Berakhir Dalam:
+              ⏳ Promo Diskon Berakhir Dalam:
             </p>
             <CountdownTimer targetDate={APP_CONFIG.earlyBirdDeadline} theme="light" size="sm" />
           </div>
@@ -214,63 +200,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               Pilih opsi harga yang relevan dengan kualifikasi kamu. Kurikulum 8 pertemuan Masterclass berformat Hybrid (offline di MAXY AI HUB atau online Zoom).
             </p>
 
-            {/* Option 1: Early Bird (Recommended / Featured) */}
-            <div
-              onClick={() => setFormData((prev) => ({ ...prev, paket: "Early_Bird" }))}
-              className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
-                formData.paket === "Early_Bird" || formData.paket === "Hybrid_Promo"
-                  ? "bg-gradient-to-b from-navy to-navy-light text-white border-cyan shadow-xl scale-[1.01] relative"
-                  : "bg-white border-slate-200 text-navy hover:border-slate-300 shadow-sm"
-              }`}
-            >
-              {(formData.paket === "Early_Bird" || formData.paket === "Hybrid_Promo") && (
-                <span className="absolute -top-3 left-6 bg-gradient-to-r from-ember to-amber text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest font-mono shadow-md">
-                  🔥 DISKON EARLY BIRD (TERBATAS)
-                </span>
-              )}
-              
-              <div className="flex items-center justify-between mb-2 mt-1">
-                <div>
-                  <p className={`text-[10px] font-mono tracking-widest uppercase font-bold ${formData.paket === "Early_Bird" ? "text-cyan" : "text-slate-500"}`}>8 Pertemuan · Mulai 4 Agustus 2026</p>
-                  <h4 className={`text-lg font-black ${formData.paket === "Early_Bird" ? "text-white" : "text-navy"}`}>Harga Early Bird</h4>
-                </div>
-                <span className="bg-amber text-navy text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider flex-shrink-0">
-                  Terpopuler
-                </span>
-              </div>
-
-              <div className={`flex items-end gap-2.5 my-3 p-3.5 rounded-2xl border ${formData.paket === "Early_Bird" ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"}`}>
-                <div>
-                  <p className="text-[10px] font-mono text-slate-400 uppercase">Harga Diskon Early Bird:</p>
-                  <span className={`text-2xl md:text-3xl font-black font-mono block ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`}>
-                    {APP_CONFIG.prices.earlyBirdCurrent}
-                  </span>
-                </div>
-                <div className="pb-1 text-right ml-auto">
-                  <span className="text-[10px] text-slate-400 block font-mono">Normal Early Bird:</span>
-                  <span className="line-through text-slate-400 text-sm md:text-base font-semibold font-mono block">
-                    {APP_CONFIG.prices.earlyBirdNormal}
-                  </span>
-                </div>
-              </div>
-
-              <ul className={`space-y-2 text-xs border-t pt-3 ${formData.paket === "Early_Bird" ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
-                <li className="flex gap-2 items-start">
-                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`} />
-                  <span><strong>8 Pertemuan Hybrid</strong> (Offline di MAXY AI HUB atau Online Live via Zoom)</span>
-                </li>
-                <li className="flex gap-2 items-start">
-                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`} />
-                  <span>Dilangsungkan setiap Selasa &amp; Kamis (Start 4 Agustus 2026)</span>
-                </li>
-                <li className="flex gap-2 items-start">
-                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Early_Bird" ? "text-cyan" : "text-blue"}`} />
-                  <span>Prompt Library, JSON Template AI &amp; Akses Rekaman Kelas</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Option 2: Mitra Universitas */}
+            {/* Option 1: Mitra Universitas */}
             <div
               onClick={() => setFormData((prev) => ({ ...prev, paket: "Mitra_Universitas" }))}
               className={`p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer ${
@@ -313,7 +243,7 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
               <ul className={`space-y-2 text-xs border-t pt-3 ${formData.paket === "Mitra_Universitas" ? "text-slate-200 border-white/10" : "text-slate-600 border-slate-100"}`}>
                 <li className="flex gap-2 items-start">
                   <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`} />
-                  <span>Potongan harga spesial sebesar <strong>Rp 1.000.000</strong> khusus mitra universitas &amp; mahasiswa</span>
+                  <span>Potongan harga spesial sebesar <strong>Rp 700.000</strong> khusus mitra universitas &amp; mahasiswa</span>
                 </li>
                 <li className="flex gap-2 items-start">
                   <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${formData.paket === "Mitra_Universitas" ? "text-emerald-400" : "text-emerald-600"}`} />
@@ -513,14 +443,11 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                     onChange={handleInputChange}
                     className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy font-bold border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all"
                   >
-                    <option value="Early_Bird">
-                      Harga Early Bird — {APP_CONFIG.prices.earlyBirdCurrent} (Dicoret {APP_CONFIG.prices.earlyBirdNormal})
-                    </option>
                     <option value="Mitra_Universitas">
-                      Harga Khusus Mitra Universitas — {APP_CONFIG.prices.mitraCurrent} (Dicoret {APP_CONFIG.prices.mitraNormal})
+                      Harga Khusus Mitra Universitas — {APP_CONFIG.prices.mitraCurrent} (Normal {APP_CONFIG.prices.mitraNormal})
                     </option>
                     <option value="Masterclass_Regular">
-                      Harga Masterclass (8 Pertemuan) — {APP_CONFIG.prices.masterclassCurrent} (Dicoret {APP_CONFIG.prices.masterclassNormal})
+                      Harga Masterclass (8 Pertemuan) — {APP_CONFIG.prices.masterclassCurrent} (Normal {APP_CONFIG.prices.masterclassNormal})
                     </option>
                   </select>
                   {errors.paket && (

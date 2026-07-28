@@ -13,7 +13,7 @@ export const APP_CONFIG = {
     earlyBirdNormal: "Rp 1.800.000",
     earlyBirdCurrent: "Rp 1.500.000",
     mitraNormal: "Rp 2.500.000",
-    mitraCurrent: "Rp 1.500.000",
+    mitraCurrent: "Rp 1.800.000",
     // Legacy mapping for compatibility
     normal: "Rp 2.500.000",
     earlyBird: "Rp 1.500.000",
