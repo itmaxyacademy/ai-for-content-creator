@@ -690,15 +690,6 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleResetSiteContent}
-              className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl text-xs font-semibold transition-colors flex items-center gap-2 cursor-pointer"
-              title="Reset konten ke default awal"
-            >
-              <RotateCcw className="w-3.5 h-3.5 text-slate-400" /> Reset Default
-            </button>
-          </div>
         </header>
 
         {/* Content Body Container */}
