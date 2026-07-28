@@ -123,7 +123,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-navy font-sans antialiased selection:bg-cyan/30 relative">
       {/* 1. URGENCY TOP BAR */}
-      <div className="bg-gradient-to-r from-ember to-amber py-2.5 px-4 text-white text-center text-xs md:text-sm font-bold tracking-wide flex items-center justify-center gap-x-2 flex-wrap shadow-md">
+      <div className="bg-[#1B4FD8] py-2.5 px-4 text-white text-center text-xs md:text-sm font-bold tracking-wide flex items-center justify-center gap-x-2 flex-wrap shadow-sm">
         <span className="w-2 h-2 rounded-full bg-white animate-ping inline-block"></span>
         <span>
           {content.appConfig.topBannerText ||

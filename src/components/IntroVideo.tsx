@@ -23,10 +23,10 @@ export default function IntroVideo() {
   const instagramCta = content.appConfig.introInstagramCta || "Buka Instagram Reels";
 
   return (
-    <section className="py-14 bg-gradient-to-b from-[#eaf4fd] to-white relative z-10">
+    <section className="py-14 bg-slate-50 relative z-10">
       <div className="max-w-5xl mx-auto px-5">
         <div className="text-center mb-10">
-          <span className="text-[10px] font-mono font-bold tracking-widest text-[#1B4FD8] uppercase bg-blue-100 px-3 py-1 rounded-full">
+          <span className="text-[10px] font-mono font-bold tracking-widest text-[#1B4FD8] uppercase bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
             🎞️ INTRO VIDEO
           </span>
           <h2 className="text-2xl md:text-3xl font-black mt-3 text-[#0B1628] tracking-tight">
@@ -40,7 +40,7 @@ export default function IntroVideo() {
         <div className="max-w-4xl mx-auto w-full">
           <div className="grid md:grid-cols-12 gap-6 items-stretch">
             {/* YouTube Main Video Embed */}
-            <div className="md:col-span-8 bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 shadow-xl aspect-video relative group">
+            <div className="md:col-span-8 bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 shadow-lg aspect-video relative group">
               <iframe
                 id="intro-video-iframe"
                 className="w-full h-full"
@@ -52,10 +52,9 @@ export default function IntroVideo() {
             </div>
 
             {/* Instagram Reels Link Card */}
-            <div className="md:col-span-4 bg-white border border-slate-200/80 rounded-2xl p-6 flex flex-col justify-between text-left relative overflow-hidden shadow-lg">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-pink-500/5 to-transparent rounded-full"></div>
+            <div className="md:col-span-4 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between text-left shadow-sm">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-600 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-[#1B4FD8] mb-4 border border-blue-100">
                   <Instagram className="w-5 h-5" />
                 </div>
                 <h4 className="font-bold text-sm text-[#0B1628] mb-2">{instagramTitle}</h4>
@@ -68,7 +67,7 @@ export default function IntroVideo() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xs font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-1.5 bg-[#1B4FD8] hover:bg-blue-700 text-white text-xs font-bold py-3 px-4 rounded-xl transition-colors shadow-sm"
               >
                 <Play className="w-3.5 h-3.5 fill-current" /> {instagramCta}
               </a>

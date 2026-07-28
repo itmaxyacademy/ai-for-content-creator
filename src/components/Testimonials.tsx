@@ -70,17 +70,15 @@ export default function Testimonials() {
         </div>
 
         {/* Instagram Reels Card */}
-        <div className="max-w-5xl mx-auto bg-gradient-to-r from-purple-50 via-pink-50/30 to-purple-50/50 p-6 md:p-8 rounded-3xl border border-purple-200/30 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xs hover:shadow-md transition-all duration-300 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-500/5 to-transparent rounded-full pointer-events-none"></div>
-
-          <div className="flex-1 text-left relative z-10">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center text-white mb-5 shadow-md animate-pulse">
+        <div className="max-w-5xl mx-auto bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
+          <div className="flex-1 text-left">
+            <div className="w-12 h-12 rounded-2xl bg-[#1B4FD8] flex items-center justify-center text-white mb-5 shadow-sm">
               <Instagram className="w-6 h-6" />
             </div>
-            <p className="text-[10px] font-mono tracking-widest uppercase text-purple-700 font-bold mb-2">
+            <p className="text-[10px] font-mono tracking-widest uppercase text-[#1B4FD8] font-bold mb-2">
               🎥 SOSIAL MEDIA REELS
             </p>
-            <h4 className="font-black text-2xl md:text-3xl text-navy mt-1 leading-snug mb-3">
+            <h4 className="font-bold text-2xl md:text-3xl text-navy mt-1 leading-snug mb-3">
               Tonton Kesaksian Langsung di Instagram Reels
             </h4>
             <p className="text-muted text-sm leading-relaxed max-w-xl">

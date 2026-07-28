@@ -473,150 +473,150 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col md:flex-row text-slate-100 font-sans antialiased selection:bg-cyan/30 relative">
+    <div className="min-h-screen bg-[#0F172A] flex flex-col md:flex-row text-slate-100 font-sans antialiased selection:bg-blue-500/30 relative">
       {/* Toast message popup */}
       {toastMessage && (
-        <div className="fixed top-5 right-5 z-50 bg-emerald-500 text-white font-bold text-xs px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-2 animate-bounce border border-emerald-300">
+        <div className="fixed top-5 right-5 z-50 bg-[#1B4FD8] text-white font-bold text-xs px-5 py-3.5 rounded-xl shadow-xl flex items-center gap-2 border border-blue-400">
           <CheckCircle2 className="w-4 h-4" /> {toastMessage}
         </div>
       )}
 
       {/* LEFT SIDEBAR NAVIGATION */}
-      <aside className="w-full md:w-64 bg-[#070D18] text-white flex flex-col justify-between p-5 border-r border-white/10 flex-shrink-0">
+      <aside className="w-full md:w-64 bg-[#0B1120] text-white flex flex-col justify-between p-5 border-r border-slate-800 flex-shrink-0">
         <div>
           {/* Logo / Brand Header */}
-          <div className="flex items-center gap-3 pb-6 border-b border-white/10 mb-6">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue to-cyan flex items-center justify-center text-white shadow-lg shadow-cyan/20 font-black text-lg">
+          <div className="flex items-center gap-3 pb-5 border-b border-slate-800 mb-5">
+            <div className="w-9 h-9 rounded-xl bg-[#1B4FD8] flex items-center justify-center text-white font-black text-base">
               M
             </div>
             <div>
-              <h2 className="font-black text-base text-white leading-tight">MAXY Admin CMS</h2>
-              <p className="text-[10px] text-cyan font-mono">Control Panel Portal</p>
+              <h2 className="font-bold text-sm text-white leading-tight">MAXY Admin CMS</h2>
+              <p className="text-[10px] text-slate-400 font-mono">Control Panel Portal</p>
             </div>
           </div>
 
           {/* Navigation Links */}
-          <nav className="space-y-1.5 overflow-y-auto max-h-[calc(100vh-250px)] pr-1">
+          <nav className="space-y-1 overflow-y-auto max-h-[calc(100vh-250px)] pr-1">
             <button
               onClick={() => setActiveTab("hero")}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "hero"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
-              <Settings className="w-4 h-4 text-cyan" /> Hero Teks &amp; Media
+              <Settings className="w-4 h-4 text-slate-300" /> Hero Teks &amp; Media
             </button>
 
             <button
               onClick={() => setActiveTab("intro")}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "intro"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
-              <Video className="w-4 h-4 text-rose-400" /> Intro Video (YT &amp; IG)
+              <Video className="w-4 h-4 text-slate-300" /> Intro Video (YT &amp; IG)
             </button>
 
             <button
               onClick={() => setActiveTab("pricing")}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "pricing"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
-              <Clock className="w-4 h-4 text-emerald-400" /> Datepicker &amp; Scarcity
+              <Clock className="w-4 h-4 text-slate-300" /> Datepicker &amp; Scarcity
             </button>
 
             <button
               onClick={() => setActiveTab("packages")}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "packages"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
               <div className="flex items-center gap-3">
-                <Package className="w-4 h-4 text-amber-400" /> CRUD Opsi Paket
+                <Package className="w-4 h-4 text-slate-300" /> Opsi Paket Harga
               </div>
-              <span className="text-[10px] bg-white/15 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
                 {content.packages.length}
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab("testimonials")}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "testimonials"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
               <div className="flex items-center gap-3">
-                <Star className="w-4 h-4 text-yellow-400" /> CRUD Testimoni
+                <Star className="w-4 h-4 text-slate-300" /> Testimoni Alumni
               </div>
-              <span className="text-[10px] bg-white/15 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
                 {content.testimonials.length}
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab("modules")}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "modules"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
               <div className="flex items-center gap-3">
-                <BookOpen className="w-4 h-4 text-indigo-400" /> Modul Kurikulum
+                <BookOpen className="w-4 h-4 text-slate-300" /> Modul Kurikulum
               </div>
-              <span className="text-[10px] bg-white/15 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
                 {content.modules.length}
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab("speakers")}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "speakers"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
               <div className="flex items-center gap-3">
-                <UserCheck className="w-4 h-4 text-cyan" /> Pemateri / Mentor
+                <UserCheck className="w-4 h-4 text-slate-300" /> Pemateri / Mentor
               </div>
-              <span className="text-[10px] bg-white/15 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
                 {content.speakers.length}
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab("wa_popup")}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "wa_popup"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
-              <MessageCircle className="w-4 h-4 text-emerald-400" /> WA &amp; Popups
+              <MessageCircle className="w-4 h-4 text-slate-300" /> WA &amp; Popups
             </button>
 
             <button
               onClick={() => setActiveTab("sections")}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "sections"
-                  ? "bg-gradient-to-r from-blue via-cyan to-indigo text-white shadow-lg shadow-cyan/20 border border-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
               }`}
             >
               <div className="flex items-center gap-3">
-                <Layers className="w-4 h-4 text-amber-400" /> Urutan Section
+                <Layers className="w-4 h-4 text-slate-300" /> Urutan Section
               </div>
-              <span className="text-[10px] bg-white/15 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
                 {content.sectionOrder.length}
               </span>
             </button>
@@ -624,17 +624,17 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
         </div>
 
         {/* Sidebar Footer Actions */}
-        <div className="pt-4 border-t border-white/10 space-y-2 mt-4">
+        <div className="pt-4 border-t border-slate-800 space-y-2 mt-4">
           <button
             onClick={onBackToSite}
-            className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white px-4 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer border border-white/10"
+            className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer border border-slate-700"
           >
             <ExternalLink className="w-4 h-4" /> Lihat Landing Page
           </button>
 
           <button
             onClick={onLogout}
-            className="w-full flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/20 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 bg-slate-800/60 hover:bg-red-500/20 text-red-400 border border-slate-700 px-4 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer"
           >
             <LogOut className="w-4 h-4" /> Logout Admin
           </button>
@@ -642,36 +642,36 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
       </aside>
 
       {/* RIGHT MAIN CONTENT AREA */}
-      <main className="flex-1 flex flex-col overflow-hidden bg-[#0A1220]">
+      <main className="flex-1 flex flex-col overflow-hidden bg-[#0B1120]">
         {/* Top Header Bar */}
-        <header className="bg-[#0D1829] border-b border-white/10 px-8 py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 flex-shrink-0">
+        <header className="bg-[#0B1120] border-b border-slate-800 px-8 py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 flex-shrink-0">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <h1 className="text-xl font-black text-white uppercase tracking-tight font-sans">
-                {activeTab === "hero" && "⚙️ Teks Hero &amp; Media Upload"}
-                {activeTab === "intro" && "🎥 Intro Video (YouTube &amp; Instagram)"}
-                {activeTab === "pricing" && "⏰ Datepicker &amp; Scarcity Settings"}
-                {activeTab === "packages" && "📦 CRUD Opsi Paket Pendaftaran"}
-                {activeTab === "testimonials" && "⭐ CRUD Testimoni Alumni"}
-                {activeTab === "modules" && "📚 Modul Kurikulum (CRUD)"}
-                {activeTab === "speakers" && "🎤 Data Pemateri &amp; Mentor"}
-                {activeTab === "wa_popup" && "💬 WhatsApp &amp; Popup Settings"}
-                {activeTab === "sections" && "📑 Urutan &amp; Custom Section"}
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+              <h1 className="text-lg font-bold text-white uppercase tracking-wider font-sans">
+                {activeTab === "hero" && "Teks Hero &amp; Media Upload"}
+                {activeTab === "intro" && "Intro Video (YouTube &amp; Instagram)"}
+                {activeTab === "pricing" && "Datepicker &amp; Scarcity Settings"}
+                {activeTab === "packages" && "Opsi Paket Pendaftaran"}
+                {activeTab === "testimonials" && "Testimoni Alumni"}
+                {activeTab === "modules" && "Modul Kurikulum"}
+                {activeTab === "speakers" && "Data Pemateri &amp; Mentor"}
+                {activeTab === "wa_popup" && "WhatsApp &amp; Popup Settings"}
+                {activeTab === "sections" && "Urutan &amp; Custom Section"}
               </h1>
             </div>
-            <p className="text-slate-400 text-xs mt-1 font-mono">
-              Dashboard Manajemen Konten Terintegrasi Realtime
+            <p className="text-slate-400 text-xs mt-0.5 font-mono">
+              Dashboard Pengelolaan Konten Website MAXY
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handleResetSiteContent}
-              className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+              className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl text-xs font-semibold transition-colors flex items-center gap-2 cursor-pointer"
               title="Reset konten ke default awal"
             >
-              <RotateCcw className="w-3.5 h-3.5" /> Reset Default
+              <RotateCcw className="w-3.5 h-3.5 text-slate-400" /> Reset Default
             </button>
           </div>
         </header>
@@ -681,168 +681,168 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
           {/* TAB 1: HERO SETTINGS */}
           {activeTab === "hero" && (
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
+            <div className="grid lg:grid-cols-12 gap-6 items-start">
               {/* Form Input Card */}
-              <form onSubmit={handleSaveHero} className="lg:col-span-7 bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
-                <div className="border-b border-white/10 pb-4">
-                  <h3 className="font-black text-lg text-white flex items-center gap-2">
-                    <Settings className="w-5 h-5 text-cyan" /> Edit Seluruh Teks &amp; Background Hero
+              <form onSubmit={handleSaveHero} className="lg:col-span-7 bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5">
+                <div className="border-b border-slate-800 pb-3">
+                  <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                    <Settings className="w-4 h-4 text-blue-400" /> Edit Teks &amp; Background Hero
                   </h3>
                 </div>
 
                 {/* File Upload Component */}
-                <div className="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-3">
-                  <label className="block text-xs font-bold text-slate-300 uppercase font-mono tracking-wider">
-                    🖼️ Hero Background Image (Pilih File Komputer atau Masukkan URL)
+                <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-2.5">
+                  <label className="block text-xs font-semibold text-slate-300 uppercase font-mono tracking-wider">
+                    Hero Background Image
                   </label>
                   <div className="flex flex-col sm:flex-row gap-3 items-center">
-                    <label className="px-5 py-3 bg-gradient-to-r from-blue to-cyan hover:opacity-90 text-white font-bold text-xs rounded-xl cursor-pointer flex items-center gap-2 shadow-md transition-all flex-shrink-0">
-                      <Upload className="w-4 h-4" /> Pilih File Gambar Dari Komputer
+                    <label className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-semibold text-xs rounded-lg cursor-pointer flex items-center gap-2 transition-colors flex-shrink-0">
+                      <Upload className="w-3.5 h-3.5" /> Pilih Gambar Komputer
                       <input type="file" accept="image/*" onChange={handleHeroFileUpload} className="hidden" />
                     </label>
-                    <span className="text-xs text-slate-400 font-mono">atau URL:</span>
+                    <span className="text-xs text-slate-500 font-mono">atau URL:</span>
                     <input
                       type="text"
                       value={heroForm.heroBgUrl}
                       onChange={(e) => setHeroForm({ ...heroForm, heroBgUrl: e.target.value })}
                       placeholder="https://..."
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-mono"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">
-                    Running Announcement Banner Text
+                  <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
+                    Top Announcement Text
                   </label>
                   <input
                     type="text"
                     value={heroForm.topBannerText}
                     onChange={(e) => setHeroForm({ ...heroForm, topBannerText: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-medium"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-medium"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">
-                    Badge Teks Acara (Atas Title)
+                  <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
+                    Badge Teks Acara
                   </label>
                   <input
                     type="text"
                     value={heroForm.heroEventBadge}
                     onChange={(e) => setHeroForm({ ...heroForm, heroEventBadge: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
                     Hero Headline Title
                   </label>
                   <textarea
                     rows={3}
                     value={heroForm.heroHeadlineTitle}
                     onChange={(e) => setHeroForm({ ...heroForm, heroHeadlineTitle: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold leading-relaxed"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold leading-relaxed"
                   />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">
-                      Hero Sub-Headline Utama
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
+                      Sub-Headline Utama
                     </label>
                     <textarea
                       rows={3}
                       value={heroForm.heroHeadlineSubtitle}
                       onChange={(e) => setHeroForm({ ...heroForm, heroHeadlineSubtitle: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white leading-relaxed"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white leading-relaxed"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">
-                      Hero Sub-Headline Tambahan
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
+                      Sub-Headline Tambahan
                     </label>
                     <textarea
                       rows={3}
                       value={heroForm.heroHeadlineSubtitle2}
                       onChange={(e) => setHeroForm({ ...heroForm, heroHeadlineSubtitle2: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white leading-relaxed"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white leading-relaxed"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">
+                  <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
                     Feature Badges (Pisahkan Koma)
                   </label>
                   <input
                     type="text"
                     value={heroForm.heroFeatureTags}
                     onChange={(e) => setHeroForm({ ...heroForm, heroFeatureTags: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-medium"
                   />
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">Teks Countdown</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">Teks Countdown</label>
                     <input
                       type="text"
                       value={heroForm.heroCountdownTitle}
                       onChange={(e) => setHeroForm({ ...heroForm, heroCountdownTitle: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-medium"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">Teks Tombol CTA</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">Teks Tombol CTA</label>
                     <input
                       type="text"
                       value={heroForm.heroCtaText}
                       onChange={(e) => setHeroForm({ ...heroForm, heroCtaText: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-medium"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">Teks Sub-CTA</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">Teks Sub-CTA</label>
                     <input
                       type="text"
                       value={heroForm.heroCtaSubtext}
                       onChange={(e) => setHeroForm({ ...heroForm, heroCtaSubtext: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                     />
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex justify-end">
+                <div className="pt-3 border-t border-slate-800 flex justify-end">
                   <button
                     type="submit"
-                    className="px-6 py-3.5 bg-gradient-to-r from-blue via-cyan to-indigo hover:opacity-95 text-white font-black text-xs rounded-xl shadow-lg shadow-cyan/20 transition-all flex items-center gap-2 cursor-pointer"
+                    className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
                   >
-                    <Save className="w-4 h-4" /> Simpan Teks &amp; Media Hero
+                    <Save className="w-4 h-4" /> Simpan Teks Hero
                   </button>
                 </div>
               </form>
 
               {/* Live Preview Card */}
-              <div className="lg:col-span-5 bg-[#111C30] p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                  <h4 className="font-extrabold text-sm text-cyan flex items-center gap-2">
-                    <Eye className="w-4 h-4" /> Realtime Preview Hero
+              <div className="lg:col-span-5 bg-[#111827] p-5 rounded-2xl border border-slate-800 space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <h4 className="font-bold text-xs text-slate-300 flex items-center gap-2">
+                    <Eye className="w-4 h-4 text-blue-400" /> Pratinjau Tampilan Hero
                   </h4>
-                  <span className="text-[10px] font-mono bg-cyan/20 text-cyan px-2.5 py-0.5 rounded-full">Live Mockup</span>
+                  <span className="text-[10px] font-mono text-slate-400">Live View</span>
                 </div>
 
-                <div className="bg-[#eaf4fd] text-navy p-6 rounded-2xl border border-slate-200 relative overflow-hidden space-y-4 text-center">
+                <div className="bg-[#eaf4fd] text-navy p-5 rounded-xl border border-slate-200 relative overflow-hidden space-y-3 text-center">
                   {heroForm.heroBgUrl && (
-                    <img src={heroForm.heroBgUrl} alt="Background preview" className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none" />
+                    <img src={heroForm.heroBgUrl} alt="Background preview" className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none" />
                   )}
 
-                  <span className="inline-block bg-[#1e293b] text-white text-[10px] font-black px-4 py-1.5 rounded-full relative z-10 shadow-xs">
+                  <span className="inline-block bg-[#1e293b] text-white text-[10px] font-bold px-3 py-1 rounded-full relative z-10">
                     {heroForm.heroEventBadge || "Masterclass · Mulai 4 Agustus..."}
                   </span>
 
-                  <h3 className="text-xl font-black text-[#0B1628] leading-tight relative z-10 whitespace-pre-line">
+                  <h3 className="text-lg font-black text-[#0B1628] leading-tight relative z-10 whitespace-pre-line">
                     {heroForm.heroHeadlineTitle || "BANGUN SISTEM KONTEN KAMU..."}
                   </h3>
 
@@ -850,12 +850,12 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                     {heroForm.heroHeadlineSubtitle}
                   </p>
 
-                  <div className="bg-gradient-to-r from-[#1B4FD8] to-[#1241be] text-white p-4 rounded-xl relative z-10 shadow-md">
-                    <p className="text-[10px] font-extrabold text-amber-300 uppercase tracking-widest">{heroForm.heroCountdownTitle}</p>
-                    <p className="text-sm font-black font-mono mt-1">00j : 45m : 12d</p>
+                  <div className="bg-[#1B4FD8] text-white p-3 rounded-lg relative z-10">
+                    <p className="text-[10px] font-bold uppercase font-mono">{heroForm.heroCountdownTitle}</p>
+                    <p className="text-xs font-black font-mono mt-0.5">00j : 45m : 12d</p>
                   </div>
 
-                  <button className="bg-gradient-to-r from-[#25D366] to-[#1aaa52] text-white font-black text-xs py-3 px-6 rounded-full relative z-10 shadow-md">
+                  <button className="bg-[#25D366] text-white font-bold text-xs py-2.5 px-5 rounded-full relative z-10">
                     {heroForm.heroCtaText} →
                   </button>
                 </div>
@@ -865,85 +865,83 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
           {/* TAB 2: INTRO VIDEO SETTINGS */}
           {activeTab === "intro" && (
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
-              <form onSubmit={handleSaveIntro} className="lg:col-span-7 bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
-                <div className="border-b border-white/10 pb-4">
-                  <h3 className="font-black text-lg text-white flex items-center gap-2">
-                    <Video className="w-5 h-5 text-rose-400" /> Intro Video (YouTube &amp; Instagram Reels)
+            <div className="grid lg:grid-cols-12 gap-6 items-start">
+              <form onSubmit={handleSaveIntro} className="lg:col-span-7 bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5">
+                <div className="border-b border-slate-800 pb-3">
+                  <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                    <Video className="w-4 h-4 text-blue-400" /> Intro Video (YouTube &amp; Instagram Reels)
                   </h3>
                 </div>
 
-                <div className="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-3">
-                  <h4 className="font-bold text-sm text-white flex items-center gap-2">
-                    🎥 1. YouTube Main Video Embed Link
+                <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-2">
+                  <h4 className="font-bold text-xs text-slate-200">
+                    🎥 1. YouTube Video Link
                   </h4>
                   <input
                     type="text"
                     value={introForm.introYoutubeUrl}
                     onChange={(e) => setIntroForm({ ...introForm, introYoutubeUrl: e.target.value })}
                     placeholder="https://www.youtube.com/embed/Rt4q44v09qc"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-mono"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
                   />
                 </div>
 
-                <div className="bg-pink-500/10 p-5 rounded-2xl border border-pink-500/20 space-y-3">
-                  <h4 className="font-bold text-sm text-pink-300 flex items-center gap-2">
+                <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                  <h4 className="font-bold text-xs text-slate-200">
                     📸 2. Instagram Reels Card &amp; Link
                   </h4>
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-1">Judul Card Instagram</label>
+                      <label className="block text-xs font-semibold text-slate-400 mb-1">Judul Card</label>
                       <input
                         type="text"
                         value={introForm.introInstagramTitle}
                         onChange={(e) => setIntroForm({ ...introForm, introInstagramTitle: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-semibold"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-1">Teks Tombol CTA</label>
+                      <label className="block text-xs font-semibold text-slate-400 mb-1">Teks Tombol CTA</label>
                       <input
                         type="text"
                         value={introForm.introInstagramCta}
                         onChange={(e) => setIntroForm({ ...introForm, introInstagramCta: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-semibold"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">URL Link Instagram Reels</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">URL Link Instagram Reels</label>
                     <input
                       type="text"
                       value={introForm.introInstagramUrl}
                       onChange={(e) => setIntroForm({ ...introForm, introInstagramUrl: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-mono"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
                     />
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex justify-end">
+                <div className="pt-3 border-t border-slate-800 flex justify-end">
                   <button
                     type="submit"
-                    className="px-6 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl shadow-lg shadow-rose-500/20 transition-all flex items-center gap-2 cursor-pointer"
+                    className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
                   >
-                    <Save className="w-4 h-4" /> Simpan Pengaturan Intro Video
+                    <Save className="w-4 h-4" /> Simpan Video Config
                   </button>
                 </div>
               </form>
 
               {/* Preview Intro Card */}
-              <div className="lg:col-span-5 bg-[#111C30] p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                  <h4 className="font-extrabold text-sm text-pink-400 flex items-center gap-2">
-                    <Eye className="w-4 h-4" /> Preview Intro Video
-                  </h4>
-                </div>
-                <div className="bg-slate-950 p-4 rounded-2xl border border-white/10 space-y-3">
-                  <p className="text-xs text-slate-300 font-bold">YouTube Video Embed:</p>
-                  <p className="text-[11px] text-cyan font-mono truncate">{introForm.introYoutubeUrl}</p>
-                  <hr className="border-white/10" />
-                  <p className="text-xs text-slate-300 font-bold">Instagram Reels Link:</p>
-                  <p className="text-[11px] text-pink-400 font-mono truncate">{introForm.introInstagramUrl}</p>
+              <div className="lg:col-span-5 bg-[#111827] p-5 rounded-2xl border border-slate-800 space-y-3">
+                <h4 className="font-bold text-xs text-slate-300 flex items-center gap-2">
+                  <Eye className="w-4 h-4 text-blue-400" /> Pratinjau Tautan Video
+                </h4>
+                <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
+                  <p className="text-slate-400 font-semibold">YouTube URL:</p>
+                  <p className="text-blue-400 font-mono truncate">{introForm.introYoutubeUrl}</p>
+                  <hr className="border-slate-800" />
+                  <p className="text-slate-400 font-semibold">Instagram Reels URL:</p>
+                  <p className="text-blue-400 font-mono truncate">{introForm.introInstagramUrl}</p>
                 </div>
               </div>
             </div>
@@ -951,18 +949,18 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
           {/* TAB 3: PRICING & DATEPICKER */}
           {activeTab === "pricing" && (
-            <div className="max-w-4xl space-y-6">
-              <form onSubmit={handleSavePricing} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
-                <div className="border-b border-white/10 pb-4">
-                  <h3 className="font-black text-lg text-white flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-emerald-400" /> Pemilih Tanggal &amp; Waktu (Anti-Typo) &amp; Kuota Slot
+            <div className="max-w-3xl space-y-6">
+              <form onSubmit={handleSavePricing} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5">
+                <div className="border-b border-slate-800 pb-3">
+                  <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-400" /> Datepicker &amp; Kuota Slot Pendaftar
                   </h3>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-5">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">
-                      📅 Target Tanggal &amp; Waktu Countdown (Anti-Typo Datepicker)
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
+                      📅 Target Tanggal &amp; Waktu Countdown
                     </label>
                     <input
                       type="datetime-local"
@@ -971,39 +969,39 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                         const val = e.target.value ? `${e.target.value}:00` : "";
                         setPricingForm({ ...pricingForm, earlyBirdDeadline: val });
                       }}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold focus:outline-none focus:border-cyan"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                     <p className="text-[10px] text-slate-400 mt-1">Tersimpan: {pricingForm.earlyBirdDeadline}</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">Total Slot</label>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">Total Slot</label>
                       <input
                         type="number"
                         value={pricingForm.slotTotal}
                         onChange={(e) => setPricingForm({ ...pricingForm, slotTotal: Number(e.target.value) })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold"
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase font-mono tracking-wider">Slot Terisi</label>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">Slot Terisi</label>
                       <input
                         type="number"
                         value={pricingForm.slotTaken}
                         onChange={(e) => setPricingForm({ ...pricingForm, slotTaken: Number(e.target.value) })}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white font-bold"
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex justify-end">
+                <div className="pt-3 border-t border-slate-800 flex justify-end">
                   <button
                     type="submit"
-                    className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2 cursor-pointer"
+                    className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
                   >
-                    <Save className="w-4 h-4" /> Simpan Pengaturan Datepicker
+                    <Save className="w-4 h-4" /> Simpan Datepicker
                   </button>
                 </div>
               </form>
@@ -1013,74 +1011,74 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
           {/* TAB 4: CRUD PACKAGE OPTIONS */}
           {activeTab === "packages" && (
             <div className="space-y-6 max-w-5xl">
-              <form onSubmit={handleSavePackage} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <h3 className="font-black text-base text-white flex items-center gap-2">
-                  <Package className="w-4 h-4 text-amber-400" />
+              <form onSubmit={handleSavePackage} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <Package className="w-4 h-4 text-blue-400" />
                   {editingPackageIndex !== null ? "Edit Opsi Paket Pendaftaran" : "Tambah Opsi Paket Harga Baru"}
                 </h3>
 
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Kode Paket (Unique ID)</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Kode Paket (ID)</label>
                     <input
                       type="text"
                       value={packageInput.code}
                       onChange={(e) => setPackageInput({ ...packageInput, code: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-cyan font-mono font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-blue-400 font-mono font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Nama Paket</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Nama Paket</label>
                     <input
                       type="text"
                       value={packageInput.name}
                       onChange={(e) => setPackageInput({ ...packageInput, name: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Badge Tag</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Badge Tag</label>
                     <input
                       type="text"
                       value={packageInput.badgeTag}
                       onChange={(e) => setPackageInput({ ...packageInput, badgeTag: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-semibold"
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Harga Promo (Saat Ini)</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Harga Promo (Saat Ini)</label>
                     <input
                       type="text"
                       value={packageInput.currentPrice}
                       onChange={(e) => setPackageInput({ ...packageInput, currentPrice: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-emerald-400 font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-emerald-400 font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Harga Normal</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Harga Normal</label>
                     <input
                       type="text"
                       value={packageInput.normalPrice}
                       onChange={(e) => setPackageInput({ ...packageInput, normalPrice: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-slate-400 font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-400 font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Sub-judul Kualifikasi</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Sub-judul Kualifikasi</label>
                     <input
                       type="text"
                       value={packageInput.subtitle}
                       onChange={(e) => setPackageInput({ ...packageInput, subtitle: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Fitur &amp; Benefit (Pisahkan Koma)</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Fitur &amp; Benefit (Pisahkan Koma)</label>
                   <input
                     type="text"
                     value={packageInput.features.join(", ")}
@@ -1090,7 +1088,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                         features: e.target.value.split(",").map((s) => s.trim()),
                       })
                     }
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                   />
                 </div>
 
@@ -1111,14 +1109,14 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                           isPopular: false,
                         });
                       }}
-                      className="px-4 py-2 bg-white/10 text-slate-300 font-bold text-xs rounded-xl cursor-pointer"
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
                     >
                       Batal
                     </button>
                   )}
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-gradient-to-r from-blue to-cyan text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <Save className="w-3.5 h-3.5" />
                     {editingPackageIndex !== null ? "Simpan Perubahan Paket" : "Tambah Paket"}
@@ -1127,29 +1125,29 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               </form>
 
               {/* Package Card Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 {content.packages.map((pkg, idx) => (
-                  <div key={idx} className="bg-[#111C30] p-6 rounded-3xl border border-white/10 flex flex-col justify-between shadow-xl relative">
-                    <span className="absolute top-4 right-4 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold px-3 py-1 rounded-full uppercase">
+                  <div key={idx} className="bg-[#111827] p-5 rounded-2xl border border-slate-800 flex flex-col justify-between relative">
+                    <span className="absolute top-4 right-4 bg-slate-800 text-slate-300 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md">
                       {pkg.code}
                     </span>
                     <div>
-                      <span className="text-[10px] font-mono text-cyan font-bold uppercase tracking-wider">{pkg.badgeTag}</span>
-                      <h4 className="text-lg font-black text-white mt-1">{pkg.name}</h4>
+                      <span className="text-[10px] font-mono text-blue-400 font-bold uppercase tracking-wider">{pkg.badgeTag}</span>
+                      <h4 className="text-base font-bold text-white mt-1">{pkg.name}</h4>
                       <p className="text-xs text-slate-400 mt-0.5">{pkg.subtitle}</p>
 
-                      <div className="my-4 p-3 bg-white/5 rounded-2xl border border-white/10 flex items-end justify-between">
+                      <div className="my-3 p-3 bg-slate-900/60 rounded-xl border border-slate-800 flex items-end justify-between">
                         <div>
                           <span className="text-[10px] text-slate-400 uppercase font-mono block">Promo:</span>
-                          <span className="text-xl font-black text-emerald-400 font-mono">{pkg.currentPrice}</span>
+                          <span className="text-lg font-bold text-emerald-400 font-mono">{pkg.currentPrice}</span>
                         </div>
                         <div className="text-right">
                           <span className="text-[10px] text-slate-400 uppercase font-mono block">Normal:</span>
-                          <span className="text-sm line-through text-slate-500 font-mono font-semibold">{pkg.normalPrice}</span>
+                          <span className="text-xs line-through text-slate-500 font-mono">{pkg.normalPrice}</span>
                         </div>
                       </div>
 
-                      <ul className="space-y-1.5 text-xs text-slate-300">
+                      <ul className="space-y-1 text-xs text-slate-300">
                         {pkg.features.map((f, fi) => (
                           <li key={fi} className="flex items-start gap-2">
                             <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -1159,19 +1157,19 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                       </ul>
                     </div>
 
-                    <div className="flex gap-2 pt-4 border-t border-white/10 mt-5">
+                    <div className="flex gap-2 pt-4 border-t border-slate-800 mt-4">
                       <button
                         onClick={() => {
                           setEditingPackageIndex(idx);
                           setPackageInput(pkg);
                         }}
-                        className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                        className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold transition-colors cursor-pointer flex items-center justify-center gap-1.5"
                       >
                         <Edit2 className="w-3.5 h-3.5" /> Edit Paket
                       </button>
                       <button
                         onClick={() => handleDeletePackage(idx)}
-                        className="p-2.5 bg-red-500/15 hover:bg-red-500/25 text-red-300 rounded-xl text-xs font-bold transition-all cursor-pointer border border-red-500/20"
+                        className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg text-xs font-semibold transition-colors cursor-pointer border border-slate-700"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -1185,59 +1183,59 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
           {/* TAB 5: CRUD TESTIMONIALS */}
           {activeTab === "testimonials" && (
             <div className="space-y-6 max-w-5xl">
-              <form onSubmit={handleSaveTesti} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <h3 className="font-black text-base text-white flex items-center gap-2">
-                  <Star className="w-4 h-4 text-yellow-400" />
+              <form onSubmit={handleSaveTesti} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <Star className="w-4 h-4 text-blue-400" />
                   {editingTestiIndex !== null ? "Edit Testimoni Alumni" : "Tambah Testimoni Alumni Baru"}
                 </h3>
 
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Nama Alumni</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Nama Alumni</label>
                     <input
                       type="text"
                       value={testiInput.name}
                       onChange={(e) => setTestiInput({ ...testiInput, name: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Role / Profesi</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Role / Profesi</label>
                     <input
                       type="text"
                       value={testiInput.role}
                       onChange={(e) => setTestiInput({ ...testiInput, role: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-semibold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Perusahaan / Instansi</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Perusahaan / Instansi</label>
                     <input
                       type="text"
                       value={testiInput.company}
                       onChange={(e) => setTestiInput({ ...testiInput, company: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Quote Testimoni Ulasan</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Quote Testimoni Ulasan</label>
                   <textarea
                     rows={3}
                     value={testiInput.quote}
                     onChange={(e) => setTestiInput({ ...testiInput, quote: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white leading-relaxed"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white leading-relaxed"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">YouTube Video Embed URL (Opsional)</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">YouTube Video Embed URL (Opsional)</label>
                   <input
                     type="text"
                     value={testiInput.videoEmbedUrl || ""}
                     onChange={(e) => setTestiInput({ ...testiInput, videoEmbedUrl: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-mono"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
                     placeholder="https://www.youtube.com/embed/..."
                   />
                 </div>
@@ -1259,14 +1257,14 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                           rating: 5,
                         });
                       }}
-                      className="px-4 py-2 bg-white/10 text-slate-300 font-bold text-xs rounded-xl cursor-pointer"
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
                     >
                       Batal
                     </button>
                   )}
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-amber-600 text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <Save className="w-3.5 h-3.5" />
                     {editingTestiIndex !== null ? "Simpan Testimoni" : "Tambah Testimoni"}
@@ -1275,27 +1273,27 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               </form>
 
               {/* Testimonials Card Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 {content.testimonials.map((t, idx) => (
-                  <div key={idx} className="bg-[#111C30] p-6 rounded-3xl border border-white/10 flex flex-col justify-between shadow-xl">
+                  <div key={idx} className="bg-[#111827] p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
                     <div>
-                      <div className="flex gap-1 text-yellow-400 mb-3">
+                      <div className="flex gap-1 text-yellow-400 mb-2">
                         {[...Array(t.rating || 5)].map((_, i) => (
                           <Star key={i} className="w-3.5 h-3.5 fill-current" />
                         ))}
                       </div>
-                      <p className="text-slate-200 text-xs italic leading-relaxed mb-4">&quot;{t.quote}&quot;</p>
+                      <p className="text-slate-300 text-xs italic leading-relaxed mb-3">&quot;{t.quote}&quot;</p>
                       {t.videoEmbedUrl && (
-                        <span className="inline-block bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg mb-4">
+                        <span className="inline-block bg-slate-800 text-blue-400 text-[10px] font-mono px-2 py-0.5 rounded-md mb-3">
                           🎥 Video Embed Ready
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                    <div className="flex items-center justify-between pt-3 border-t border-slate-800">
                       <div>
                         <h5 className="font-bold text-sm text-white">{t.name}</h5>
-                        <p className="text-xs text-cyan font-semibold">{t.role} @ {t.company}</p>
+                        <p className="text-xs text-blue-400 font-semibold">{t.role} @ {t.company}</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <button
@@ -1303,15 +1301,15 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                             setEditingTestiIndex(idx);
                             setTestiInput(t);
                           }}
-                          className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl cursor-pointer"
+                          className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
                         >
-                          <Edit2 className="w-4 h-4" />
+                          <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDeleteTesti(idx)}
-                          className="p-2 bg-red-500/15 hover:bg-red-500/25 text-red-300 rounded-xl cursor-pointer border border-red-500/20"
+                          className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
@@ -1323,91 +1321,91 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
           {/* TAB 6: WA LINKS & POPUPS */}
           {activeTab === "wa_popup" && (
-            <form onSubmit={handleSaveWaPopup} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-6 max-w-4xl shadow-xl">
-              <div className="border-b border-white/10 pb-4">
-                <h3 className="font-black text-lg text-white flex items-center gap-2">
-                  <MessageCircle className="w-5 h-5 text-emerald-400" /> WhatsApp &amp; Popup Config Card
+            <form onSubmit={handleSaveWaPopup} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5 max-w-3xl">
+              <div className="border-b border-slate-800 pb-3">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4 text-blue-400" /> WhatsApp &amp; Popup Config Card
                 </h3>
               </div>
 
-              <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/20 space-y-4">
-                <h4 className="font-bold text-sm text-emerald-300 flex items-center gap-2">
+              <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                <h4 className="font-bold text-xs text-slate-200">
                   💬 Pengaturan WhatsApp Admin &amp; CS
                 </h4>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Nomor WA Admin</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">Nomor WA Admin</label>
                     <input
                       type="text"
                       value={waForm.adminWa}
                       onChange={(e) => setWaForm({ ...waForm, adminWa: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-mono font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Nomor WA CS</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">Nomor WA CS</label>
                     <input
                       type="text"
                       value={waForm.csWa}
                       onChange={(e) => setWaForm({ ...waForm, csWa: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-mono font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono font-bold"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Template Pesan Otomatis WA</label>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1">Template Pesan Otomatis WA</label>
                   <textarea
                     rows={3}
                     value={waForm.waMessageTemplate}
                     onChange={(e) => setWaForm({ ...waForm, waMessageTemplate: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                   />
                 </div>
               </div>
 
-              <div className="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-4">
-                <h4 className="font-bold text-sm text-white flex items-center gap-2">
+              <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                <h4 className="font-bold text-xs text-slate-200">
                   🚪 Exit Popup &amp; Sticky Footer Mobile Text
                 </h4>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Judul Exit Popup</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">Judul Exit Popup</label>
                     <input
                       type="text"
                       value={popupForm.exitTitle}
                       onChange={(e) => setPopupForm({ ...popupForm, exitTitle: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Tombol CTA Exit Popup</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">Tombol CTA Exit Popup</label>
                     <input
                       type="text"
                       value={popupForm.exitCtaText}
                       onChange={(e) => setPopupForm({ ...popupForm, exitCtaText: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Deskripsi Exit Popup</label>
+                  <label className="block text-xs font-semibold text-slate-400 mb-1">Deskripsi Exit Popup</label>
                   <textarea
                     rows={2}
                     value={popupForm.exitDesc}
                     onChange={(e) => setPopupForm({ ...popupForm, exitDesc: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                   />
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/10 flex justify-end">
+              <div className="pt-3 border-t border-slate-800 flex justify-end">
                 <button
                   type="submit"
-                  className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
                 >
-                  <Save className="w-4 h-4" /> Simpan WA &amp; Popup Config
+                  <Save className="w-4 h-4" /> Simpan WA &amp; Popup
                 </button>
               </div>
             </form>
@@ -1415,41 +1413,41 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
           {/* TAB 7: SECTION ORDER & CUSTOM SECTIONS */}
           {activeTab === "sections" && (
-            <div className="space-y-8 max-w-5xl">
-              <div className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <h3 className="font-black text-base text-white flex items-center gap-2">
-                  <Layers className="w-5 h-5 text-amber-400" /> Atur Urutan Section (Naik / Turun)
+            <div className="space-y-6 max-w-4xl">
+              <div className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-blue-400" /> Atur Urutan Section Landing Page
                 </h3>
 
-                <div className="space-y-2.5 pt-2">
+                <div className="space-y-2 pt-1">
                   {content.sectionOrder.map((secId, idx) => (
                     <div
                       key={secId}
-                      className="p-4 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-between gap-4 hover:bg-white/10 transition-colors"
+                      className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 flex items-center justify-between gap-4"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 rounded-xl bg-blue/20 text-cyan text-xs font-mono font-black flex items-center justify-center border border-blue/30">
+                        <span className="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 text-xs font-mono font-bold flex items-center justify-center border border-slate-700">
                           {idx + 1}
                         </span>
-                        <span className="font-bold text-sm text-white uppercase font-mono tracking-wider">
+                        <span className="font-bold text-xs text-white uppercase font-mono tracking-wider">
                           {secId}
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         <button
                           onClick={() => moveSection(idx, "up")}
                           disabled={idx === 0}
-                          className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl disabled:opacity-30 cursor-pointer"
+                          className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg disabled:opacity-30 cursor-pointer"
                         >
-                          <ArrowUp className="w-4 h-4" />
+                          <ArrowUp className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => moveSection(idx, "down")}
                           disabled={idx === content.sectionOrder.length - 1}
-                          className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl disabled:opacity-30 cursor-pointer"
+                          className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg disabled:opacity-30 cursor-pointer"
                         >
-                          <ArrowDown className="w-4 h-4" />
+                          <ArrowDown className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
@@ -1461,45 +1459,45 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
           {/* OTHER TABS: MODULES, SPEAKERS, FAQS */}
           {activeTab === "modules" && (
-            <div className="space-y-6 max-w-5xl">
-              <form onSubmit={handleSaveModule} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <h3 className="font-black text-base text-white flex items-center gap-2">
-                  <Plus className="w-4 h-4 text-cyan" />
+            <div className="space-y-5 max-w-4xl">
+              <form onSubmit={handleSaveModule} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <Plus className="w-4 h-4 text-blue-400" />
                   {editingModuleIndex !== null ? "Edit Modul Kurikulum" : "Tambah Modul Kurikulum Baru"}
                 </h3>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Hari / Kode</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Hari / Kode</label>
                     <input
                       type="text"
                       value={moduleInput.id}
                       onChange={(e) => setModuleInput({ ...moduleInput, id: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Judul Topik Modul</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Topik Modul</label>
                     <input
                       type="text"
                       value={moduleInput.title}
                       onChange={(e) => setModuleInput({ ...moduleInput, title: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Deskripsi Ringkas Materi</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Ringkas Materi</label>
                   <textarea
                     rows={2}
                     value={moduleInput.description}
                     onChange={(e) => setModuleInput({ ...moduleInput, description: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                   />
                 </div>
 
-                <div className="flex gap-2 justify-end pt-2">
+                <div className="flex gap-2 justify-end pt-1">
                   {editingModuleIndex !== null && (
                     <button
                       type="button"
@@ -1513,14 +1511,14 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                           tools: "",
                         });
                       }}
-                      className="px-4 py-2 bg-white/10 text-slate-300 font-bold text-xs rounded-xl cursor-pointer"
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
                     >
                       Batal
                     </button>
                   )}
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-gradient-to-r from-blue to-cyan text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <Save className="w-3.5 h-3.5" />
                     {editingModuleIndex !== null ? "Simpan Modul" : "Tambah Modul"}
@@ -1529,14 +1527,14 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               </form>
 
               {/* Modules Card List */}
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {content.modules.map((m, idx) => (
-                  <div key={idx} className="bg-[#111C30] p-5 rounded-2xl border border-white/10 flex items-center justify-between gap-4 shadow-lg">
+                  <div key={idx} className="bg-[#111827] p-4 rounded-xl border border-slate-800 flex items-center justify-between gap-4">
                     <div>
-                      <span className="text-[10px] font-mono font-bold bg-blue/20 text-cyan px-2.5 py-1 rounded-lg">
+                      <span className="text-[10px] font-mono font-bold bg-slate-800 text-blue-400 px-2 py-0.5 rounded-md">
                         {m.id}
                       </span>
-                      <h5 className="font-bold text-sm text-white mt-1.5">{m.title}</h5>
+                      <h5 className="font-bold text-sm text-white mt-1">{m.title}</h5>
                       <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">{m.description}</p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
@@ -1545,15 +1543,15 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                           setEditingModuleIndex(idx);
                           setModuleInput(m);
                         }}
-                        className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl cursor-pointer"
+                        className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
                       >
-                        <Edit2 className="w-4 h-4" />
+                        <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDeleteModule(idx)}
-                        className="p-2 bg-red-500/15 hover:bg-red-500/25 text-red-300 rounded-xl cursor-pointer border border-red-500/20"
+                        className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
@@ -1563,64 +1561,64 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
           )}
 
           {activeTab === "speakers" && (
-            <div className="space-y-6 max-w-5xl">
-              <form onSubmit={handleSaveSpeaker} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <h3 className="font-black text-base text-white flex items-center gap-2">
-                  <UserCheck className="w-4 h-4 text-cyan" />
+            <div className="space-y-5 max-w-4xl">
+              <form onSubmit={handleSaveSpeaker} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <UserCheck className="w-4 h-4 text-blue-400" />
                   {editingSpeakerIndex !== null ? "Edit Data Pemateri" : "Tambah Pemateri Baru"}
                 </h3>
 
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Nama Lengkap</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
                     <input
                       type="text"
                       value={speakerInput.name}
                       onChange={(e) => setSpeakerInput({ ...speakerInput, name: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Inisial / Kode</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Inisial / Kode</label>
                     <input
                       type="text"
                       value={speakerInput.initials}
                       onChange={(e) => setSpeakerInput({ ...speakerInput, initials: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Role / Jabatan</label>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Role / Jabatan</label>
                     <input
                       type="text"
                       value={speakerInput.role}
                       onChange={(e) => setSpeakerInput({ ...speakerInput, role: e.target.value })}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Deskripsi Pengalaman</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Pengalaman</label>
                   <textarea
                     rows={2}
                     value={speakerInput.description}
                     onChange={(e) => setSpeakerInput({ ...speakerInput, description: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Foto Profile Image URL</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Foto Profile Image URL</label>
                   <input
                     type="text"
                     value={speakerInput.imageUrl || ""}
                     onChange={(e) => setSpeakerInput({ ...speakerInput, imageUrl: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-mono"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-mono"
                   />
                 </div>
 
-                <div className="flex gap-2 justify-end pt-2">
+                <div className="flex gap-2 justify-end pt-1">
                   {editingSpeakerIndex !== null && (
                     <button
                       type="button"
@@ -1628,14 +1626,14 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                         setEditingSpeakerIndex(null);
                         setSpeakerInput({ initials: "", name: "", role: "", description: "", imageUrl: "" });
                       }}
-                      className="px-4 py-2 bg-white/10 text-slate-300 font-bold text-xs rounded-xl cursor-pointer"
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
                     >
                       Batal
                     </button>
                   )}
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-cyan text-navy font-black text-xs rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <Save className="w-3.5 h-3.5" />
                     {editingSpeakerIndex !== null ? "Simpan Pemateri" : "Tambah Pemateri"}
@@ -1644,11 +1642,11 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               </form>
 
               {/* Speakers Grid Card */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 {content.speakers.map((s, idx) => (
-                  <div key={idx} className="bg-[#111C30] p-6 rounded-3xl border border-white/10 flex items-center justify-between gap-4 shadow-xl">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-2xl bg-white/10 overflow-hidden flex-shrink-0 flex items-center justify-center font-black text-cyan text-lg border border-white/10">
+                  <div key={idx} className="bg-[#111827] p-5 rounded-2xl border border-slate-800 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-slate-800 overflow-hidden flex-shrink-0 flex items-center justify-center font-bold text-blue-400 text-sm border border-slate-700">
                         {s.imageUrl ? (
                           <img src={s.imageUrl} alt={s.name} className="w-full h-full object-cover" />
                         ) : (
@@ -1657,8 +1655,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                       </div>
                       <div>
                         <h5 className="font-bold text-sm text-white">{s.name}</h5>
-                        <p className="text-xs text-cyan font-semibold">{s.role}</p>
-                        <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{s.description}</p>
+                        <p className="text-xs text-blue-400 font-semibold">{s.role}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
@@ -1667,15 +1664,15 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                           setEditingSpeakerIndex(idx);
                           setSpeakerInput(s);
                         }}
-                        className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl cursor-pointer"
+                        className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
                       >
-                        <Edit2 className="w-4 h-4" />
+                        <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDeleteSpeaker(idx)}
-                        className="p-2 bg-red-500/15 hover:bg-red-500/25 text-red-300 rounded-xl cursor-pointer border border-red-500/20"
+                        className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
@@ -1685,34 +1682,34 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
           )}
 
           {activeTab === "faqs" && (
-            <div className="space-y-6 max-w-5xl">
-              <form onSubmit={handleSaveFaq} className="bg-[#111C30] p-8 rounded-3xl border border-white/10 space-y-4 shadow-xl">
-                <h3 className="font-black text-base text-white flex items-center gap-2">
-                  <HelpCircle className="w-4 h-4 text-cyan" />
+            <div className="space-y-5 max-w-4xl">
+              <form onSubmit={handleSaveFaq} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <HelpCircle className="w-4 h-4 text-blue-400" />
                   {editingFaqIndex !== null ? "Edit Pertanyaan FAQ" : "Tambah Pertanyaan FAQ Baru"}
                 </h3>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Pertanyaan (Question)</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Pertanyaan (Question)</label>
                   <input
                     type="text"
                     value={faqInput.question}
                     onChange={(e) => setFaqInput({ ...faqInput, question: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white font-bold"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Jawaban (Answer)</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Jawaban (Answer)</label>
                   <textarea
                     rows={3}
                     value={faqInput.answer}
                     onChange={(e) => setFaqInput({ ...faqInput, answer: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white leading-relaxed"
                   />
                 </div>
 
-                <div className="flex gap-2 justify-end pt-2">
+                <div className="flex gap-2 justify-end pt-1">
                   {editingFaqIndex !== null && (
                     <button
                       type="button"
@@ -1720,14 +1717,14 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                         setEditingFaqIndex(null);
                         setFaqInput({ question: "", answer: "" });
                       }}
-                      className="px-4 py-2 bg-white/10 text-slate-300 font-bold text-xs rounded-xl cursor-pointer"
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
                     >
                       Batal
                     </button>
                   )}
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-gradient-to-r from-blue to-cyan text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
                     <Save className="w-3.5 h-3.5" />
                     {editingFaqIndex !== null ? "Simpan FAQ" : "Tambah FAQ"}
@@ -1736,9 +1733,9 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               </form>
 
               {/* FAQs Card List */}
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {content.faqs.map((f, idx) => (
-                  <div key={idx} className="bg-[#111C30] p-5 rounded-2xl border border-white/10 flex items-start justify-between gap-4 shadow-lg">
+                  <div key={idx} className="bg-[#111827] p-4 rounded-xl border border-slate-800 flex items-start justify-between gap-4">
                     <div>
                       <h5 className="font-bold text-sm text-white">❓ {f.question}</h5>
                       <p className="text-xs text-slate-300 mt-1 leading-relaxed">{f.answer}</p>
@@ -1749,15 +1746,15 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                           setEditingFaqIndex(idx);
                           setFaqInput(f);
                         }}
-                        className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl cursor-pointer"
+                        className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
                       >
-                        <Edit2 className="w-4 h-4" />
+                        <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDeleteFaq(idx)}
-                        className="p-2 bg-red-500/15 hover:bg-red-500/25 text-red-300 rounded-xl cursor-pointer border border-red-500/20"
+                        className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>

@@ -95,10 +95,7 @@ export default function Hero() {
         </div>
 
         {/* Countdown Box */}
-        <div className="w-full max-w-md mx-auto mb-6 bg-gradient-to-r from-[#1B4FD8] to-[#1241be] border border-white/20 rounded-2xl p-5 shadow-[0_12px_40px_rgba(27,79,216,0.35)] relative overflow-hidden text-white">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-xl pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/15 rounded-full blur-xl pointer-events-none"></div>
-
+        <div className="w-full max-w-md mx-auto mb-6 bg-[#1B4FD8] border border-white/20 rounded-2xl p-5 shadow-lg relative overflow-hidden text-white">
           <p className="text-[11px] text-amber-300 font-extrabold mb-3 uppercase tracking-widest font-mono text-center">
             {content.appConfig.heroCountdownTitle || "⏳ Penawaran Special Promo Berakhir Dalam:"}
           </p>
@@ -110,7 +107,7 @@ export default function Hero() {
           <a
             href="#daftar"
             onClick={handleScrollToDaftar}
-            className="inline-flex items-center justify-center gap-2 text-white font-black text-sm md:text-base px-8 py-4.5 rounded-full w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-[#25D366] to-[#1aaa52] shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)] cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 text-white font-bold text-sm md:text-base px-8 py-4 rounded-full w-full sm:w-auto transition-all duration-200 hover:bg-[#1aaa52] bg-[#25D366] shadow-md cursor-pointer"
           >
             {content.appConfig.heroCtaText || "Amankan Kursi Kamu Sekarang"} <ArrowRight className="w-5 h-5" />
           </a>
