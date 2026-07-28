@@ -99,7 +99,13 @@ export default function Hero() {
           <p className="text-[11px] text-amber-300 font-extrabold mb-3 uppercase tracking-widest font-mono text-center">
             {content.appConfig.heroCountdownTitle || "⏳ Penawaran Special Promo Berakhir Dalam:"}
           </p>
-          <CountdownTimer targetDate={content.appConfig.earlyBirdDeadline} theme="dark" size="sm" />
+          <CountdownTimer
+            targetDate={content.appConfig.earlyBirdDeadline}
+            countdownMode={content.appConfig.countdownMode}
+            evergreenMinutes={content.appConfig.evergreenMinutes}
+            theme="dark"
+            size="sm"
+          />
         </div>
 
         {/* CTA Button */}

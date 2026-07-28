@@ -14,6 +14,8 @@ import {
 
 export interface AppConfigType {
   earlyBirdDeadline: string;
+  countdownMode?: "real" | "evergreen";
+  evergreenMinutes?: number;
   eventDates: string;
   eventTime: string;
   eventLocation: string;
@@ -143,6 +145,8 @@ export const DEFAULT_WA_CONFIG: WaConfig = {
 
 const DEFAULT_CONFIG: AppConfigType = {
   ...APP_CONFIG,
+  countdownMode: "real",
+  evergreenMinutes: 45,
   heroBgUrl: "https://lh3.googleusercontent.com/d/1xXjsZbHy46u6KcNG5Xw7rHiQT15K5HA2",
   heroEventBadge: "Masterclass · Mulai 4 Agustus 2026 · 8 Pertemuan Hybrid",
   heroHeadlineTitle: "BANGUN SISTEM\nKONTEN KAMU\nDENGAN AI SEKARANG!",

@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 
 interface CountdownTimerProps {
   targetDate: string;
+  countdownMode?: "real" | "evergreen";
+  evergreenMinutes?: number;
   theme?: "dark" | "light" | "red";
   size?: "sm" | "md" | "lg";
 }
 
 export default function CountdownTimer({
   targetDate,
+  countdownMode = "real",
+  evergreenMinutes = 45,
   theme = "dark",
   size = "md",
 }: CountdownTimerProps) {
@@ -21,8 +25,26 @@ export default function CountdownTimer({
 
   useEffect(() => {
     const getTargetTime = () => {
+      const now = Date.now();
+
+      if (countdownMode === "evergreen") {
+        const mins = Number(evergreenMinutes) || 45;
+        const durationMs = mins * 60 * 1000;
+        const key = `maxy_evergreen_end_${mins}`;
+        const stored = sessionStorage.getItem(key);
+        if (stored) {
+          const val = parseInt(stored, 10);
+          if (val > now && val <= now + durationMs + 1000) {
+            return val;
+          }
+        }
+        const newEnd = now + durationMs;
+        sessionStorage.setItem(key, String(newEnd));
+        return newEnd;
+      }
+
+      // Mode Real: Target Datepicker
       if (targetDate && targetDate.trim() !== "") {
-        // Parse date string format like "2026-07-31T23:59:59" or "2026-07-31 23:59:59"
         const formattedDateStr = targetDate.includes("T")
           ? targetDate
           : targetDate.replace(" ", "T");
@@ -31,8 +53,7 @@ export default function CountdownTimer({
           return parsed;
         }
       }
-      // Fallback: 24 hours from now
-      return Date.now() + 24 * 60 * 60 * 1000;
+      return now + 24 * 60 * 60 * 1000;
     };
 
     const target = getTargetTime();
@@ -42,7 +63,14 @@ export default function CountdownTimer({
       let difference = target - now;
 
       if (difference <= 0) {
-        difference = 0;
+        if (countdownMode === "evergreen") {
+          const mins = Number(evergreenMinutes) || 45;
+          const newEnd = now + mins * 60 * 1000;
+          sessionStorage.setItem(`maxy_evergreen_end_${mins}`, String(newEnd));
+          difference = mins * 60 * 1000;
+        } else {
+          difference = 0;
+        }
       }
 
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -60,7 +88,7 @@ export default function CountdownTimer({
     const interval = setInterval(updateTimer, 1000);
 
     return () => clearInterval(interval);
-  }, [targetDate]);
+  }, [targetDate, countdownMode, evergreenMinutes]);
 
   const pad = (n: number) => String(n).padStart(2, "0");
 

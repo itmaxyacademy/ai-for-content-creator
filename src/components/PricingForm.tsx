@@ -199,7 +199,13 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
             <p className="text-xs text-ember font-bold mb-2.5 font-mono">
               ⏳ Promo Diskon Berakhir Dalam:
             </p>
-            <CountdownTimer targetDate={content.appConfig.earlyBirdDeadline} theme="light" size="sm" />
+            <CountdownTimer
+              targetDate={content.appConfig.earlyBirdDeadline}
+              countdownMode={content.appConfig.countdownMode}
+              evergreenMinutes={content.appConfig.evergreenMinutes}
+              theme="light"
+              size="sm"
+            />
           </div>
         </div>
 

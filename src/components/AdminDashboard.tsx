@@ -93,6 +93,8 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
   // Pricing Form
   const [pricingForm, setPricingForm] = useState({
     earlyBirdDeadline: content.appConfig.earlyBirdDeadline || "",
+    countdownMode: content.appConfig.countdownMode || "real",
+    evergreenMinutes: content.appConfig.evergreenMinutes || 45,
     slotTotal: content.appConfig.slotTotal || 10,
     slotTaken: content.appConfig.slotTaken || 7,
   });
@@ -200,6 +202,8 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
     setPricingForm({
       earlyBirdDeadline: content.appConfig.earlyBirdDeadline || "",
+      countdownMode: content.appConfig.countdownMode || "real",
+      evergreenMinutes: content.appConfig.evergreenMinutes || 45,
       slotTotal: content.appConfig.slotTotal || 10,
       slotTaken: content.appConfig.slotTaken || 7,
     });
@@ -274,10 +278,12 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     e.preventDefault();
     updateAppConfig({
       earlyBirdDeadline: pricingForm.earlyBirdDeadline,
+      countdownMode: pricingForm.countdownMode as "real" | "evergreen",
+      evergreenMinutes: Number(pricingForm.evergreenMinutes) || 45,
       slotTotal: Number(pricingForm.slotTotal),
       slotTaken: Number(pricingForm.slotTaken),
     });
-    showToast("Pengaturan Datepicker & Scarcity berhasil disimpan!");
+    showToast("Pengaturan Countdown & Scarcity berhasil disimpan!");
   };
 
   const handleSavePackage = (e: React.FormEvent) => {
@@ -953,26 +959,97 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
               <form onSubmit={handleSavePricing} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-5">
                 <div className="border-b border-slate-800 pb-3">
                   <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-blue-400" /> Datepicker &amp; Kuota Slot Pendaftar
+                    <Clock className="w-4 h-4 text-blue-400" /> Countdown Timer Mode &amp; Kuota Slot
                   </h3>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
-                      📅 Target Tanggal &amp; Waktu Countdown
+                {/* Mode Selector */}
+                <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                  <label className="block text-xs font-semibold text-slate-300 font-mono uppercase tracking-wider">
+                    ⚙️ Pilih Opsi Mode Hitung Mundur (Countdown Timer)
+                  </label>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <label
+                      className={`p-3.5 rounded-xl border flex items-start gap-3 cursor-pointer transition-colors ${
+                        pricingForm.countdownMode === "real"
+                          ? "bg-[#1B4FD8]/20 border-blue-500 text-white"
+                          : "bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="countdownMode"
+                        value="real"
+                        checked={pricingForm.countdownMode === "real"}
+                        onChange={(e) => setPricingForm({ ...pricingForm, countdownMode: e.target.value as "real" })}
+                        className="mt-0.5"
+                      />
+                      <div>
+                        <span className="font-bold text-xs block text-white">📅 1. Real Target Date</span>
+                        <span className="text-[10px] text-slate-400 block leading-tight mt-0.5">
+                          Hitung mundur menuju tanggal &amp; jam pasti yang dipilih dari Datepicker.
+                        </span>
+                      </div>
                     </label>
-                    <input
-                      type="datetime-local"
-                      value={pricingForm.earlyBirdDeadline.replace("T", " ").slice(0, 16).replace(" ", "T")}
-                      onChange={(e) => {
-                        const val = e.target.value ? `${e.target.value}:00` : "";
-                        setPricingForm({ ...pricingForm, earlyBirdDeadline: val });
-                      }}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
-                    />
-                    <p className="text-[10px] text-slate-400 mt-1">Tersimpan: {pricingForm.earlyBirdDeadline}</p>
+
+                    <label
+                      className={`p-3.5 rounded-xl border flex items-start gap-3 cursor-pointer transition-colors ${
+                        pricingForm.countdownMode === "evergreen"
+                          ? "bg-[#1B4FD8]/20 border-blue-500 text-white"
+                          : "bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="countdownMode"
+                        value="evergreen"
+                        checked={pricingForm.countdownMode === "evergreen"}
+                        onChange={(e) => setPricingForm({ ...pricingForm, countdownMode: e.target.value as "evergreen" })}
+                        className="mt-0.5"
+                      />
+                      <div>
+                        <span className="font-bold text-xs block text-white">⚡ 2. Evergreen Loop (Menit)</span>
+                        <span className="text-[10px] text-slate-400 block leading-tight mt-0.5">
+                          Hitung mundur otomatis X menit setiap kali pengunjung membuka halaman.
+                        </span>
+                      </div>
+                    </label>
                   </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  {pricingForm.countdownMode === "real" ? (
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
+                        📅 Target Tanggal &amp; Waktu (Datepicker)
+                      </label>
+                      <input
+                        type="datetime-local"
+                        value={pricingForm.earlyBirdDeadline.replace("T", " ").slice(0, 16).replace(" ", "T")}
+                        onChange={(e) => {
+                          const val = e.target.value ? `${e.target.value}:00` : "";
+                          setPricingForm({ ...pricingForm, earlyBirdDeadline: val });
+                        }}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                      />
+                      <p className="text-[10px] text-slate-400 mt-1">Tersimpan: {pricingForm.earlyBirdDeadline}</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1 font-mono uppercase tracking-wider">
+                        ⏳ Durasi Hitung Mundur (Dalam Menit)
+                      </label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={1440}
+                        value={pricingForm.evergreenMinutes}
+                        onChange={(e) => setPricingForm({ ...pricingForm, evergreenMinutes: Number(e.target.value) })}
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                      />
+                      <p className="text-[10px] text-slate-400 mt-1">Setiap dibeli/dibuka: langsung {pricingForm.evergreenMinutes} menit</p>
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
