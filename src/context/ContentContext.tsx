@@ -302,8 +302,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [content, setContent] = useState<SiteContentState>(() => {
     try {
       const stored = localStorage.getItem("maxy_aicc_site_content_v3") ||
-                     localStorage.getItem("maxy_aicc_site_content_v2") ||
-                     localStorage.getItem("maxy_aicc_site_content");
+        localStorage.getItem("maxy_aicc_site_content_v2") ||
+        localStorage.getItem("maxy_aicc_site_content");
       if (stored) {
         const parsed = JSON.parse(stored);
         const storedAppConfig = parsed.appConfig || {};

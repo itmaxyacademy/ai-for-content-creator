@@ -69,20 +69,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
   } = useContent();
 
   const [activeTab, setActiveTab] = useState<
-    | "hero"
-    | "intro"
-    | "problem"
-    | "future_of_work"
-    | "solutions"
-    | "pricing"
-    | "packages"
-    | "valuestack"
-    | "testimonials"
-    | "modules"
-    | "speakers"
-    | "faqs"
-    | "wa_popup"
-    | "sections"
+    "hero" | "intro" | "pricing" | "packages" | "modules" | "speakers" | "testimonials" | "faqs" | "wa_popup" | "sections"
   >("hero");
 
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -730,66 +717,60 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
           <nav className="space-y-1 overflow-y-auto max-h-[calc(100vh-250px)] pr-1">
             <button
               onClick={() => setActiveTab("hero")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "hero"
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "hero"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <Settings className="w-4 h-4 text-slate-300" /> Hero Teks &amp; Media
             </button>
 
             <button
               onClick={() => setActiveTab("intro")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "intro"
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "intro"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <Video className="w-4 h-4 text-slate-300" /> Intro Video (YT &amp; IG)
             </button>
 
             <button
               onClick={() => setActiveTab("problem")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "problem"
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "problem"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <AlertCircle className="w-4 h-4 text-slate-300" /> Masalah &amp; Workflow
             </button>
 
             <button
               onClick={() => setActiveTab("solutions")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "solutions"
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "solutions"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <Zap className="w-4 h-4 text-slate-300" /> Solusi MAXY
             </button>
 
             <button
               onClick={() => setActiveTab("pricing")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "pricing"
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "pricing"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <Clock className="w-4 h-4 text-slate-300" /> Datepicker &amp; Scarcity
             </button>
 
             <button
               onClick={() => setActiveTab("packages")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "packages"
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "packages"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3">
                 <Package className="w-4 h-4 text-slate-300" /> Opsi Paket Harga
@@ -801,11 +782,10 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
             <button
               onClick={() => setActiveTab("valuestack")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "valuestack"
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "valuestack"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3">
                 <Gift className="w-4 h-4 text-slate-300" /> Yang Kamu Dapatkan
@@ -817,11 +797,10 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
             <button
               onClick={() => setActiveTab("testimonials")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "testimonials"
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "testimonials"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3">
                 <Star className="w-4 h-4 text-slate-300" /> Testimoni Alumni
@@ -833,11 +812,10 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
             <button
               onClick={() => setActiveTab("modules")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "modules"
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "modules"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3">
                 <BookOpen className="w-4 h-4 text-slate-300" /> Modul Kurikulum
@@ -849,11 +827,10 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
 
             <button
               onClick={() => setActiveTab("speakers")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "speakers"
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "speakers"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3">
                 <UserCheck className="w-4 h-4 text-slate-300" /> Pemateri / Mentor
@@ -864,39 +841,21 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </button>
 
             <button
-              onClick={() => setActiveTab("faqs")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "faqs"
-                  ? "bg-[#1B4FD8] text-white font-bold"
-                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <HelpCircle className="w-4 h-4 text-slate-300" /> Tanya Jawab (FAQ)
-              </div>
-              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
-                {content.faqs.length}
-              </span>
-            </button>
-
-            <button
               onClick={() => setActiveTab("wa_popup")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "wa_popup"
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "wa_popup"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <MessageCircle className="w-4 h-4 text-slate-300" /> WA &amp; Popups
             </button>
 
             <button
               onClick={() => setActiveTab("sections")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
-                activeTab === "sections"
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${activeTab === "sections"
                   ? "bg-[#1B4FD8] text-white font-bold"
                   : "text-slate-400 hover:text-white hover:bg-slate-800/60"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3">
                 <Layers className="w-4 h-4 text-slate-300" /> Urutan Section
@@ -942,7 +901,6 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                 {activeTab === "testimonials" && "Testimoni Alumni"}
                 {activeTab === "modules" && "Modul Kurikulum"}
                 {activeTab === "speakers" && "Data Pemateri &amp; Mentor"}
-                {activeTab === "faqs" && "Tanya Jawab &amp; FAQ Settings"}
                 {activeTab === "wa_popup" && "WhatsApp &amp; Popup Settings"}
                 {activeTab === "sections" && "Urutan &amp; Custom Section"}
               </h1>
@@ -1818,11 +1776,10 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                   </label>
                   <div className="grid sm:grid-cols-2 gap-3">
                     <label
-                      className={`p-3.5 rounded-xl border flex items-start gap-3 cursor-pointer transition-colors ${
-                        pricingForm.countdownMode === "real"
+                      className={`p-3.5 rounded-xl border flex items-start gap-3 cursor-pointer transition-colors ${pricingForm.countdownMode === "real"
                           ? "bg-[#1B4FD8]/20 border-blue-500 text-white"
                           : "bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700"
-                      }`}
+                        }`}
                     >
                       <input
                         type="radio"
@@ -1841,11 +1798,10 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                     </label>
 
                     <label
-                      className={`p-3.5 rounded-xl border flex items-start gap-3 cursor-pointer transition-colors ${
-                        pricingForm.countdownMode === "evergreen"
+                      className={`p-3.5 rounded-xl border flex items-start gap-3 cursor-pointer transition-colors ${pricingForm.countdownMode === "evergreen"
                           ? "bg-[#1B4FD8]/20 border-blue-500 text-white"
                           : "bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700"
-                      }`}
+                        }`}
                     >
                       <input
                         type="radio"
