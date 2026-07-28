@@ -98,6 +98,13 @@ export interface SolutionConfig {
   cards: SolutionCardItem[];
 }
 
+export interface ValueStackItem {
+  title: string;
+  desc: string;
+  value: string;
+  isBonus?: boolean;
+}
+
 export interface CustomSection {
   id: string;
   title: string;

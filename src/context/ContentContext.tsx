@@ -49,6 +49,40 @@ export interface AppConfigType {
   topBannerText?: string;
 }
 
+export const DEFAULT_VALUE_STACK: ValueStackItem[] = [
+  {
+    title: "AI Content Ecosystem Systemization",
+    desc: "Desain sistem 5 komponen end-to-end & audit mandiri akun sosial mediamu.",
+    value: "Rp 4.000.000",
+  },
+  {
+    title: "Virtual CMO & Campaign Strategy Builder",
+    desc: "Formula melatih AI menyusun Campaign Brief & merangkai funnel TOFU → BOFU.",
+    value: "Rp 5.000.000",
+  },
+  {
+    title: "Senior Level Content Planning Masterclass",
+    desc: "Template taktis Content Plan mencakup 9 channel sosial media profesional.",
+    value: "Rp 3.000.000",
+  },
+  {
+    title: "Cinematic AI Visual Storytelling Methodology",
+    desc: "Formula JSON Prompting untuk konsistensi visual video tanpa keahlian coding.",
+    value: "Rp 6.000.000",
+  },
+  {
+    title: "Mass Scale Video Creation & Multi-channel Publishing",
+    desc: "Teknis ElevenLabs voiceover, auto-caption CapCut AI, dan sistem distribusi kilat.",
+    value: "Rp 5.000.000",
+  },
+  {
+    title: "EXCLUSIVE BONUS — Blueprint, Prompt Library & E-Certificate",
+    desc: "Akses Claude AI Skill, Prompt Library, grup diskusi, dan sertifikat kelulusan.",
+    value: "FREE BONUS",
+    isBonus: true,
+  },
+];
+
 export interface SiteContentState {
   appConfig: AppConfigType;
   modules: ModulItem[];
@@ -63,6 +97,7 @@ export interface SiteContentState {
   waConfig: WaConfig;
   problemConfig: ProblemConfig;
   solutionConfig: SolutionConfig;
+  valueStackItems: ValueStackItem[];
 }
 
 export const DEFAULT_PROBLEM_CONFIG: ProblemConfig = {
@@ -249,6 +284,7 @@ interface ContentContextType {
   updateWaConfig: (partial: Partial<WaConfig>) => void;
   updateProblemConfig: (partial: Partial<ProblemConfig>) => void;
   updateSolutionConfig: (partial: Partial<SolutionConfig>) => void;
+  setValueStackItems: (items: ValueStackItem[]) => void;
   resetToDefault: () => void;
 }
 
@@ -304,6 +340,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
           waConfig: { ...DEFAULT_WA_CONFIG, ...(parsed.waConfig || {}) },
           problemConfig: { ...DEFAULT_PROBLEM_CONFIG, ...(parsed.problemConfig || {}) },
           solutionConfig: { ...DEFAULT_SOLUTION_CONFIG, ...(parsed.solutionConfig || {}) },
+          valueStackItems: Array.isArray(parsed.valueStackItems) && parsed.valueStackItems.length > 0 ? parsed.valueStackItems : DEFAULT_VALUE_STACK,
         };
       }
     } catch (e) {
@@ -323,6 +360,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       waConfig: DEFAULT_WA_CONFIG,
       problemConfig: DEFAULT_PROBLEM_CONFIG,
       solutionConfig: DEFAULT_SOLUTION_CONFIG,
+      valueStackItems: DEFAULT_VALUE_STACK,
     };
   });
 
@@ -408,6 +446,10 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
 
+  const setValueStackItems = (valueStackItems: ValueStackItem[]) => {
+    setContent((prev) => ({ ...prev, valueStackItems }));
+  };
+
   const resetToDefault = () => {
     const defaultState: SiteContentState = {
       appConfig: DEFAULT_CONFIG,
@@ -443,6 +485,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         updateWaConfig,
         updateProblemConfig,
         updateSolutionConfig,
+        setValueStackItems,
         resetToDefault,
       }}
     >

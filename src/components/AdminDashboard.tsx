@@ -6,7 +6,10 @@ import {
   VideoItem,
   TestimonialItem,
   PackageOptionItem,
-  CustomSection
+  CustomSection,
+  ValueStackItem,
+  PainCardItem,
+  SolutionCardItem
 } from "../types";
 import { useContent } from "../context/ContentContext";
 import {
@@ -34,7 +37,8 @@ import {
   Eye,
   CheckCircle2,
   AlertCircle,
-  Zap
+  Zap,
+  Gift
 } from "lucide-react";
 
 interface AdminDashboardProps {
@@ -58,6 +62,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     updateWaConfig,
     updateProblemConfig,
     updateSolutionConfig,
+    setValueStackItems,
     resetToDefault,
   } = useContent();
 
@@ -198,6 +203,91 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
     content: "",
     bgStyle: "offwhite",
   });
+
+  // CRUD Value Stack Form
+  const [editingValueStackIndex, setEditingValueStackIndex] = useState<number | null>(null);
+  const [valueStackInput, setValueStackInput] = useState<ValueStackItem>({
+    title: "",
+    desc: "",
+    value: "Rp 3.000.000",
+    isBonus: false,
+  });
+
+  const handleSaveValueStack = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!valueStackInput.title.trim()) return;
+    const list = [...(content.valueStackItems || [])];
+    if (editingValueStackIndex !== null) {
+      list[editingValueStackIndex] = valueStackInput;
+    } else {
+      list.push(valueStackInput);
+    }
+    setValueStackItems(list);
+    setEditingValueStackIndex(null);
+    setValueStackInput({ title: "", desc: "", value: "Rp 3.000.000", isBonus: false });
+    showToast("Item 'Yang Kamu Dapatkan' berhasil disimpan!");
+  };
+
+  const handleDeleteValueStack = (idx: number) => {
+    if (window.confirm("Hapus item value stack ini?")) {
+      setValueStackItems((content.valueStackItems || []).filter((_, i) => i !== idx));
+      showToast("Item berhasil dihapus!");
+    }
+  };
+
+  // Pain Card Sub-Form State
+  const [editingPainCardIndex, setEditingPainCardIndex] = useState<number | null>(null);
+  const [painCardInput, setPainCardInput] = useState<PainCardItem>({ icon: "😩", title: "", desc: "" });
+
+  const handleSavePainCard = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!painCardInput.title.trim()) return;
+    const cards = [...(content.problemConfig?.cards || [])];
+    if (editingPainCardIndex !== null) {
+      cards[editingPainCardIndex] = painCardInput;
+    } else {
+      cards.push(painCardInput);
+    }
+    updateProblemConfig({ cards });
+    setEditingPainCardIndex(null);
+    setPainCardInput({ icon: "😩", title: "", desc: "" });
+    showToast("Kartu masalah berhasil disimpan!");
+  };
+
+  const handleDeletePainCard = (idx: number) => {
+    if (window.confirm("Hapus kartu masalah ini?")) {
+      const cards = (content.problemConfig?.cards || []).filter((_, i) => i !== idx);
+      updateProblemConfig({ cards });
+      showToast("Kartu masalah berhasil dihapus!");
+    }
+  };
+
+  // Solution Card Sub-Form State
+  const [editingSolutionCardIndex, setEditingSolutionCardIndex] = useState<number | null>(null);
+  const [solutionCardInput, setSolutionCardInput] = useState<SolutionCardItem>({ title: "", desc: "" });
+
+  const handleSaveSolutionCard = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!solutionCardInput.title.trim()) return;
+    const cards = [...(content.solutionConfig?.cards || [])];
+    if (editingSolutionCardIndex !== null) {
+      cards[editingSolutionCardIndex] = solutionCardInput;
+    } else {
+      cards.push(solutionCardInput);
+    }
+    updateSolutionConfig({ cards });
+    setEditingSolutionCardIndex(null);
+    setSolutionCardInput({ title: "", desc: "" });
+    showToast("Kartu solusi berhasil disimpan!");
+  };
+
+  const handleDeleteSolutionCard = (idx: number) => {
+    if (window.confirm("Hapus kartu solusi ini?")) {
+      const cards = (content.solutionConfig?.cards || []).filter((_, i) => i !== idx);
+      updateSolutionConfig({ cards });
+      showToast("Kartu solusi berhasil dihapus!");
+    }
+  };
 
   useEffect(() => {
     setHeroForm({
@@ -658,6 +748,22 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </button>
 
             <button
+              onClick={() => setActiveTab("valuestack")}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                activeTab === "valuestack"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Gift className="w-4 h-4 text-slate-300" /> Yang Kamu Dapatkan
+              </div>
+              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
+                {(content.valueStackItems || []).length}
+              </span>
+            </button>
+
+            <button
               onClick={() => setActiveTab("testimonials")}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "testimonials"
@@ -764,6 +870,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                 {activeTab === "intro" && "Intro Video (YouTube &amp; Instagram)"}
                 {activeTab === "pricing" && "Datepicker &amp; Scarcity Settings"}
                 {activeTab === "packages" && "Opsi Paket Pendaftaran"}
+                {activeTab === "valuestack" && "Item 'Yang Kamu Dapatkan' (Value Stack)"}
                 {activeTab === "testimonials" && "Testimoni Alumni"}
                 {activeTab === "modules" && "Modul Kurikulum"}
                 {activeTab === "speakers" && "Data Pemateri &amp; Mentor"}
@@ -1127,6 +1234,99 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                   </button>
                 </div>
               </form>
+
+              {/* CRUD Pain Cards Sub-Form */}
+              <form onSubmit={handleSavePainCard} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h4 className="font-bold text-xs text-white flex items-center gap-2">
+                  <Plus className="w-4 h-4 text-red-400" />
+                  {editingPainCardIndex !== null ? "Edit Kartu Masalah" : "Tambah Kartu Masalah Baru"}
+                </h4>
+                <div className="grid md:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Emoji Icon</label>
+                    <input
+                      type="text"
+                      value={painCardInput.icon}
+                      onChange={(e) => setPainCardInput({ ...painCardInput, icon: e.target.value })}
+                      placeholder="😩"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Masalah</label>
+                    <input
+                      type="text"
+                      value={painCardInput.title}
+                      onChange={(e) => setPainCardInput({ ...painCardInput, title: e.target.value })}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Detail Masalah</label>
+                  <textarea
+                    rows={2}
+                    value={painCardInput.desc}
+                    onChange={(e) => setPainCardInput({ ...painCardInput, desc: e.target.value })}
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
+                  />
+                </div>
+                <div className="flex justify-end gap-2">
+                  {editingPainCardIndex !== null && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingPainCardIndex(null);
+                        setPainCardInput({ icon: "😩", title: "", desc: "" });
+                      }}
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
+                    >
+                      Batal
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Save className="w-3.5 h-3.5" /> {editingPainCardIndex !== null ? "Simpan Kartu" : "Tambah Kartu Masalah"}
+                  </button>
+                </div>
+              </form>
+
+              {/* Pain Cards List */}
+              <div className="space-y-3">
+                <h4 className="font-bold text-xs text-slate-400 font-mono uppercase tracking-wider">
+                  Daftar Kartu Masalah ({(content.problemConfig?.cards || []).length})
+                </h4>
+                {(content.problemConfig?.cards || []).map((card, idx) => (
+                  <div key={idx} className="bg-[#111827] p-4 rounded-xl border border-slate-800 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl">{card.icon}</span>
+                      <div>
+                        <h5 className="font-bold text-xs text-white">{card.title}</h5>
+                        <p className="text-[11px] text-slate-400 line-clamp-1">{card.desc}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <button
+                        onClick={() => {
+                          setEditingPainCardIndex(idx);
+                          setPainCardInput(card);
+                        }}
+                        className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
+                      >
+                        <Edit2 className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => handleDeletePainCard(idx)}
+                        className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
@@ -1192,6 +1392,206 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                   </button>
                 </div>
               </form>
+
+              {/* CRUD Solution Cards Sub-Form */}
+              <form onSubmit={handleSaveSolutionCard} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h4 className="font-bold text-xs text-white flex items-center gap-2">
+                  <Plus className="w-4 h-4 text-cyan" />
+                  {editingSolutionCardIndex !== null ? "Edit Kartu Solusi" : "Tambah Kartu Solusi Baru"}
+                </h4>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Kartu Solusi</label>
+                  <input
+                    type="text"
+                    value={solutionCardInput.title}
+                    onChange={(e) => setSolutionCardInput({ ...solutionCardInput, title: e.target.value })}
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Kartu Solusi</label>
+                  <textarea
+                    rows={2}
+                    value={solutionCardInput.desc}
+                    onChange={(e) => setSolutionCardInput({ ...solutionCardInput, desc: e.target.value })}
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
+                  />
+                </div>
+                <div className="flex justify-end gap-2">
+                  {editingSolutionCardIndex !== null && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingSolutionCardIndex(null);
+                        setSolutionCardInput({ title: "", desc: "" });
+                      }}
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
+                    >
+                      Batal
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Save className="w-3.5 h-3.5" /> {editingSolutionCardIndex !== null ? "Simpan Kartu" : "Tambah Kartu Solusi"}
+                  </button>
+                </div>
+              </form>
+
+              {/* Solution Cards List */}
+              <div className="space-y-3">
+                <h4 className="font-bold text-xs text-slate-400 font-mono uppercase tracking-wider">
+                  Daftar Kartu Solusi ({(content.solutionConfig?.cards || []).length})
+                </h4>
+                {(content.solutionConfig?.cards || []).map((card, idx) => (
+                  <div key={idx} className="bg-[#111827] p-4 rounded-xl border border-slate-800 flex items-center justify-between gap-4">
+                    <div>
+                      <h5 className="font-bold text-xs text-white">{card.title}</h5>
+                      <p className="text-[11px] text-slate-400 line-clamp-1">{card.desc}</p>
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <button
+                        onClick={() => {
+                          setEditingSolutionCardIndex(idx);
+                          setSolutionCardInput(card);
+                        }}
+                        className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
+                      >
+                        <Edit2 className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteSolutionCard(idx)}
+                        className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB: VALUE STACK (YANG KAMU DAPATKAN) */}
+          {activeTab === "valuestack" && (
+            <div className="max-w-4xl space-y-6">
+              <form onSubmit={handleSaveValueStack} className="bg-[#111827] p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                  <Gift className="w-4 h-4 text-blue-400" />
+                  {editingValueStackIndex !== null ? "Edit Item Value Stack" : "Tambah Item Value Stack Baru"}
+                </h3>
+
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Judul Program / Modul</label>
+                    <input
+                      type="text"
+                      value={valueStackInput.title}
+                      onChange={(e) => setValueStackInput({ ...valueStackInput, title: e.target.value })}
+                      placeholder="misal: Virtual CMO Strategy"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Perkiraan Nilai Riil (Price Tag / Free Bonus)</label>
+                    <input
+                      type="text"
+                      value={valueStackInput.value}
+                      onChange={(e) => setValueStackInput({ ...valueStackInput, value: e.target.value })}
+                      placeholder="Rp 4.000.000 atau FREE BONUS"
+                      className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Deskripsi Manfaat</label>
+                  <textarea
+                    rows={2}
+                    value={valueStackInput.desc}
+                    onChange={(e) => setValueStackInput({ ...valueStackInput, desc: e.target.value })}
+                    className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"
+                  />
+                </div>
+
+                <div className="flex items-center gap-2 pt-1">
+                  <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={valueStackInput.isBonus || false}
+                      onChange={(e) => setValueStackInput({ ...valueStackInput, isBonus: e.target.checked })}
+                      className="rounded border-slate-800 bg-slate-900"
+                    />
+                    <span>Tandai sebagai 🎁 EXCLUSIVE BONUS</span>
+                  </label>
+                </div>
+
+                <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                  {editingValueStackIndex !== null && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingValueStackIndex(null);
+                        setValueStackInput({ title: "", desc: "", value: "Rp 3.000.000", isBonus: false });
+                      }}
+                      className="px-4 py-2 bg-slate-800 text-slate-300 font-semibold text-xs rounded-xl cursor-pointer"
+                    >
+                      Batal
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 bg-[#1B4FD8] hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <Save className="w-4 h-4" />
+                    {editingValueStackIndex !== null ? "Simpan Item" : "Tambah Item Value Stack"}
+                  </button>
+                </div>
+              </form>
+
+              {/* Value Stack Items List */}
+              <div className="space-y-3">
+                <h4 className="font-bold text-xs text-slate-400 font-mono uppercase tracking-wider">
+                  Daftar Item "Yang Kamu Dapatkan" ({(content.valueStackItems || []).length})
+                </h4>
+                {(content.valueStackItems || []).map((item, idx) => (
+                  <div key={idx} className="bg-[#111827] p-4 rounded-xl border border-slate-800 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg">{item.isBonus ? "🎁" : "💎"}</span>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h5 className="font-bold text-xs text-white">{item.title}</h5>
+                          {item.isBonus && (
+                            <span className="text-[9px] font-bold bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/30">
+                              BONUS
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{item.desc}</p>
+                        <span className="text-[10px] text-cyan font-mono font-bold">{item.value}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <button
+                        onClick={() => {
+                          setEditingValueStackIndex(idx);
+                          setValueStackInput(item);
+                        }}
+                        className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
+                      >
+                        <Edit2 className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteValueStack(idx)}
+                        className="p-2 bg-slate-800 hover:bg-red-500/20 text-red-400 rounded-lg cursor-pointer border border-slate-700"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

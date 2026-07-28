@@ -12,39 +12,9 @@ export default function ValueStack() {
     }
   };
 
-  const stackItems = [
-    {
-      title: "AI Content Ecosystem Systemization",
-      desc: "Desain sistem 5 komponen end-to-end & audit mandiri akun sosial mediamu.",
-      value: "Rp 4.000.000",
-    },
-    {
-      title: "Virtual CMO & Campaign Strategy Builder",
-      desc: "Formula melatih AI menyusun Campaign Brief & merangkai funnel TOFU → BOFU.",
-      value: "Rp 5.000.000",
-    },
-    {
-      title: "Senior Level Content Planning Masterclass",
-      desc: "Template taktis Content Plan mencakup 9 channel sosial media profesional.",
-      value: "Rp 3.000.000",
-    },
-    {
-      title: "Cinematic AI Visual Storytelling Methodology",
-      desc: "Formula JSON Prompting untuk konsistensi visual video tanpa keahlian coding.",
-      value: "Rp 6.000.000",
-    },
-    {
-      title: "Mass Scale Video Creation & Multi-channel Publishing",
-      desc: "Teknis ElevenLabs voiceover, auto-caption CapCut AI, dan sistem distribusi kilat.",
-      value: "Rp 5.000.000",
-    },
-    {
-      title: "EXCLUSIVE BONUS — Blueprint, Prompt Library & E-Certificate",
-      desc: "Akses Claude AI Skill, Prompt Library, grup diskusi, dan sertifikat kelulusan.",
-      value: "FREE BONUS",
-      isBonus: true,
-    },
-  ];
+  const stackItems = content.valueStackItems && content.valueStackItems.length > 0
+    ? content.valueStackItems
+    : [];
 
   return (
     <section className="py-16 md:py-24 bg-white border-b border-slate-100">
