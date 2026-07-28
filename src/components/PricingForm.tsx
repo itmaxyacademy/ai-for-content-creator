@@ -17,9 +17,14 @@ export default function PricingForm() {
     paket: "Mitra_Universitas", // default option
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submittedLead, setSubmittedLead] = useState<Lead | null>(null);
+  useEffect(() => {
+    if (content.packages.length > 0) {
+      const exists = content.packages.some((p) => p.code === formData.paket);
+      if (!exists) {
+        setFormData((prev) => ({ ...prev, paket: content.packages[0].code }));
+      }
+    }
+  }, [content.packages]);
 
   // Dynamic price lookup
   const getSelectedPrice = (paketCode: string) => {
@@ -29,6 +34,14 @@ export default function PricingForm() {
         name: pkg.name,
         current: pkg.currentPrice,
         normal: pkg.normalPrice,
+      };
+    }
+    const firstPkg = content.packages[0];
+    if (firstPkg) {
+      return {
+        name: firstPkg.name,
+        current: firstPkg.currentPrice,
+        normal: firstPkg.normalPrice,
       };
     }
     return {
@@ -388,14 +401,13 @@ Mohon dipandu langkah selanjutnya untuk konfirmasi pembayaran. Terima kasih!`;
                     name="paket"
                     value={formData.paket}
                     onChange={handleInputChange}
-                    className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy font-bold border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all"
+                    className="w-full bg-white rounded-xl px-4 py-3 text-sm text-navy font-bold border border-slate-300 focus:outline-none focus:border-cyan focus:ring-4 focus:ring-cyan/10 transition-all cursor-pointer"
                   >
-                    <option value="Mitra_Universitas">
-                      Harga Khusus Mitra Universitas — {content.appConfig.prices.mitraCurrent} (Normal {content.appConfig.prices.mitraNormal})
-                    </option>
-                    <option value="Masterclass_Regular">
-                      Harga Masterclass (8 Pertemuan) — {content.appConfig.prices.masterclassCurrent} (Normal {content.appConfig.prices.masterclassNormal})
-                    </option>
+                    {content.packages.map((pkg) => (
+                      <option key={pkg.code} value={pkg.code}>
+                        {pkg.name} — {pkg.currentPrice} (Normal {pkg.normalPrice})
+                      </option>
+                    ))}
                   </select>
                   {errors.paket && (
                     <p className="text-red-400 text-[10px] mt-1 font-bold">⚠️ {errors.paket}</p>
