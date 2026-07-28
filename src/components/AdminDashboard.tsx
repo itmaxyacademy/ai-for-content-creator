@@ -72,7 +72,20 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
   } = useContent();
 
   const [activeTab, setActiveTab] = useState<
-    "hero" | "intro" | "pricing" | "packages" | "modules" | "speakers" | "testimonials" | "faqs" | "wa_popup" | "sections"
+    | "hero"
+    | "intro"
+    | "problem"
+    | "future_of_work"
+    | "solutions"
+    | "pricing"
+    | "packages"
+    | "valuestack"
+    | "testimonials"
+    | "modules"
+    | "speakers"
+    | "faqs"
+    | "wa_popup"
+    | "sections"
   >("hero");
 
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -923,6 +936,22 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
             </button>
 
             <button
+              onClick={() => setActiveTab("faqs")}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                activeTab === "faqs"
+                  ? "bg-[#1B4FD8] text-white font-bold"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <HelpCircle className="w-4 h-4 text-slate-300" /> Tanya Jawab (FAQ)
+              </div>
+              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md font-mono">
+                {content.faqs.length}
+              </span>
+            </button>
+
+            <button
               onClick={() => setActiveTab("wa_popup")}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === "wa_popup"
@@ -987,6 +1016,7 @@ export default function AdminDashboard({ onLogout, onBackToSite }: AdminDashboar
                 {activeTab === "testimonials" && "Testimoni Alumni"}
                 {activeTab === "modules" && "Modul Kurikulum"}
                 {activeTab === "speakers" && "Data Pemateri &amp; Mentor"}
+                {activeTab === "faqs" && "Tanya Jawab &amp; FAQ Settings"}
                 {activeTab === "wa_popup" && "WhatsApp &amp; Popup Settings"}
                 {activeTab === "sections" && "Urutan &amp; Custom Section"}
               </h1>
